@@ -1,0 +1,9 @@
+/_build/
+/deps/
+/doc/
+/cover/
+/erl_crash.dump
+/.elixir_ls/
+/.lexical/
+/.blitz/tmp/
+/.dependency_sources.local.exs

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="200" height="200" viewBox="0 0 200 200"
+     role="img" aria-labelledby="title desc">
+  <title id="title">NSHKR</title>
+  <desc id="desc">Symmetrical hexagonal NSHKR mark</desc>
+  <polygon points="100,4 183.138,52 183.138,148 100,196 16.862,148 16.862,52"
+           fill="#0b0f14" />
+  <polygon points="100,40 151.962,70 151.962,130 100,160 48.038,130 48.038,70"
+           fill="none" stroke="#5eead4" stroke-width="6" stroke-linejoin="round" />
+  <path d="M100 40V160 M48.038 70L151.962 130 M151.962 70L48.038 130"
+        fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+  <circle cx="100" cy="100" r="13" fill="#f8fafc" />
+  <circle cx="100" cy="100" r="6" fill="#0b0f14" />
+</svg>
