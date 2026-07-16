@@ -3,7 +3,7 @@ reconciled_on: "2026-07-15"
 repositories:
   - id: program_control
     path: /home/home/p/g/j/jido_brainstorm
-    revision: c324fd04b3848b5bbc158fb91978b44235450613
+    revision: 3308ef59c9c976c87a7e22ab18fda984291ab673
     branch: main
     dirty: false
     role: checklist_and_architecture
@@ -11,7 +11,7 @@ repositories:
     consumes: []
   - id: nshkr
     path: /home/home/p/g/n/nshkr
-    revision: 96e76609f27c7606c3dfde86a3be8272e659c76b
+    revision: d9b2423c2770d748e10bafd38544b57ae362f52f
     branch: main
     dirty: false
     role: production_composition
