@@ -4,7 +4,7 @@ phase: 1
 driving_consumer: production-runtime
 repository: /home/home/p/g/n/nshkr
 base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
-owned_paths: ["/home/home/p/g/n/nshkr/mix.exs","/home/home/p/g/n/nshkr/mix.lock","/home/home/p/g/n/nshkr/build_support","/home/home/p/g/n/nshkr/apps/nshkr_runtime","/home/home/p/g/n/nshkr/README.md","/home/home/p/g/n/nshkr/assets"]
+owned_paths: ["/home/home/p/g/n/nshkr/.formatter.exs","/home/home/p/g/n/nshkr/mix.exs","/home/home/p/g/n/nshkr/mix.lock","/home/home/p/g/n/nshkr/build_support","/home/home/p/g/n/nshkr/apps/nshkr_runtime","/home/home/p/g/n/nshkr/README.md","/home/home/p/g/n/nshkr/assets"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation"]
 contract_versions: ["nshkr.production-profile.v1","aitrace.exporter.v1"]
 dependency_nodes: ["P00-contract-spine"]
