@@ -4,7 +4,7 @@ phase: 1
 driving_consumer: managed-gemini
 repository: /home/home/p/g/n/inference
 base_revision: aa8da90b11490b0610be12d72ba086376ecfd1d1
-owned_paths: ["/home/home/p/g/n/inference/apps/inference/lib"]
+owned_paths: ["/home/home/p/g/n/inference/apps/inference/lib","/home/home/p/g/n/inference/apps/inference/test/inference/governed_authority_test.exs"]
 read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-lease.v1","jido.credential-materialization.v1"]
 dependency_nodes: ["P00-contract-spine"]
