@@ -1,0 +1,240 @@
+schema: nshkr.dag.v1
+allowed_edge_types: [semantic, compile_api, composition, activation]
+nodes:
+  - id: P00-contract-spine
+    phase: 0
+    repository: /home/home/p/g/n/nshkr
+    produces: [nshkr.production-profile.v1, ground-plane.opaque-ref.v1, ground-plane.command-envelope.v1, ground-plane.artifact-descriptor.v1, mezzanine.run-acceptance.v1, mezzanine.effect-record.v1, citadel.scoped-grant.v1, outer-brain.semantic-context-provenance.v1, outer-brain.reply-publication.v1, outer-brain.memory-context-provenance.v1, jido.credential-lease.v1, jido.credential-materialization.v1, jido.provider-attempt.v1, jido.provider-event.v1, jido.lease-revocation.v1, execution-plane.runtime-client.v1, execution-plane.runtime-families.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1, chassis.release-resource.v1]
+    requires: []
+    edges: []
+    owned_paths: [/home/home/p/g/n/nshkr/implementation]
+    catalog_effect: none
+    status: complete
+  - id: P01-runtime-security
+    phase: 1
+    repository: /home/home/p/g/n/nshkr
+    produces: [durable_runtime_composition, production_preflight, durable_owner_stores, managed_secret_closure]
+    requires: [P00-contract-spine]
+    edges:
+      - node: P00-contract-spine
+        type: compile_api
+    owned_paths: [/home/home/p/g/n/nshkr, /home/home/p/g/n/mezzanine, /home/home/p/g/n/citadel, /home/home/p/g/n/outer_brain, /home/home/p/g/n/jido_integration]
+    catalog_effect: dormant_only
+    status: ready
+  - id: P02-durable-synapse-acceptance
+    phase: 2
+    repository: /home/home/p/g/n/mezzanine
+    produces: [canonical_run_turn_transaction, durable_run_projection, durable_cursor_readback]
+    requires: [P01-runtime-security]
+    edges:
+      - node: P01-runtime-security
+        type: composition
+    owned_paths: [/home/home/p/g/n/mezzanine, /home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
+    catalog_effect: none
+    status: blocked_dependencies
+  - id: P03-governed-gemini
+    phase: 3
+    repository: /home/home/p/g/n/jido_integration
+    produces: [governed_gemini_local_effect]
+    requires: [P01-runtime-security, P02-durable-synapse-acceptance]
+    edges:
+      - node: P01-runtime-security
+        type: composition
+      - node: P02-durable-synapse-acceptance
+        type: semantic
+    owned_paths: [/home/home/p/g/n/outer_brain, /home/home/p/g/n/citadel, /home/home/p/g/n/jido_integration, /home/home/p/g/n/inference, /home/home/p/g/n/gemini_ex, /home/home/p/g/n/mezzanine, /home/home/p/g/n/nshkr]
+    catalog_effect: none
+    status: blocked_dependencies
+  - id: P03-gemini-activation
+    phase: 3
+    repository: /home/home/p/g/n/nshkr
+    produces: [model.gemini.managed-account.local-effect]
+    requires: [P03-governed-gemini]
+    edges:
+      - node: P03-governed-gemini
+        type: activation
+    owned_paths: [/home/home/p/g/n/nshkr/apps/nshkr_runtime]
+    catalog_effect: activate_model.gemini.managed-account.local-effect
+    status: blocked_dependencies
+  - id: P04-governed-codex
+    phase: 4
+    repository: /home/home/p/g/n/jido_integration
+    produces: [governed_codex_local_effect, durable_effect_receipt_and_ambiguity]
+    requires: [P03-governed-gemini]
+    edges:
+      - node: P03-governed-gemini
+        type: semantic
+    owned_paths: [/home/home/p/g/n/codex_sdk, /home/home/p/g/n/cli_subprocess_core, /home/home/p/g/n/agent_session_manager, /home/home/p/g/n/jido_integration, /home/home/p/g/n/mezzanine, /home/home/p/g/n/citadel, /home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
+    catalog_effect: none
+    status: blocked_dependencies
+  - id: P04-codex-activation
+    phase: 4
+    repository: /home/home/p/g/n/nshkr
+    produces: [codex.session.turn]
+    requires: [P04-governed-codex]
+    edges:
+      - node: P04-governed-codex
+        type: activation
+    owned_paths: [/home/home/p/g/n/nshkr/apps/nshkr_runtime]
+    catalog_effect: activate_codex.session.turn
+    status: blocked_dependencies
+  - id: P05-recovery-cognition
+    phase: 5
+    repository: /home/home/p/g/n/mezzanine
+    produces: [durable_control_and_recovery, demanded_memory_with_provenance]
+    requires: [P04-governed-codex]
+    edges:
+      - node: P04-governed-codex
+        type: semantic
+    owned_paths: [/home/home/p/g/n/mezzanine, /home/home/p/g/n/outer_brain, /home/home/p/g/n/jido_integration, /home/home/p/g/n/citadel, /home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
+    catalog_effect: none
+    status: blocked_dependencies
+  - id: P06-synapse-mvp
+    phase: 6
+    repository: /home/home/p/g/n/synapse
+    produces: [synapse_real_mvp_journeys]
+    requires: [P05-recovery-cognition]
+    edges:
+      - node: P05-recovery-cognition
+        type: composition
+    owned_paths: [/home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
+    catalog_effect: activate_only_executable_product_capabilities
+    status: blocked_dependencies
+  - id: P07-family-preparation
+    phase: 7
+    repository: /home/home/p/g/n/execution_plane
+    produces: [process_family_preparation, http_family_preparation]
+    requires: [P00-contract-spine]
+    edges:
+      - node: P00-contract-spine
+        type: compile_api
+    owned_paths: [/home/home/p/g/n/execution_plane, /home/home/p/g/n/pristine]
+    catalog_effect: dormant_only
+    status: ready
+  - id: P07-execution-placement
+    phase: 7
+    repository: /home/home/p/g/n/execution_plane
+    produces: [separate_node_process_effect, separate_node_http_effect]
+    requires: [P04-governed-codex, P07-family-preparation]
+    edges:
+      - node: P04-governed-codex
+        type: semantic
+      - node: P07-family-preparation
+        type: composition
+    owned_paths: [/home/home/p/g/n/execution_plane, /home/home/p/g/n/pristine, /home/home/p/g/n/cli_subprocess_core, /home/home/p/g/n/jido_integration, /home/home/p/g/n/agent_session_manager, /home/home/p/g/n/nshkr]
+    catalog_effect: none
+    status: blocked_dependencies
+  - id: P07-runtime-activation
+    phase: 7
+    repository: /home/home/p/g/n/nshkr
+    produces: [execution.process.runtime-admitted-effect, execution.http.runtime-admitted-effect]
+    requires: [P07-execution-placement]
+    edges:
+      - node: P07-execution-placement
+        type: activation
+    owned_paths: [/home/home/p/g/n/nshkr/apps/nshkr_runtime]
+    catalog_effect: activate_runtime_admitted_effects
+    status: blocked_dependencies
+  - id: P08-chassis-foundation-preparation
+    phase: 8
+    repository: /home/home/p/g/n/chassis
+    produces: [chassis_controller_foundation]
+    requires: [P00-contract-spine]
+    edges:
+      - node: P00-contract-spine
+        type: compile_api
+    owned_paths: [/home/home/p/g/n/chassis]
+    catalog_effect: none
+    status: ready
+  - id: P08-chassis-single-host
+    phase: 8
+    repository: /home/home/p/g/n/chassis
+    produces: [durable_single_host_controller]
+    requires: [P01-runtime-security, P06-synapse-mvp, P08-chassis-foundation-preparation]
+    edges:
+      - node: P01-runtime-security
+        type: composition
+      - node: P06-synapse-mvp
+        type: semantic
+      - node: P08-chassis-foundation-preparation
+        type: composition
+    owned_paths: [/home/home/p/g/n/chassis, /home/home/p/g/n/app_kit, /home/home/p/g/n/nshkr]
+    catalog_effect: activate_chassis_single_host_only_after_real_lifecycle
+    status: blocked_dependencies
+  - id: P09-chassis-remote-cluster
+    phase: 9
+    repository: /home/home/p/g/n/chassis
+    produces: [hetzner_remote_cluster_lifecycle]
+    requires: [P07-execution-placement, P08-chassis-single-host]
+    edges:
+      - node: P07-execution-placement
+        type: composition
+      - node: P08-chassis-single-host
+        type: semantic
+    owned_paths: [/home/home/p/g/n/chassis, /home/home/p/g/n/nshkr]
+    catalog_effect: activate_hetzner_only_after_observed_lifecycle
+    status: blocked_dependencies
+  - id: P10-extravaganza-mvp
+    phase: 10
+    repository: /home/home/p/g/n/extravaganza
+    produces: [durable_issue_to_pr_lifecycle]
+    requires: [P05-recovery-cognition, P07-execution-placement, P09-chassis-remote-cluster]
+    edges:
+      - node: P05-recovery-cognition
+        type: semantic
+      - node: P07-execution-placement
+        type: composition
+      - node: P09-chassis-remote-cluster
+        type: composition
+    owned_paths: [/home/home/p/g/n/extravaganza, /home/home/p/g/n/app_kit, /home/home/p/g/n/chassis, /home/home/p/g/n/nshkr]
+    catalog_effect: activate_extravaganza_only_after_real_issue_to_pr
+    status: blocked_dependencies
+  - id: P11-gemini-live
+    phase: 11
+    repository: /home/home/p/g/n/gemini_ex
+    produces: [gemini_live_local_and_runtime_lifecycle]
+    requires: [P03-governed-gemini, P07-execution-placement]
+    edges:
+      - node: P03-governed-gemini
+        type: semantic
+      - node: P07-execution-placement
+        type: composition
+    owned_paths: [/home/home/p/g/n/gemini_ex, /home/home/p/g/n/inference, /home/home/p/g/n/jido_integration, /home/home/p/g/n/execution_plane, /home/home/p/g/n/mezzanine, /home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
+    catalog_effect: none
+    status: blocked_dependencies
+  - id: P11-live-activation
+    phase: 11
+    repository: /home/home/p/g/n/nshkr
+    produces: [model.gemini.live.managed-account.local-effect, model.gemini.live.runtime-admitted-effect]
+    requires: [P11-gemini-live]
+    edges:
+      - node: P11-gemini-live
+        type: activation
+    owned_paths: [/home/home/p/g/n/nshkr/apps/nshkr_runtime]
+    catalog_effect: activate_live_local_and_runtime_modes_separately
+    status: blocked_dependencies
+  - id: P12-capability-closure
+    phase: 12
+    repository: /home/home/p/g/n/nshkr
+    produces: [truthful_normal_release_catalog]
+    requires: [P06-synapse-mvp, P09-chassis-remote-cluster, P10-extravaganza-mvp, P11-gemini-live, P03-gemini-activation, P04-codex-activation, P07-runtime-activation, P11-live-activation]
+    edges:
+      - node: P06-synapse-mvp
+        type: semantic
+      - node: P09-chassis-remote-cluster
+        type: semantic
+      - node: P10-extravaganza-mvp
+        type: semantic
+      - node: P11-gemini-live
+        type: semantic
+      - node: P03-gemini-activation
+        type: activation
+      - node: P04-codex-activation
+        type: activation
+      - node: P07-runtime-activation
+        type: activation
+      - node: P11-live-activation
+        type: activation
+    owned_paths: [/home/home/p/g/n/nshkr, /home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/extravaganza]
+    catalog_effect: remove_inactive_and_nonexecutable_descriptors
+    status: blocked_dependencies

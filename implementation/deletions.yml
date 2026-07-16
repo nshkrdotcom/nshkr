@@ -1,0 +1,291 @@
+schema: nshkr.deletions.v1
+deletions:
+  - id: P01-mezzanine-production-memory-defaults
+    phase: 1
+    repository: /home/home/p/g/n/mezzanine
+    remove_paths:
+      - /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/persistence.ex
+      - /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/core/application.ex
+      - /home/home/p/g/n/mezzanine/core/ai_run_model/lib/mezzanine/ai_run/persistence_refs.ex
+      - /home/home/p/g/n/mezzanine/core/workflow_runtime/lib/mezzanine/workflow_runtime/outbox_persistence.ex
+    remove_test_paths:
+      - /home/home/p/g/n/mezzanine/core/ai_run_model/test/mezzanine/ai_run_model/memory_default_boot_test.exs
+    remove_references: [production_mickey_mouse_selector, production_memory_store_fallback, static_success_boot_child]
+    replacement_contract: mezzanine.run-acceptance.v1
+    current_consumers_to_update: [nshkr_runtime, mezzanine_workflow_runtime]
+    verification: &unverified
+      replacement_complete: false
+      consumers_migrated: false
+      production_references_absent: false
+      obsolete_tests_classified: false
+    risk_class: standard
+    protected_domains: []
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P01-managed-secret-and-account-bypasses
+    phase: 1
+    repository: /home/home/p/g/n/jido_integration
+    remove_paths:
+      - /home/home/p/g/n/jido_integration/core/secrets_provider/lib/jido/integration/secrets/env_provider.ex
+      - /home/home/p/g/n/jido_integration/core/control_plane/lib/jido/integration/v2/control_plane/inference/req_llm_call_spec.ex
+    remove_test_paths: []
+    remove_references: [managed_raw_api_key_option, managed_env_secret_lookup, secret_bearing_durable_request]
+    replacement_contract: jido.credential-materialization.v1
+    current_consumers_to_update: [jido_control_plane, inference, gemini_ex, codex_sdk]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [credential, account, lease, materialization, secret, redaction]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P02-appkit-bridge-local-run-truth
+    phase: 2
+    repository: /home/home/p/g/n/app_kit
+    remove_paths:
+      - /home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/app_kit/bridges/mezzanine_bridge/runtime_projection_store.ex
+    remove_test_paths:
+      - /home/home/p/g/n/app_kit/bridges/mezzanine_bridge/test/app_kit/bridges/mezzanine_bridge/runtime_projection_store_test.exs
+    remove_references: [bridge_local_ttl_projection, locally_constructed_accepted_dto]
+    replacement_contract: mezzanine.run-acceptance.v1
+    current_consumers_to_update: [app_kit_agent_intake, app_kit_headless_surface, synapse]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [appkit_schema_registry, product_boundary_bridge]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P02-synapse-nontest-intake-fixture-default
+    phase: 2
+    repository: /home/home/p/g/n/synapse
+    remove_paths:
+      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex
+      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/agent_intake_backend.ex
+    remove_test_paths: []
+    remove_references: [Synapse.Fixtures.AgentIntakeBackend, static_run_list, pubsub_only_workflow_truth]
+    replacement_contract: app-kit.agent-intake.v1
+    current_consumers_to_update: [synapse_run_new, synapse_run_show, synapse_dashboard]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [product_boundary_bridge]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P03-gemini-managed-global-credentials
+    phase: 3
+    repository: /home/home/p/g/n/gemini_ex
+    remove_paths:
+      - /home/home/p/g/n/gemini_ex/lib/gemini/config.ex
+      - /home/home/p/g/n/gemini_ex/lib/gemini/env.ex
+      - /home/home/p/g/n/gemini_ex/lib/gemini/auth/gemini_strategy.ex
+    remove_test_paths: []
+    remove_references: [managed_global_api_key, managed_application_env_credentials, static_provider_capability_claim]
+    replacement_contract: jido.credential-materialization.v1
+    current_consumers_to_update: [jido_managed_inference, inference_gemini_adapter]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [credential, account, lease, materialization, secret, redaction]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P04-jido-direct-distributed-placement
+    phase: 4
+    repository: /home/home/p/g/n/jido_integration
+    remove_paths:
+      - /home/home/p/g/n/jido_integration/core/direct_runtime/lib/jido_integration/bridges/execution_plane_bridge/transport/direct.ex
+      - /home/home/p/g/n/jido_integration/core/direct_runtime/lib/jido_integration/bridges/execution_plane_bridge/transport/distributed.ex
+    remove_test_paths: []
+    remove_references: [direct_runtime_bridge, distributed_runtime_bridge, anonymous_compensation_callback]
+    replacement_contract: cli-core.runtime-gateway.v1
+    current_consumers_to_update: [jido_runtime_router, jido_asm_runtime_bridge]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [execution_admission, sandbox, receipt_enforcement]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P04-asm-manual-rpc-placement
+    phase: 4
+    repository: /home/home/p/g/n/agent_session_manager
+    remove_paths:
+      - /home/home/p/g/n/agent_session_manager/lib/asm/remote/node_connector.ex
+      - /home/home/p/g/n/agent_session_manager/lib/asm/migration/main_compat.ex
+    remove_test_paths: []
+    remove_references: [manual_remote_node_selection, raw_pid_session_identity, migration_compat_facade]
+    replacement_contract: asm.managed-session.v1
+    current_consumers_to_update: [asm_control, asm_provider_backend, jido_asm_runtime_bridge]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [credential, account, lease, execution_admission, sandbox]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P04-synapse-production-effect-fixtures
+    phase: 4
+    repository: /home/home/p/g/n/synapse
+    remove_paths:
+      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/effect_surface_backend.ex
+      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/review_surface.ex
+    remove_test_paths: []
+    remove_references: [production_fixture_effect_backend, production_fixture_review_backend]
+    replacement_contract: app-kit.governed-effect.v1
+    current_consumers_to_update: [synapse_reviews, synapse_turns, synapse_review_show]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [product_boundary_bridge, authority_decision_enforcement]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P05-mezzanine-volatile-recovery-truth
+    phase: 5
+    repository: /home/home/p/g/n/mezzanine
+    remove_paths:
+      - /home/home/p/g/n/mezzanine/core/workflow_runtime/lib/mezzanine/workflow_runtime/final_temporal_cutover.ex
+      - /home/home/p/g/n/mezzanine/core/workflow_runtime/lib/mezzanine/workflow_runtime/store/memory.ex
+      - /home/home/p/g/n/mezzanine/core/workflow_runtime/lib/mezzanine/workflow_runtime/operator_signal_control.ex
+    remove_test_paths: []
+    remove_references: [direct_temporal_signal_fallback, blind_unknown_effect_retry, pid_based_restart_truth]
+    replacement_contract: mezzanine.effect-record.v1
+    current_consumers_to_update: [mezzanine_workflow_runtime, app_kit_control_surface]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [cancellation, fencing, receipt_enforcement, revocation]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P05-outer-brain-production-map-memory
+    phase: 5
+    repository: /home/home/p/g/n/outer_brain
+    remove_paths:
+      - /home/home/p/g/n/outer_brain/core/memory_engine/lib/outer_brain/memory_engine.ex
+      - /home/home/p/g/n/outer_brain/core/outer_brain_prompting/lib/outer_brain/memory/recall_cache.ex
+    remove_test_paths: []
+    remove_references: [production_map_memory_state, mutable_unpinned_retrieval]
+    replacement_contract: outer-brain.memory-context-provenance.v1
+    current_consumers_to_update: [outer_brain_recall, app_kit_memory_surface, synapse_memory]
+    verification: *unverified
+    risk_class: standard
+    protected_domains: []
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P06-synapse-production-fixture-catalog
+    phase: 6
+    repository: /home/home/p/g/n/synapse
+    remove_paths:
+      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/catalog.ex
+      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/headless_backend.ex
+      - /home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_show_live.ex
+    remove_test_paths: []
+    remove_references: [fixture_runs_attribute, fixture_detail_fallback, fixture_id_rewrite, incomplete_capability_routes]
+    replacement_contract: app-kit.agent-intake.v1
+    current_consumers_to_update: [synapse_catalog, synapse_run_show, synapse_navigation]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [appkit_schema_registry, product_boundary_bridge]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P07-execution-plane-synchronous-and-noop-runtime
+    phase: 7
+    repository: /home/home/p/g/n/execution_plane
+    remove_paths:
+      - /home/home/p/g/n/execution_plane/runtimes/execution_plane_node/lib/execution_plane/node/local_client.ex
+      - /home/home/p/g/n/execution_plane/runtimes/execution_plane_node/lib/execution_plane/node/server.ex
+      - /home/home/p/g/n/execution_plane/runtimes/execution_plane_node/lib/execution_plane/node/target_client/adapter.ex
+    remove_test_paths:
+      - /home/home/p/g/n/execution_plane/runtimes/execution_plane_node/test/support/fakes.ex
+    remove_references: [synchronous_node_server_effect, noop_target_cancel, remote_local_delegate, activated_supports_stream_false]
+    replacement_contract: execution-plane.runtime-client.v1
+    current_consumers_to_update: [execution_plane_process, pristine, jido_integration, agent_session_manager]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [execution_admission, sandbox, egress, fencing, cancellation, receipt_enforcement]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P08-chassis-volatile-controller-state
+    phase: 8
+    repository: /home/home/p/g/n/chassis
+    remove_paths:
+      - /home/home/p/g/n/chassis/manager/chassis_stack_manager/lib/chassis/stack_manager.ex
+      - /home/home/p/g/n/chassis/core/chassis_releases/lib/chassis/releases.ex
+      - /home/home/p/g/n/chassis/host/chassis_host_daemon/lib/chassis/host_daemon.ex
+    remove_test_paths:
+      - /home/home/p/g/n/chassis/manager/chassis_cli/test/static_response_path_regression_test.exs
+    remove_references: [volatile_fence_store, volatile_checkpoint_store, ets_app_registry, host_static_accepted_success, local_node_mesh]
+    replacement_contract: chassis.release-resource.v1
+    current_consumers_to_update: [chassis_stack_manager, chassis_host_daemon, nshkr_runtime]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [authority, secret, fencing, receipt_enforcement]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P09-chassis-placeholder-infrastructure-providers
+    phase: 9
+    repository: /home/home/p/g/n/chassis
+    remove_paths:
+      - /home/home/p/g/n/chassis/adapters/chassis_k8s/lib/chassis/k8s.ex
+      - /home/home/p/g/n/chassis/adapters/chassis_tofu/lib/chassis/tofu.ex
+      - /home/home/p/g/n/chassis/core/chassis_inventory/lib/chassis/inventory.ex
+    remove_test_paths:
+      - /home/home/p/g/n/chassis/adapters/chassis_tofu/test/tofu_test.exs
+    remove_references: [incomplete_kubernetes_descriptor, incomplete_tofu_descriptor, current_node_inventory_fallback, ssh_success_without_observation]
+    replacement_contract: chassis.release-resource.v1
+    current_consumers_to_update: [chassis_provider_catalog, chassis_inventory, chassis_controller]
+    verification: *unverified
+    risk_class: standard
+    protected_domains: []
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P09-chassis-ambient-cloud-and-secret-delivery
+    phase: 9
+    repository: /home/home/p/g/n/chassis
+    remove_paths:
+      - /home/home/p/g/n/chassis/bootstrap/chassis_bootstrap/lib/chassis/bootstrap.ex
+      - /home/home/p/g/n/chassis/manager/chassis_stack_manager/lib/chassis/stack_manager.ex
+    remove_test_paths: []
+    remove_references: [ambient_cloud_credentials, plaintext_secret_delivery, implicit_authority, activation_before_observation]
+    replacement_contract: citadel.scoped-grant.v1
+    current_consumers_to_update: [chassis_hetzner_provider, chassis_bootstrap, chassis_controller]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [authority, credential, account, lease, materialization, secret, redaction, fencing]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P10-extravaganza-fixture-and-live-example-production-routes
+    phase: 10
+    repository: /home/home/p/g/n/extravaganza
+    remove_paths:
+      - /home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/headless_fixture_backend.ex
+      - /home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/headless_live_examples.ex
+      - /home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/headless_live_examples/registry.ex
+      - /home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/product_host.ex
+    remove_test_paths:
+      - /home/home/p/g/n/extravaganza/apps/extravaganza_core/test/extravaganza_headless_live_examples_split_test.exs
+    remove_references: [normal_fixture_backend_selection, live_example_registry_as_product, product_started_lower_services, volatile_source_dedupe]
+    replacement_contract: app-kit.agent-intake.v1
+    current_consumers_to_update: [extravaganza_headless_surface, extravaganza_product_surface, extravaganza_web]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [appkit_schema_registry, product_boundary_bridge, credential, secret, authority]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P11-gemini-live-ambient-and-direct-connections
+    phase: 11
+    repository: /home/home/p/g/n/gemini_ex
+    remove_paths:
+      - /home/home/p/g/n/gemini_ex/lib/gemini/client/websocket.ex
+      - /home/home/p/g/n/gemini_ex/lib/gemini/live/session.ex
+      - /home/home/p/g/n/gemini_ex/lib/gemini/streaming/unified_manager.ex
+    remove_test_paths: []
+    remove_references: [production_live_connection_outside_gateway, reconnect_with_global_credentials, query_bearing_telemetry, collected_synthetic_stream]
+    replacement_contract: execution-plane.runtime-families.v1
+    current_consumers_to_update: [gemini_live, jido_managed_live, execution_plane_websocket]
+    verification: *unverified
+    risk_class: protected
+    protected_domains: [credential, account, lease, materialization, secret, redaction, egress, cancellation]
+    root_reviewed: false
+    compatibility_layer: forbidden
+  - id: P12-stale-capability-and-compatibility-closure
+    phase: 12
+    repository: /home/home/p/g/n/nshkr
+    remove_paths:
+      - /home/home/p/g/n/nshkr/apps/nshkr_runtime/lib/nshkr/runtime/application.ex
+    remove_test_paths: []
+    remove_references: [inactive_descriptor_advertised_by_normal_release, missed_fake_fixture_memory_noop, missed_compatibility_alias, documentation_for_deleted_route]
+    replacement_contract: nshkr.production-profile.v1
+    current_consumers_to_update: [nshkr_runtime, app_kit, synapse, extravaganza]
+    verification: *unverified
+    risk_class: standard
+    protected_domains: []
+    root_reviewed: false
+    compatibility_layer: forbidden

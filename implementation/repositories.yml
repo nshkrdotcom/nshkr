@@ -1,0 +1,171 @@
+schema: nshkr.repositories.v1
+reconciled_on: "2026-07-15"
+repositories:
+  - id: program_control
+    path: /home/home/p/g/j/jido_brainstorm
+    revision: c324fd04b3848b5bbc158fb91978b44235450613
+    branch: main
+    dirty: false
+    role: checklist_and_architecture
+    publishes: []
+    consumes: []
+  - id: nshkr
+    path: /home/home/p/g/n/nshkr
+    revision: 96e76609f27c7606c3dfde86a3be8272e659c76b
+    branch: main
+    dirty: false
+    role: production_composition
+    publishes: [nshkr.production-profile.v1]
+    consumes: [aitrace.exporter.v1]
+  - id: ground_plane
+    path: /home/home/p/g/n/ground_plane
+    revision: 950f40b8d37e7751c75bdf5e69a3666b964ac8a2
+    branch: main
+    dirty: false
+    role: shared_pure_contracts
+    publishes: [ground-plane.opaque-ref.v1, ground-plane.command-envelope.v1, ground-plane.artifact-descriptor.v1]
+    consumes: []
+  - id: mezzanine
+    path: /home/home/p/g/n/mezzanine
+    revision: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+    branch: main
+    dirty: false
+    role: durable_run_turn_and_effect_owner
+    publishes: [mezzanine.run-acceptance.v1, mezzanine.effect-record.v1]
+    consumes: [ground-plane.opaque-ref.v1, ground-plane.command-envelope.v1, ground-plane.artifact-descriptor.v1, citadel.scoped-grant.v1]
+  - id: citadel
+    path: /home/home/p/g/n/citadel
+    revision: b15e9b4f4bb2013d024e01dbff5c4bbf9b4e5598
+    branch: main
+    dirty: false
+    role: authority_governance_and_grant_owner
+    publishes: [citadel.scoped-grant.v1]
+    consumes: [ground-plane.opaque-ref.v1]
+  - id: outer_brain
+    path: /home/home/p/g/n/outer_brain
+    revision: 1d2f27a7f28c17f20e0833f7300bc948c64e86a5
+    branch: main
+    dirty: false
+    role: semantic_context_memory_and_reply_owner
+    publishes: [outer-brain.semantic-context-provenance.v1, outer-brain.reply-publication.v1, outer-brain.memory-context-provenance.v1]
+    consumes: [ground-plane.opaque-ref.v1, ground-plane.artifact-descriptor.v1, mezzanine.run-acceptance.v1, citadel.scoped-grant.v1]
+  - id: jido_integration
+    path: /home/home/p/g/n/jido_integration
+    revision: bd2306b2a792a1123bea7735937e8272781efd32
+    branch: main
+    dirty: false
+    role: provider_account_lease_materialization_and_attempt_owner
+    publishes: [jido.credential-lease.v1, jido.credential-materialization.v1, jido.provider-attempt.v1, jido.provider-event.v1, jido.lease-revocation.v1]
+    consumes: [ground-plane.opaque-ref.v1, citadel.scoped-grant.v1, outer-brain.semantic-context-provenance.v1, execution-plane.runtime-client.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
+  - id: inference
+    path: /home/home/p/g/n/inference
+    revision: aa8da90b11490b0610be12d72ba086376ecfd1d1
+    branch: main
+    dirty: false
+    role: managed_model_adapter
+    publishes: []
+    consumes: [jido.credential-lease.v1, jido.credential-materialization.v1]
+  - id: gemini_ex
+    path: /home/home/p/g/n/gemini_ex
+    revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+    branch: main
+    dirty: false
+    role: gemini_provider_protocol
+    publishes: []
+    consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, execution-plane.runtime-families.v1]
+  - id: codex_sdk
+    path: /home/home/p/g/n/codex_sdk
+    revision: 54c4d2d008f4fbf82790c4dcd74192005171eea4
+    branch: main
+    dirty: false
+    role: codex_app_server_protocol
+    publishes: []
+    consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
+  - id: cli_subprocess_core
+    path: /home/home/p/g/n/cli_subprocess_core
+    revision: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+    branch: main
+    dirty: false
+    role: local_process_runtime_gateway
+    publishes: [cli-core.runtime-gateway.v1]
+    consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, execution-plane.runtime-client.v1]
+  - id: agent_session_manager
+    path: /home/home/p/g/n/agent_session_manager
+    revision: a5764929ab7318c611af46c04f1d27154e069526
+    branch: main
+    dirty: false
+    role: durable_managed_session_lifecycle
+    publishes: [asm.managed-session.v1]
+    consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, execution-plane.runtime-client.v1]
+  - id: execution_plane
+    path: /home/home/p/g/n/execution_plane
+    revision: ff19877742c8d44fab72c31e7c965938ff2ab565
+    branch: main
+    dirty: false
+    role: runtime_admission_placement_and_receipt_owner
+    publishes: [execution-plane.runtime-client.v1, execution-plane.runtime-families.v1]
+    consumes: [ground-plane.opaque-ref.v1, citadel.scoped-grant.v1]
+  - id: pristine
+    path: /home/home/p/g/n/pristine
+    revision: 24506addc290cb9184116f1daff5836d8ebcb99b
+    branch: main
+    dirty: false
+    role: http_execution_family
+    publishes: []
+    consumes: [execution-plane.runtime-client.v1, execution-plane.runtime-families.v1]
+  - id: chassis
+    path: /home/home/p/g/n/chassis
+    revision: d9a496037aaf2e630be60828e0646c04a794ef3b
+    branch: main
+    dirty: false
+    role: release_resource_and_cluster_lifecycle_owner
+    publishes: [chassis.release-resource.v1]
+    consumes: [ground-plane.opaque-ref.v1, ground-plane.artifact-descriptor.v1, citadel.scoped-grant.v1]
+  - id: aitrace
+    path: /home/home/p/g/n/AITrace
+    revision: 2cc5e4cd4bf5a8f24be3f32e452ee336e4bdf288
+    branch: main
+    dirty: false
+    role: trace_and_governed_effect_evidence_owner
+    publishes: [aitrace.trace.v1, aitrace.span.v1, aitrace.event.v1, aitrace.export-bounds.v1, aitrace.governed-effect-evidence.v1, aitrace.exporter.v1]
+    consumes: []
+  - id: app_kit
+    path: /home/home/p/g/n/app_kit
+    revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+    branch: main
+    dirty: false
+    role: sole_product_boundary
+    publishes: [app-kit.agent-intake.v1, app-kit.governed-effect.v1]
+    consumes: [mezzanine.run-acceptance.v1, mezzanine.effect-record.v1, outer-brain.reply-publication.v1, chassis.release-resource.v1]
+  - id: synapse
+    path: /home/home/p/g/n/synapse
+    revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+    branch: nshkr-agent-rewrite-20260518
+    dirty: false
+    role: appkit_only_product
+    publishes: []
+    consumes: [app-kit.agent-intake.v1, app-kit.governed-effect.v1]
+  - id: extravaganza
+    path: /home/home/p/g/n/extravaganza
+    revision: 808b329e3067b5e663b2191ac36462441a3f8e96
+    branch: main
+    dirty: false
+    role: appkit_only_issue_to_pr_product
+    publishes: []
+    consumes: [app-kit.agent-intake.v1, app-kit.governed-effect.v1, chassis.release-resource.v1]
+  - id: temporalex
+    path: /home/home/p/g/n/temporalex
+    revision: 8fd4abab9431d7dfff3598e674d22c30df31b873
+    branch: main
+    dirty: false
+    role: temporal_client_and_worker_runtime
+    publishes: []
+    consumes: []
+  - id: stack_lab
+    path: /home/home/p/g/n/stack_lab
+    revision: c7d3ce1e67a50efe3e15b89522ebb45841f78fde
+    branch: main
+    dirty: false
+    role: proof_and_regression_harness_only
+    publishes: []
+    consumes: []

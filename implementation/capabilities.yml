@@ -1,0 +1,79 @@
+schema: nshkr.capabilities.v1
+capabilities:
+  - id: model.gemini.managed-account.local-effect
+    mode: managed_account_local_effect
+    required_contracts: [citadel.scoped-grant.v1, outer-brain.semantic-context-provenance.v1, jido.credential-lease.v1, jido.credential-materialization.v1, jido.provider-attempt.v1, jido.provider-event.v1]
+    required_components: [nshkr_runtime, mezzanine, outer_brain, citadel, jido_integration, inference, gemini_ex]
+    active: false
+    absence_reason: not_composed
+    activation_node: P03-governed-gemini
+  - id: codex.session.turn
+    mode: managed_account_local_effect
+    required_contracts: [citadel.scoped-grant.v1, jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1, mezzanine.effect-record.v1]
+    required_components: [nshkr_runtime, mezzanine, citadel, jido_integration, codex_sdk, cli_subprocess_core, agent_session_manager]
+    active: false
+    absence_reason: not_composed
+    activation_node: P04-governed-codex
+  - id: execution.process.runtime-admitted-effect
+    mode: runtime_admitted_effect
+    required_contracts: [citadel.scoped-grant.v1, execution-plane.runtime-client.v1, execution-plane.runtime-families.v1, mezzanine.effect-record.v1]
+    required_components: [nshkr_runtime, execution_plane, cli_subprocess_core]
+    active: false
+    absence_reason: separate_effect_node_not_composed
+    activation_node: P07-execution-placement
+  - id: execution.http.runtime-admitted-effect
+    mode: runtime_admitted_effect
+    required_contracts: [citadel.scoped-grant.v1, execution-plane.runtime-client.v1, execution-plane.runtime-families.v1, mezzanine.effect-record.v1]
+    required_components: [nshkr_runtime, execution_plane, pristine]
+    active: false
+    absence_reason: separate_effect_node_not_composed
+    activation_node: P07-execution-placement
+  - id: model.gemini.live.managed-account.local-effect
+    mode: managed_account_local_effect
+    required_contracts: [citadel.scoped-grant.v1, jido.credential-lease.v1, jido.credential-materialization.v1, jido.lease-revocation.v1, execution-plane.runtime-families.v1]
+    required_components: [nshkr_runtime, jido_integration, inference, gemini_ex]
+    active: false
+    absence_reason: live_lifecycle_not_implemented
+    activation_node: P11-gemini-live
+  - id: model.gemini.live.runtime-admitted-effect
+    mode: runtime_admitted_effect
+    required_contracts: [citadel.scoped-grant.v1, jido.credential-lease.v1, jido.credential-materialization.v1, jido.lease-revocation.v1, execution-plane.runtime-client.v1, execution-plane.runtime-families.v1]
+    required_components: [nshkr_runtime, jido_integration, inference, gemini_ex, execution_plane]
+    active: false
+    absence_reason: live_separate_node_not_composed
+    activation_node: P11-gemini-live
+  - id: capability.plan
+    mode: product_authoring
+    required_contracts: [app-kit.agent-intake.v1]
+    required_components: [app_kit, synapse]
+    active: false
+    absence_reason: production_fixture_only
+    activation_node: P06-synapse-mvp
+  - id: capability.reflect
+    mode: product_authoring
+    required_contracts: [app-kit.agent-intake.v1]
+    required_components: [app_kit, synapse]
+    active: false
+    absence_reason: stale_product_reference_without_executable_descriptor
+    activation_node: P12-capability-closure
+  - id: capability.summarize
+    mode: product_authoring
+    required_contracts: [app-kit.agent-intake.v1]
+    required_components: [app_kit, synapse]
+    active: false
+    absence_reason: production_fixture_only
+    activation_node: P06-synapse-mvp
+  - id: capability.evaluate
+    mode: product_authoring
+    required_contracts: [app-kit.agent-intake.v1]
+    required_components: [app_kit, synapse]
+    active: false
+    absence_reason: stale_product_reference_without_executable_descriptor
+    activation_node: P12-capability-closure
+  - id: capability.write.external
+    mode: managed_account_local_effect
+    required_contracts: [app-kit.governed-effect.v1, citadel.scoped-grant.v1, mezzanine.effect-record.v1]
+    required_components: [app_kit, synapse, mezzanine, citadel]
+    active: false
+    absence_reason: production_fixture_only
+    activation_node: P06-synapse-mvp

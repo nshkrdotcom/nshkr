@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
   reconciled_on: "2026-07-15"
-  checklist_revision: 4a9c51528ad5234776d4e607a00e479c9fad07c7
+  checklist_revision: c324fd04b3848b5bbc158fb91978b44235450613
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
     application: /home/home/p/g/n/nshkr/apps/nshkr_runtime
@@ -81,6 +81,14 @@ baseline:
       runtime_client_admission: false
       external_authority_required: true
       external_authority_reason: billable_codex_provider_call
+    first_infrastructure_provider:
+      provider: hetzner
+      provider_api: hetzner_cloud_v1
+      first_region: fsn1
+      driving_consumer: chassis-remote-cluster
+      external_authority_required: true
+      effect_class: provision_and_decommission_remote_cluster
+      cost_or_lifecycle_scope: one_disposable_P09_cluster
 
 call_traces:
   - id: synapse-journey-1.current.v1
@@ -696,4 +704,256 @@ substrates:
     rebuildable: true
 
 contract_sources_frozen: true
-contracts: []
+contracts:
+  - id: ground-plane.opaque-ref.v1
+    authority: ground_plane
+    path: /home/home/p/g/n/ground_plane/core/ground_plane_contracts/lib/ground_plane/contracts/opaque_ref.ex
+    version: 1
+    digest: a59368b07a116c7e99a72efef62c3b0dc91ffd51799370c409b20a7c409f647a
+    producers: [ground_plane]
+    consumers: [mezzanine, citadel, outer_brain, jido_integration, execution_plane, chassis, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: ground-plane.command-envelope.v1
+    authority: ground_plane
+    path: /home/home/p/g/n/ground_plane/core/ground_plane_contracts/lib/ground_plane/contracts/command_envelope.ex
+    version: 1
+    digest: 10a0087c822e63f7ac072ff7933e7902ae15bd6e534454d657395d3787077d7d
+    producers: [ground_plane]
+    consumers: [mezzanine, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: ground-plane.artifact-descriptor.v1
+    authority: ground_plane
+    path: /home/home/p/g/n/ground_plane/core/ground_plane_contracts/lib/ground_plane/contracts/artifact_descriptor.ex
+    version: 1
+    digest: c352253f66cee6e225699aafefe8b40c43e5938f22609fadae5122369bfdec7b
+    producers: [ground_plane]
+    consumers: [mezzanine, outer_brain, jido_integration, chassis, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: mezzanine.run-acceptance.v1
+    authority: mezzanine
+    path: /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/contracts/run_acceptance.ex
+    version: 1
+    digest: b14177524c39a699a7b90fab3f9e532156f2aaa45f79230e92e75c85660ec671
+    producers: [mezzanine]
+    consumers: [app_kit, synapse, outer_brain]
+    compatibility: clean_break
+    status: frozen
+  - id: mezzanine.effect-record.v1
+    authority: mezzanine
+    path: /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/contracts/effect_record.ex
+    version: 1
+    digest: 632794bef4cba80c2b9f999f43c6730d630daf36e2b7f3398ebcef1624a46486
+    producers: [mezzanine]
+    consumers: [app_kit, synapse, jido_integration, execution_plane]
+    compatibility: clean_break
+    status: frozen
+  - id: citadel.scoped-grant.v1
+    authority: citadel
+    path: /home/home/p/g/n/citadel/core/citadel_governance/lib/citadel/governance/scoped_grant.ex
+    version: 1
+    digest: 8689bbba64e5b416dd31f06529f3e0c44b54a2873835d3c8e2e579c501cdda7e
+    producers: [citadel]
+    consumers: [mezzanine, outer_brain, jido_integration, execution_plane, chassis, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: outer-brain.semantic-context-provenance.v1
+    authority: outer_brain
+    path: /home/home/p/g/n/outer_brain/core/semantic/lib/outer_brain/semantic/context_provenance.ex
+    version: 1
+    digest: a7739cb13803b96d58dca93329cc6292095e8b0d6467a57038f9699444b30718
+    producers: [outer_brain]
+    consumers: [mezzanine, jido_integration, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: outer-brain.reply-publication.v1
+    authority: outer_brain
+    path: /home/home/p/g/n/outer_brain/core/semantic/lib/outer_brain/semantic/reply_publication.ex
+    version: 1
+    digest: 7dfa05edbbd02b9a541035a7929b70b0745c4ad12d97a54452c30a6b9eafe730
+    producers: [outer_brain]
+    consumers: [mezzanine, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: outer-brain.memory-context-provenance.v1
+    authority: outer_brain
+    path: /home/home/p/g/n/outer_brain/core/semantic/lib/outer_brain/semantic/memory_context_provenance.ex
+    version: 1
+    digest: f270837c7ebf114bdb03641a7a48e3a4ad719007c56caf589cdbdcf0f3ff96cb
+    producers: [outer_brain]
+    consumers: [mezzanine, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: jido.credential-lease.v1
+    authority: jido_integration
+    path: /home/home/p/g/n/jido_integration/core/credential_materialization/lib/jido/integration/credential_lease.ex
+    version: 1
+    digest: 62cdad73a9250ccbc21a0f790a5c1a577f14bac6c2738214cc2e28fa679324fd
+    producers: [jido_integration]
+    consumers: [inference, gemini_ex, codex_sdk, cli_subprocess_core, agent_session_manager]
+    compatibility: clean_break
+    status: frozen
+  - id: jido.credential-materialization.v1
+    authority: jido_integration
+    path: /home/home/p/g/n/jido_integration/core/credential_materialization/lib/jido/integration/credential_materialization.ex
+    version: 1
+    digest: 7ea76d6a02300f748d3fd1af358afa46e26420c1c08e5342a9c49b459a1d1e6e
+    producers: [jido_integration]
+    consumers: [inference, gemini_ex, codex_sdk, cli_subprocess_core, agent_session_manager]
+    compatibility: clean_break
+    status: frozen
+  - id: jido.provider-attempt.v1
+    authority: jido_integration
+    path: /home/home/p/g/n/jido_integration/core/control_plane/lib/jido/integration/v2/provider_attempt.ex
+    version: 1
+    digest: 244c4e7eb9df6176052332d693b8b6911368a032c841b9ad220e8bbcdc98de09
+    producers: [jido_integration]
+    consumers: [mezzanine, outer_brain, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: jido.provider-event.v1
+    authority: jido_integration
+    path: /home/home/p/g/n/jido_integration/core/control_plane/lib/jido/integration/v2/provider_event.ex
+    version: 1
+    digest: 033632edf0348d8c956bc32c8a6811f653adcaf788038d5e9cc0692339e7ad47
+    producers: [jido_integration]
+    consumers: [mezzanine, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: jido.lease-revocation.v1
+    authority: jido_integration
+    path: /home/home/p/g/n/jido_integration/core/control_plane/lib/jido/integration/v2/lease_revocation.ex
+    version: 1
+    digest: ada459f4fe39e2a8cc74011e4ba6728e126af8eb72140cba5fcbf4c320dee71e
+    producers: [jido_integration]
+    consumers: [inference, codex_sdk, cli_subprocess_core, agent_session_manager]
+    compatibility: clean_break
+    status: frozen
+  - id: execution-plane.runtime-client.v1
+    authority: execution_plane
+    path: /home/home/p/g/n/execution_plane/core/execution_plane_contracts/lib/execution_plane/runtime/client.ex
+    version: 1
+    digest: a7d811fd5bebc24ac6bc92bea777d5409fef132e5709419d59b18262caa13e04
+    producers: [execution_plane]
+    consumers: [jido_integration, cli_subprocess_core, agent_session_manager, pristine, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: execution-plane.runtime-families.v1
+    authority: execution_plane
+    path: /home/home/p/g/n/execution_plane/core/execution_plane_contracts/lib/execution_plane/runtime/families.ex
+    version: 1
+    digest: de8e3645d581554f5233ada3541e6e89dbec8a93024778bb2358949e3859d46f
+    producers: [execution_plane]
+    consumers: [cli_subprocess_core, pristine, gemini_ex, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: cli-core.runtime-gateway.v1
+    authority: cli_subprocess_core
+    path: /home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core/runtime_gateway.ex
+    version: 1
+    digest: 301b42ff693c460c2539632e2de425b666cc97d5b784c267d635d17d66e75ee7
+    producers: [cli_subprocess_core]
+    consumers: [codex_sdk, agent_session_manager, jido_integration]
+    compatibility: clean_break
+    status: frozen
+  - id: asm.managed-session.v1
+    authority: agent_session_manager
+    path: /home/home/p/g/n/agent_session_manager/lib/agent_session_manager/managed_session.ex
+    version: 1
+    digest: fcf4feea3ecdd8786dbfb896416928d6306384f702c3ab571bda3478c63c891f
+    producers: [agent_session_manager]
+    consumers: [jido_integration, codex_sdk, app_kit]
+    compatibility: clean_break
+    status: frozen
+  - id: chassis.release-resource.v1
+    authority: chassis
+    path: /home/home/p/g/n/chassis/core/chassis_contracts/lib/chassis/contracts/release_resource.ex
+    version: 1
+    digest: 90742697620d6c6d49e9003a16bcab4230e09460243a0fc7c7f21cb6e0dba1fe
+    producers: [chassis]
+    consumers: [app_kit, extravaganza]
+    compatibility: clean_break
+    status: frozen
+  - id: nshkr.production-profile.v1
+    authority: nshkr
+    path: /home/home/p/g/n/nshkr/apps/nshkr_runtime/lib/nshkr/runtime/contracts.ex
+    version: 1
+    digest: 6fec0cbb49930c33d44c7cb2f61ea13ed908615197a64403ecd21ce17f5d37fa
+    producers: [nshkr]
+    consumers: [app_kit, synapse, chassis, extravaganza]
+    compatibility: clean_break
+    status: frozen
+  - id: aitrace.trace.v1
+    authority: aitrace
+    path: /home/home/p/g/n/AITrace/core/ai_trace_core/lib/ai_trace/trace.ex
+    version: 1
+    digest: c328c1a388b34dd6eff1d75d48d3b9f430ffd394cfe40ad4204e6bd3b3d9ef8e
+    producers: [aitrace]
+    consumers: [mezzanine, outer_brain, jido_integration, execution_plane, chassis]
+    compatibility: clean_break
+    status: frozen
+  - id: aitrace.span.v1
+    authority: aitrace
+    path: /home/home/p/g/n/AITrace/core/ai_trace_core/lib/ai_trace/span.ex
+    version: 1
+    digest: d627d80993f83200b3a9d66faff2e28f79dc97637345a315029ee8cc933b39a1
+    producers: [aitrace]
+    consumers: [mezzanine, outer_brain, jido_integration, execution_plane, chassis]
+    compatibility: clean_break
+    status: frozen
+  - id: aitrace.event.v1
+    authority: aitrace
+    path: /home/home/p/g/n/AITrace/core/ai_trace_core/lib/ai_trace/event.ex
+    version: 1
+    digest: ebe864174d8b71003384850df7ee4f63426f0588c171b00c0aa20fc48a1c1eb5
+    producers: [aitrace]
+    consumers: [mezzanine, outer_brain, jido_integration, execution_plane, chassis]
+    compatibility: clean_break
+    status: frozen
+  - id: aitrace.export-bounds.v1
+    authority: aitrace
+    path: /home/home/p/g/n/AITrace/core/ai_trace_core/lib/ai_trace/export_bounds.ex
+    version: 1
+    digest: 70546f100d2f15a6dad1c3405964fa2d559836e57c6524d69a338adb5ca6b227
+    producers: [aitrace]
+    consumers: [mezzanine, outer_brain, jido_integration, execution_plane, chassis]
+    compatibility: clean_break
+    status: frozen
+  - id: aitrace.governed-effect-evidence.v1
+    authority: aitrace
+    path: /home/home/p/g/n/AITrace/core/ai_trace_core/lib/ai_trace/governed_effect_evidence.ex
+    version: 1
+    digest: e285978e31524a0eac3ced9424d0c02a5d8e0422d884b982d81b89fce60efb32
+    producers: [aitrace]
+    consumers: [mezzanine, citadel, jido_integration, execution_plane]
+    compatibility: clean_break
+    status: frozen
+  - id: aitrace.exporter.v1
+    authority: aitrace
+    path: /home/home/p/g/n/AITrace/core/ai_trace_core/lib/ai_trace/exporter.ex
+    version: 1
+    digest: 05cafd5f325e1e68dd9bfc3d54db04259399f0d0a966956c1e3c309577371719
+    producers: [aitrace]
+    consumers: [nshkr]
+    compatibility: clean_break
+    status: frozen
+  - id: app-kit.agent-intake.v1
+    authority: app_kit
+    path: /home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/agent_dtos.ex
+    version: 1
+    digest: 0102435ac6b17cdfd3b399bf25608a9879219ddd3ad6dbba062b9f82d96aba12
+    producers: [app_kit]
+    consumers: [synapse, extravaganza]
+    compatibility: clean_break
+    status: frozen
+  - id: app-kit.governed-effect.v1
+    authority: app_kit
+    path: /home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/effect_dtos.ex
+    version: 1
+    digest: 259f30848c3d7eaf86c1b9ba8a855fcbe06f279d32b672b8d75c4e730c4b355a
+    producers: [app_kit]
+    consumers: [synapse, extravaganza]
+    compatibility: clean_break
+    status: frozen
