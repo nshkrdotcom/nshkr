@@ -14,13 +14,37 @@ nodes:
     phase: 1
     repository: /home/home/p/g/n/nshkr
     produces: [durable_runtime_composition, production_preflight, durable_owner_stores, managed_secret_closure]
+    requires: [P00-contract-spine, P01-mezzanine-memory-clean-break]
+    edges:
+      - node: P00-contract-spine
+        type: compile_api
+      - node: P01-mezzanine-memory-clean-break
+        type: semantic
+    owned_paths: [/home/home/p/g/n/nshkr, /home/home/p/g/n/mezzanine, /home/home/p/g/n/citadel, /home/home/p/g/n/outer_brain, /home/home/p/g/n/jido_integration]
+    catalog_effect: dormant_only
+    status: ready
+  - id: P01-mezzanine-durable-runtime
+    phase: 1
+    repository: /home/home/p/g/n/mezzanine
+    produces: [mezzanine_postgres_run_store, mezzanine_temporal_outbox_dispatch]
     requires: [P00-contract-spine]
     edges:
       - node: P00-contract-spine
         type: compile_api
-    owned_paths: [/home/home/p/g/n/nshkr, /home/home/p/g/n/mezzanine, /home/home/p/g/n/citadel, /home/home/p/g/n/outer_brain, /home/home/p/g/n/jido_integration]
-    catalog_effect: dormant_only
+    owned_paths: [/home/home/p/g/n/mezzanine/core/mezzanine_core, /home/home/p/g/n/mezzanine/core/workflow_runtime, /home/home/p/g/n/mezzanine/core/ai_run_model]
+    catalog_effect: none
     status: ready
+  - id: P01-mezzanine-memory-clean-break
+    phase: 1
+    repository: /home/home/p/g/n/mezzanine
+    produces: [mezzanine_production_memory_defaults_removed]
+    requires: [P01-mezzanine-durable-runtime]
+    edges:
+      - node: P01-mezzanine-durable-runtime
+        type: compile_api
+    owned_paths: [/home/home/p/g/n/mezzanine/core/projection_engine, /home/home/p/g/n/mezzanine/core/evidence_engine, /home/home/p/g/n/mezzanine/core/decision_engine, /home/home/p/g/n/mezzanine/core/execution_engine, /home/home/p/g/n/mezzanine/core/operator_engine, /home/home/p/g/n/mezzanine/core/object_engine, /home/home/p/g/n/mezzanine/core/audit_engine, /home/home/p/g/n/mezzanine/core/archival_engine, /home/home/p/g/n/mezzanine/core/coordination_engine]
+    catalog_effect: none
+    status: blocked_dependencies
   - id: P02-durable-synapse-acceptance
     phase: 2
     repository: /home/home/p/g/n/mezzanine

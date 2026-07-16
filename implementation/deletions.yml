@@ -10,9 +10,9 @@ deletions:
       - /home/home/p/g/n/mezzanine/core/workflow_runtime/lib/mezzanine/workflow_runtime/outbox_persistence.ex
     remove_test_paths:
       - /home/home/p/g/n/mezzanine/core/ai_run_model/test/mezzanine/ai_run_model/memory_default_boot_test.exs
-    remove_references: [production_mickey_mouse_selector, production_memory_store_fallback, static_success_boot_child]
+    remove_references: [production_mickey_mouse_selector, production_memory_store_fallback, omitted_option_engine_memory_adapter, memory_capability_advertisement, static_success_boot_child]
     replacement_contract: mezzanine.run-acceptance.v1
-    current_consumers_to_update: [nshkr_runtime, mezzanine_workflow_runtime]
+    current_consumers_to_update: [nshkr_runtime, mezzanine_workflow_runtime, mezzanine_projection_engine, mezzanine_evidence_engine, mezzanine_decision_engine, mezzanine_execution_engine, mezzanine_operator_engine, mezzanine_object_engine, mezzanine_audit_engine, mezzanine_archival_engine, mezzanine_coordination_engine]
     verification: &unverified
       replacement_complete: false
       consumers_migrated: false
