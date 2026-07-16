@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P11-gemini-live-local
+phase: 11
+driving_consumer: gemini-live
+repository: /home/home/p/g/n/gemini_ex
+base_revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini/live","/home/home/p/g/n/gemini_ex/lib/gemini/client/websocket.ex","/home/home/p/g/n/gemini_ex/lib/gemini/streaming","/home/home/p/g/n/gemini_ex/test/gemini/live","/home/home/p/g/n/gemini_ex/test/gemini/client/websocket_test.exs"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.credential-materialization.v1","jido.lease-revocation.v1","execution-plane.runtime-families.v1"]
+dependency_nodes: ["P03-governed-gemini","P07-execution-placement"]
+behavior: ["implement real local Gemini Live connect, send, receive, backpressure, reconnect, rotation, revocation, and close","isolate two accounts","emit sanitized lifecycle events"]
+negative_invariants: ["no ambient credential reconnect","no URL or query secret telemetry","no synthetic collected backpressure"]
+minimal_qc: ["compile GeminiEx","run targeted Live, WebSocket, backpressure, reconnect, rotation, revocation, close, and two-account tests","run one approved real two-account lifecycle"]
+mandatory_qc: ["cd /home/home/p/g/n/gemini_ex && mix test test/gemini/auth_test.exs test/gemini/governed_authority_test.exs test/gemini/client/websocket_test.exs test/gemini/live/session_test.exs test/gemini/live/ephemeral_token_test.exs"]
+protected_deletions: ["P11-gemini-live-ambient-and-direct-connections"]
+external_effects:
+  authority_required: true
+  target: "Google Gemini Live API using two managed accounts"
+  effect_class: "billable_two_account_live_sessions"
+  cost_or_lifecycle_scope: "one local and one runtime-admitted session exercising reconnect or revocation and close"
+catalog_effect: dormant
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

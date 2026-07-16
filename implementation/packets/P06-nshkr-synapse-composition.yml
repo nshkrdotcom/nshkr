@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P06-nshkr-synapse-composition
+phase: 6
+driving_consumer: synapse-mvp
+repository: /home/home/p/g/n/nshkr
+base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
+owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/synapse"]
+contract_versions: ["nshkr.production-profile.v1","app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
+dependency_nodes: ["P06-synapse-mvp"]
+behavior: ["compose all real Synapse AppKit backends and capability truth","own production release selection and end-to-end journey commands","keep fixture modules unreachable"]
+negative_invariants: ["no fixture backend in normal release","no lower service started by Synapse","no inactive descriptor advertised"]
+minimal_qc: ["compile nshkr_runtime","run targeted composition and discovery tests","run one real pass through each distinct MVP journey, reusing identical P03-P05 results"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: activate_only_executable_product_capabilities
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

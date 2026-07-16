@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-outerbrain-persistence
+phase: 1
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/outer_brain
+base_revision: 1d2f27a7f28c17f20e0833f7300bc948c64e86a5
+owned_paths: ["/home/home/p/g/n/outer_brain/core/outer_brain_persistence","/home/home/p/g/n/outer_brain/core/outer_brain_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/outer_brain/core/outer_brain_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["outer-brain.semantic-context-provenance.v1","outer-brain.reply-publication.v1","outer-brain.memory-context-provenance.v1","ground-plane.artifact-descriptor.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["compose the canonical Postgres repository for semantic context and publication facts","persist immutable artifact and provenance references","fail production boot without the durable repository"]
+negative_invariants: ["no production memory publication journal","no secret payload in artifact metadata"]
+minimal_qc: ["cd /home/home/p/g/n/outer_brain && mix format --check-formatted","cd /home/home/p/g/n/outer_brain/core/outer_brain_persistence && mix compile --warnings-as-errors","run targeted persistence and redaction tests"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

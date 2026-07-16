@@ -11,7 +11,7 @@ repositories:
     consumes: []
   - id: nshkr
     path: /home/home/p/g/n/nshkr
-    revision: d9b2423c2770d748e10bafd38544b57ae362f52f
+    revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
     branch: main
     dirty: false
     role: production_composition

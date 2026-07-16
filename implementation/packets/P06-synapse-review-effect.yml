@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P06-synapse-review-effect
+phase: 6
+driving_consumer: synapse-mvp-review-effect
+repository: /home/home/p/g/n/synapse
+base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/reviews.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/governed_effects.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/review_index_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/review_show_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/components/governed_effect_components.ex"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.governed-effect.v1"]
+dependency_nodes: ["P05-recovery-cognition"]
+behavior: ["complete review, effect progress, receipt, ambiguity, cancel, and continuation UI","read only durable AppKit DTOs","remove production fixture review/effect selection"]
+negative_invariants: ["no static approved or complete state","no direct effect launch","no fixture backend in normal release"]
+minimal_qc: ["compile changed Synapse apps","run targeted review, governed-effect, component, and stable-DOM LiveView tests","reuse the P04 real effect journey"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/synapse --profile product --profile hazmat --include 'apps/synapse_core/lib/**/*.ex' --include 'apps/synapse_web/lib/**/*.ex'"]
+protected_deletions: ["P04-synapse-production-effect-fixtures"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P04-codex-app-server
+phase: 4
+driving_consumer: synapse-journey-2
+repository: /home/home/p/g/n/codex_sdk
+base_revision: 54c4d2d008f4fbf82790c4dcd74192005171eea4
+owned_paths: ["/home/home/p/g/n/codex_sdk/lib/codex/app_server","/home/home/p/g/n/codex_sdk/lib/codex/auth","/home/home/p/g/n/codex_sdk/lib/codex/exec"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.credential-materialization.v1","cli-core.runtime-gateway.v1","asm.managed-session.v1"]
+dependency_nodes: ["P03-governed-gemini"]
+behavior: ["run a governed Codex app-server session with incremental JSON-RPC output and continuation","bind the isolated account and disposable workspace","propagate terminal, cancel, ambiguity, and cleanup state"]
+negative_invariants: ["no ambient account discovery","no direct unmanaged process launch","no false cleanup success"]
+minimal_qc: ["compile Codex SDK","run targeted account, app-server, incremental, cancellation, and redaction tests","run one approved real governed reviewed file effect"]
+mandatory_qc: ["cd /home/home/p/g/n/codex_sdk && mix test test/codex/app_server/account_test.exs test/codex/auth_test.exs test/codex/secrets_redaction_test.exs test/codex/exec/cancellation_registry_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: true
+  target: "Codex app-server in one isolated disposable workspace"
+  effect_class: "billable_codex_session_and_reviewed_file_write"
+  cost_or_lifecycle_scope: "one create-or-replace of one named text file plus readback"
+catalog_effect: dormant
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

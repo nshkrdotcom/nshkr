@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P04-asm-managed-session
+phase: 4
+driving_consumer: synapse-journey-2
+repository: /home/home/p/g/n/agent_session_manager
+base_revision: a5764929ab7318c611af46c04f1d27154e069526
+owned_paths: ["/home/home/p/g/n/agent_session_manager/lib/asm","/home/home/p/g/n/agent_session_manager/test/asm"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["asm.managed-session.v1","cli-core.runtime-gateway.v1","jido.credential-materialization.v1"]
+dependency_nodes: ["P03-governed-gemini"]
+behavior: ["own managed session refs, account generation, continuation, cancel, and cleanup","route local sessions only through CLI Core","remove manual RPC as a second placement model"]
+negative_invariants: ["no PID identity across boundary","no manual remote-node fallback","no lease generation drift"]
+minimal_qc: ["compile ASM","run targeted managed session, runtime-auth, continuation, cancellation, and cleanup tests"]
+mandatory_qc: ["cd /home/home/p/g/n/agent_session_manager && mix test test/asm/runtime_auth_test.exs test/asm/runtime_auth_codex_materialization_test.exs test/asm/distributed/remote_node_execution_test.exs"]
+protected_deletions: ["P04-asm-manual-rpc-placement"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: dormant
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

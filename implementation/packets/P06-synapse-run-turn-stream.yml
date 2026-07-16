@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P06-synapse-run-turn-stream
+phase: 6
+driving_consumer: synapse-mvp-run-turn
+repository: /home/home/p/g/n/synapse
+base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/turns.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_index_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_new_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_show_live.ex"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1"]
+dependency_nodes: ["P05-recovery-cognition"]
+behavior: ["complete durable run, turn, incremental stream, cursor resume, and degraded presentation","replace provisional deltas with committed turn readback","remove fixture ID and detail fallbacks"]
+negative_invariants: ["no static fixture run list","no PubSub as durable truth","no lower-stack imports"]
+minimal_qc: ["compile changed Synapse apps","run targeted AgentRuns, Turns, and stable-DOM run LiveView tests","exercise the distinct real run/turn/stream journey"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/synapse --profile product --profile hazmat --include 'apps/synapse_core/lib/**/*.ex' --include 'apps/synapse_web/lib/**/*.ex'"]
+protected_deletions: ["P06-synapse-production-fixture-catalog"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

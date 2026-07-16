@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-gemini-security-closure
+phase: 1
+driving_consumer: managed-gemini
+repository: /home/home/p/g/n/gemini_ex
+base_revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini/auth","/home/home/p/g/n/gemini_ex/lib/gemini/config.ex","/home/home/p/g/n/gemini_ex/lib/gemini/env.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex"]
+read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.credential-lease.v1","jido.credential-materialization.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["accept isolated managed materialization without global configuration","close account and token precedence defects","redact request, error, telemetry, and retry surfaces"]
+negative_invariants: ["managed calls never consult ambient global credentials","no token or API key in logs, URLs, receipts, or errors"]
+minimal_qc: ["cd /home/home/p/g/n/gemini_ex && mix format --check-formatted","cd /home/home/p/g/n/gemini_ex && mix compile --warnings-as-errors","run targeted auth/config and governed-authority tests"]
+mandatory_qc: ["cd /home/home/p/g/n/gemini_ex && mix test test/gemini/auth_test.exs test/gemini/auth/gemini_strategy_test.exs test/gemini/config_test.exs test/gemini/governed_authority_test.exs"]
+protected_deletions: ["P03-gemini-managed-global-credentials"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

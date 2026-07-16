@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P12-execution-plane-closure
+phase: 12
+driving_consumer: advertised-capability-closure
+repository: /home/home/p/g/n/execution_plane
+base_revision: ff19877742c8d44fab72c31e7c965938ff2ab565
+owned_paths: ["/home/home/p/g/n/execution_plane/core","/home/home/p/g/n/execution_plane/runtimes","/home/home/p/g/n/execution_plane/protocols","/home/home/p/g/n/execution_plane/streaming"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
+contract_versions: ["nshkr.production-profile.v1"]
+dependency_nodes: ["P06-synapse-mvp","P09-chassis-remote-cluster","P10-extravaganza-mvp","P11-gemini-live"]
+behavior: ["enumerate production-discovered capabilities in this repository","delete or remove every fake, fixture, memory, no-op, shim, incomplete adapter, stale descriptor, bypass, and displaced production path","preserve only unreachable deterministic fixtures that test a current contract"]
+negative_invariants: ["no non-production path selectable by normal release","no inactive or stale descriptor advertised","no compatibility alias or fallback"]
+minimal_qc: ["cd /home/home/p/g/n/execution_plane && mix format --check-formatted","cd /home/home/p/g/n/execution_plane && mix compile --warnings-as-errors","run targeted production discovery and static-fitness tests"]
+mandatory_qc: ["cd /home/home/p/g/n/execution_plane && mix test runtimes/execution_plane_node/test/execution_plane/node_test.exs runtimes/execution_plane_process/test/execution_plane/process/transport/guest_bridge_state_machine_test.exs streaming/execution_plane_websocket/test/execution_plane_websocket_package_test.exs core/execution_plane/test/core/execution_plane_contracts/no_egress_policy_contract_test.exs"]
+protected_deletions: ["P07-execution-plane-synchronous-and-noop-runtime"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: remove_inactive_and_nonexecutable_descriptors
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

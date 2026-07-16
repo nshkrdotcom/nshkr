@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P11-synapse-live-product
+phase: 11
+driving_consumer: gemini-live
+repository: /home/home/p/g/n/synapse
+base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
+dependency_nodes: ["P03-governed-gemini","P07-execution-placement"]
+behavior: ["present local and runtime Live lifecycle through AppKit only","render reconnect, rotation, revocation, close, backpressure, and degraded states","resume durable cursor readback"]
+negative_invariants: ["no direct Gemini or Execution Plane import","no local mode presented as remote","no fixture Live production route"]
+minimal_qc: ["compile changed Synapse apps","run targeted Live product, reconnect, revocation, backpressure, close, and stable-DOM tests"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/synapse --profile product --profile hazmat --include 'apps/synapse_core/lib/**/*.ex' --include 'apps/synapse_web/lib/**/*.ex'"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

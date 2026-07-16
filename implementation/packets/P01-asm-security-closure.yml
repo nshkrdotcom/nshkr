@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-asm-security-closure
+phase: 1
+driving_consumer: governed-codex
+repository: /home/home/p/g/n/agent_session_manager
+base_revision: a5764929ab7318c611af46c04f1d27154e069526
+owned_paths: ["/home/home/p/g/n/agent_session_manager/lib/asm/runtime_auth.ex","/home/home/p/g/n/agent_session_manager/lib/asm/runtime_auth","/home/home/p/g/n/agent_session_manager/lib/asm/provider_backend","/home/home/p/g/n/agent_session_manager/lib/asm/session"]
+read_only_dependencies: ["/home/home/p/g/n/agent_session_manager/lib/asm/managed_session.ex","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["asm.managed-session.v1","jido.credential-lease.v1","jido.credential-materialization.v1","cli-core.runtime-gateway.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["bind managed sessions to account, lease generation, authority, and workspace","close ambient account and config paths","ensure expiry, revocation, and cleanup terminate materialization"]
+negative_invariants: ["no raw PID as cross-node session identity","no managed session without exact materialization","no downgrade to manual RPC"]
+minimal_qc: ["cd /home/home/p/g/n/agent_session_manager && mix format --check-formatted","cd /home/home/p/g/n/agent_session_manager && mix compile --warnings-as-errors","run targeted runtime-auth and provider-profile tests"]
+mandatory_qc: ["cd /home/home/p/g/n/agent_session_manager && mix test test/asm/runtime_auth_test.exs test/asm/runtime_auth_codex_materialization_test.exs test/asm/provider_runtime_profile_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

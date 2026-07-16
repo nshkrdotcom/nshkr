@@ -1,0 +1,25 @@
+schema: nshkr.packet.v1
+packet_id: P02-mezzanine-run-acceptance
+phase: 2
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/mezzanine
+base_revision: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+owned_paths: ["/home/home/p/g/n/mezzanine/core/mezzanine_core","/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["mezzanine.run-acceptance.v1","ground-plane.command-envelope.v1"]
+dependency_nodes: ["P01-runtime-security"]
+behavior: ["atomically create canonical run, first turn, idempotency command, and outbox row","relay the committed outbox row to Temporal","query durable ordered projection and cursor after restart"]
+negative_invariants: ["no duplicate run or turn writer","no workflow start before database commit","no PubSub-only readback"]
+minimal_qc: ["compile changed Mezzanine packages","run targeted command, idempotency, outbox, projection, and cursor tests","run one create, application restart, snapshot and cursor readback"]
+mandatory_qc: []
+standard_deletions: ["P01-mezzanine-production-memory-defaults"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

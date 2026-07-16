@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-cli-core-security-closure
+phase: 1
+driving_consumer: governed-codex
+repository: /home/home/p/g/n/cli_subprocess_core
+base_revision: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+owned_paths: ["/home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core"]
+read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["cli-core.runtime-gateway.v1","jido.credential-lease.v1","jido.credential-materialization.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["enforce the frozen local RuntimeGateway security boundary","isolate process environment and workspace","sanitize incremental output and terminal state"]
+negative_invariants: ["no ambient credential inheritance","no launch outside pinned workspace","cancel and cleanup cannot report false success"]
+minimal_qc: ["cd /home/home/p/g/n/cli_subprocess_core && mix format --check-formatted","cd /home/home/p/g/n/cli_subprocess_core && mix compile --warnings-as-errors","run targeted gateway, authority, isolation, and cancellation tests"]
+mandatory_qc: ["cd /home/home/p/g/n/cli_subprocess_core && mix test test/cli_subprocess_core/governed_authority_test.exs test/cli_subprocess_core/provider_runtime_profile_test.exs test/cli_subprocess_core/runtime_gateway_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

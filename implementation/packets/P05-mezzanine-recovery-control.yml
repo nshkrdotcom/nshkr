@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P05-mezzanine-recovery-control
+phase: 5
+driving_consumer: synapse-recovery
+repository: /home/home/p/g/n/mezzanine
+base_revision: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+owned_paths: ["/home/home/p/g/n/mezzanine/core/lifecycle_engine","/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/mezzanine/core/operator_engine"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["mezzanine.effect-record.v1","mezzanine.run-acceptance.v1"]
+dependency_nodes: ["P04-governed-codex"]
+behavior: ["implement pause, cancel, resume, retry, supersession, deadline, and restart reconciliation","classify unknown external effects and require operator recovery","use durable signal outbox rather than direct Temporal fallback"]
+negative_invariants: ["no blind retry of unknown effect","no PID-based recovery truth","no local success fabrication"]
+minimal_qc: ["compile changed Mezzanine packages","run targeted lifecycle, signal-outbox, killed-process, ambiguity, and operator-recovery tests"]
+mandatory_qc: ["cd /home/home/p/g/n/mezzanine && mix test core/execution_engine/test/mezzanine/operator_actions_test.exs core/projection_engine/test/mezzanine/projections/receipt_reducer_test.exs core/workflow_runtime/test/mezzanine/workflow_runtime/operator_signal_control_test.exs core/workflow_runtime/test/mezzanine/workflow_runtime/activity_side_effect_idempotency_test.exs"]
+protected_deletions: ["P05-mezzanine-volatile-recovery-truth"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

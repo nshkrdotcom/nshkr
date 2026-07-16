@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P07-cli-process-family
+phase: 7
+driving_consumer: runtime-admitted-process
+repository: /home/home/p/g/n/cli_subprocess_core
+base_revision: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+owned_paths: ["/home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core","/home/home/p/g/n/cli_subprocess_core/test/cli_subprocess_core"]
+read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["execution-plane.runtime-client.v1","execution-plane.runtime-families.v1","cli-core.runtime-gateway.v1"]
+dependency_nodes: ["P04-governed-codex"]
+behavior: ["converge process semantics between local RuntimeGateway and Runtime Client family","preserve input, EOF, incremental output, status, cancel, and cleanup","advertise local and runtime modes separately"]
+negative_invariants: ["no semantic fork between local and remote process family","no raw PID identity","no remote claim before observation"]
+minimal_qc: ["compile CLI Core","run targeted local/runtime equivalence, isolation, stream, EOF, cancel, and cleanup tests"]
+mandatory_qc: ["cd /home/home/p/g/n/cli_subprocess_core && mix test test/cli_subprocess_core/governed_authority_test.exs test/cli_subprocess_core/runtime_gateway_test.exs test/cli_subprocess_core/runtime_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: dormant
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

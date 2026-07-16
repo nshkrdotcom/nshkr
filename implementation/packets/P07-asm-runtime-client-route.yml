@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P07-asm-runtime-client-route
+phase: 7
+driving_consumer: runtime-admitted-process
+repository: /home/home/p/g/n/agent_session_manager
+base_revision: a5764929ab7318c611af46c04f1d27154e069526
+owned_paths: ["/home/home/p/g/n/agent_session_manager/lib/asm/remote","/home/home/p/g/n/agent_session_manager/lib/asm/control.ex","/home/home/p/g/n/agent_session_manager/lib/asm/managed_session.ex"]
+read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["asm.managed-session.v1","execution-plane.runtime-client.v1"]
+dependency_nodes: ["P04-governed-codex"]
+behavior: ["route placed managed sessions through Runtime Client","replace manual RPC and node selection","preserve continuation, cancel, cleanup, account, and generation identity"]
+negative_invariants: ["no manual RPC placement","no raw PID identity","no account/generation drift"]
+minimal_qc: ["compile ASM","run targeted remote route, continuation, cancellation, cleanup, and downgrade tests"]
+mandatory_qc: ["cd /home/home/p/g/n/agent_session_manager && mix test test/asm/runtime_auth_test.exs test/asm/runtime_auth_codex_materialization_test.exs test/asm/distributed/remote_node_execution_test.exs"]
+protected_deletions: ["P04-asm-manual-rpc-placement"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

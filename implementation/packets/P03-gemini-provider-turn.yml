@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P03-gemini-provider-turn
+phase: 3
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/gemini_ex
+base_revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/streaming","/home/home/p/g/n/gemini_ex/test/gemini"]
+read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.credential-materialization.v1","jido.provider-event.v1"]
+dependency_nodes: ["P02-durable-synapse-acceptance"]
+behavior: ["call gemini-2.5-flash generateContent and streamGenerateContent over local HTTPS/SSE","emit incremental output, usage, terminal, cancel, and sanitized errors","honor the exact materialized account for the call lifetime"]
+negative_invariants: ["no ambient credential lookup","no secret in URL, telemetry, or error","no model fallback"]
+minimal_qc: ["compile GeminiEx","run targeted HTTP, SSE, auth, cancellation, and redaction tests","run one approved real completion and stream"]
+mandatory_qc: ["cd /home/home/p/g/n/gemini_ex && mix test test/gemini/auth_test.exs test/gemini/auth/gemini_strategy_test.exs test/gemini/config_test.exs test/gemini/governed_authority_test.exs"]
+protected_deletions: ["P03-gemini-managed-global-credentials"]
+external_effects:
+  authority_required: true
+  target: "Google Gemini API model gemini-2.5-flash"
+  effect_class: "billable_model_completion_and_stream"
+  cost_or_lifecycle_scope: "one completion and one stream for Synapse journey 1"
+catalog_effect: dormant
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P05-nshkr-recovery-composition
+phase: 5
+driving_consumer: synapse-recovery-and-memory
+repository: /home/home/p/g/n/nshkr
+base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
+owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/mezzanine","/home/home/p/g/n/jido_integration","/home/home/p/g/n/citadel","/home/home/p/g/n/outer_brain"]
+contract_versions: ["nshkr.production-profile.v1","mezzanine.effect-record.v1","outer-brain.memory-context-provenance.v1"]
+dependency_nodes: ["P05-recovery-cognition"]
+behavior: ["compose durable recovery, revocation, reconciliation, and memory owners","own killed-process and ambiguous-effect integration scenarios","preserve production boot ordering"]
+negative_invariants: ["no volatile recovery source","no blind retry","no fixture completion"]
+minimal_qc: ["compile nshkr_runtime","run targeted composition tests","run one killed-process recovery and one ambiguous-effect operator-recovery scenario"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

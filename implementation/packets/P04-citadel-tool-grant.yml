@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P04-citadel-tool-grant
+phase: 4
+driving_consumer: synapse-journey-2
+repository: /home/home/p/g/n/citadel
+base_revision: b15e9b4f4bb2013d024e01dbff5c4bbf9b4e5598
+owned_paths: ["/home/home/p/g/n/citadel/core/citadel_governance","/home/home/p/g/n/citadel/core/policy_packs"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["citadel.scoped-grant.v1"]
+dependency_nodes: ["P03-governed-gemini"]
+behavior: ["persist exact account, workspace, file target, operation, and review authority","enforce expiry and revocation through session cleanup","deny target or content drift"]
+negative_invariants: ["no wildcard workspace or operation","no reused model grant for tool effect","no revocation race success"]
+minimal_qc: ["compile changed governance packages","run targeted tool-grant, target-binding, expiry, revocation, and receipt tests"]
+mandatory_qc: ["cd /home/home/p/g/n/citadel && mix hardening.governance","cd /home/home/p/g/n/citadel/core/citadel_governance && mix dialyzer"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

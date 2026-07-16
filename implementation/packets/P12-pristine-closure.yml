@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P12-pristine-closure
+phase: 12
+driving_consumer: advertised-capability-closure
+repository: /home/home/p/g/n/pristine
+base_revision: 24506addc290cb9184116f1daff5836d8ebcb99b
+owned_paths: ["/home/home/p/g/n/pristine/apps/pristine_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
+contract_versions: ["nshkr.production-profile.v1"]
+dependency_nodes: ["P06-synapse-mvp","P09-chassis-remote-cluster","P10-extravaganza-mvp","P11-gemini-live"]
+behavior: ["enumerate production-discovered capabilities in this repository","delete or remove every fake, fixture, memory, no-op, shim, incomplete adapter, stale descriptor, bypass, and displaced production path","preserve only unreachable deterministic fixtures that test a current contract"]
+negative_invariants: ["no non-production path selectable by normal release","no inactive or stale descriptor advertised","no compatibility alias or fallback"]
+minimal_qc: ["cd /home/home/p/g/n/pristine && mix format --check-formatted","cd /home/home/p/g/n/pristine && mix compile --warnings-as-errors","run targeted production discovery and static-fitness tests"]
+mandatory_qc: ["cd /home/home/p/g/n/pristine/apps/pristine_runtime && mix test test/pristine/governed_authority_test.exs test/pristine/adapters/admission_control/dispatch_test.exs test/pristine/adapters/transport/finch_stream_test.exs test/pristine/core/stream_response_test.exs test/pristine/runtime_dependency_boundary_test.exs","add and run narrow cancellation, egress, and downgrade tests if absent"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: remove_inactive_and_nonexecutable_descriptors
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

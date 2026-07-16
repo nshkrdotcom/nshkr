@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P10-extravaganza-web-readback
+phase: 10
+driving_consumer: extravaganza-issue-to-pr
+repository: /home/home/p/g/n/extravaganza
+base_revision: 808b329e3067b5e663b2191ac36462441a3f8e96
+owned_paths: ["/home/home/p/g/n/extravaganza/apps/extravaganza_web","/home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/presenters","/home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/agent_run_view_model.ex"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
+dependency_nodes: ["P05-recovery-cognition","P07-execution-placement","P09-chassis-remote-cluster"]
+behavior: ["render durable admission, workspace, coding, verification, publication, feedback, recovery, and degraded states","read only AppKit product DTOs","resume from durable cursor"]
+negative_invariants: ["no headless live example as product state","no lower import","no volatile cursor truth"]
+minimal_qc: ["compile changed Extravaganza apps","run targeted presenter, controller, headless API, restart, and degraded tests"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/extravaganza --profile product --profile hazmat --include 'apps/extravaganza_core/lib/**/*.ex' --include 'apps/extravaganza_web/lib/**/*.ex'"]
+protected_deletions: ["P10-extravaganza-fixture-and-live-example-production-routes"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

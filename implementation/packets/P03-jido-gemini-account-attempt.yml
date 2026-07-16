@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P03-jido-gemini-account-attempt
+phase: 3
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/jido_integration
+base_revision: bd2306b2a792a1123bea7735937e8272781efd32
+owned_paths: ["/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/model_provider_registry","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/jido_integration/core/store_postgres"]
+read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/citadel/core/citadel_governance","/home/home/p/g/n/outer_brain/core/outer_brain_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["citadel.scoped-grant.v1","jido.credential-lease.v1","jido.credential-materialization.v1","jido.provider-attempt.v1","jido.provider-event.v1"]
+dependency_nodes: ["P02-durable-synapse-acceptance"]
+behavior: ["resolve the pinned managed Gemini account and lease","persist attempt identity before provider success is possible","materialize in memory and persist only sanitized incremental events, usage, and artifact refs"]
+negative_invariants: ["no raw API key option","no direct adapter downgrade","no provider success before durable attempt"]
+minimal_qc: ["compile changed Jido packages","run targeted account, materializer, attempt, event, expiry, revocation, and redaction tests"]
+mandatory_qc: ["cd /home/home/p/g/n/jido_integration && mix test core/auth/test/jido/integration/v2/auth_lease_redemption_test.exs core/auth/test/jido/integration/v2/auth_secret_envelope_test.exs core/contracts/test/jido/integration/v2/credential_materialization_test.exs core/contracts/test/jido/integration/v2/redaction_test.exs"]
+protected_deletions: ["P01-managed-secret-and-account-bypasses"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

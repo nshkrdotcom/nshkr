@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P05-appkit-control-memory
+phase: 5
+driving_consumer: synapse-recovery-and-memory
+repository: /home/home/p/g/n/app_kit
+base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+owned_paths: ["/home/home/p/g/n/app_kit/core/adaptive_control_surface","/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/headless_surface.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/work_control_service.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/semantic_failure_recovery_service.ex"]
+read_only_dependencies: ["/home/home/p/g/n/mezzanine","/home/home/p/g/n/outer_brain","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1","mezzanine.effect-record.v1","outer-brain.memory-context-provenance.v1"]
+dependency_nodes: ["P04-governed-codex"]
+behavior: ["expose product-safe control, recovery, memory, and context DTOs","map durable owner errors and cursor state","narrow adjacent adaptive surfaces only where the named journey requires"]
+negative_invariants: ["no product lower-stack imports","no mutable memory result","no local control success fabrication"]
+minimal_qc: ["compile changed AppKit packages","run targeted control, recovery, memory, context, and bridge tests"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/app_kit --profile hazmat --include 'core/**/*.ex' --include 'bridges/**/*.ex' --include 'web/**/*.ex' --include 'examples/**/*.ex'"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

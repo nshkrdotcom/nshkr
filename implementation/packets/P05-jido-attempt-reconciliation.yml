@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P05-jido-attempt-reconciliation
+phase: 5
+driving_consumer: synapse-recovery
+repository: /home/home/p/g/n/jido_integration
+base_revision: bd2306b2a792a1123bea7735937e8272781efd32
+owned_paths: ["/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/store_postgres","/home/home/p/g/n/jido_integration/core/auth"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.provider-attempt.v1","jido.lease-revocation.v1"]
+dependency_nodes: ["P04-governed-codex"]
+behavior: ["reconcile attempts after process loss","propagate deadline, cancellation, expiry, and revocation to provider/session cleanup","preserve terminal and unknown outcome facts"]
+negative_invariants: ["no attempt resurrection after revocation","no duplicate provider effect on ambiguous recovery","no secret re-materialization after expiry"]
+minimal_qc: ["compile changed Jido packages","run targeted killed-process, attempt-reconcile, expiry, revocation, cancellation, and redaction tests"]
+mandatory_qc: ["cd /home/home/p/g/n/jido_integration && mix test core/auth/test/jido/integration/v2/auth_lease_redemption_test.exs core/auth/test/jido/integration/v2/auth_secret_envelope_test.exs core/contracts/test/jido/integration/v2/credential_materialization_test.exs core/contracts/test/jido/integration/v2/redaction_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

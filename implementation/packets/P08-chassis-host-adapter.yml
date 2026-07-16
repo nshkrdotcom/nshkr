@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P08-chassis-host-adapter
+phase: 8
+driving_consumer: nshkr-single-host
+repository: /home/home/p/g/n/chassis
+base_revision: d9a496037aaf2e630be60828e0646c04a794ef3b
+owned_paths: ["/home/home/p/g/n/chassis/host/chassis_host_daemon","/home/home/p/g/n/chassis/host/chassis_swap_supervisor"]
+read_only_dependencies: ["/home/home/p/g/n/chassis/core/chassis_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["chassis.release-resource.v1","citadel.scoped-grant.v1"]
+dependency_nodes: ["P01-runtime-security","P06-synapse-mvp","P08-chassis-foundation-preparation"]
+behavior: ["execute authorized host commands with durable command journal and idempotency","observe actual release and process state","enforce leases, fences, drain, rollback, and restart reconciliation"]
+negative_invariants: ["no missing-handler static accepted response","no implicit authority","no unjournaled host mutation"]
+minimal_qc: ["compile changed Chassis host packages","run targeted command journal, idempotency, fence, drain, rollback, and restart tests"]
+mandatory_qc: ["cd /home/home/p/g/n/chassis && mix test core/chassis_receipts/test/receipts_test.exs core/chassis_contracts/test/release_resource_contracts_test.exs secrets/chassis_secret_refs/test/secret_refs_test.exs secrets/chassis_secret_vault/test/secret_vault_test.exs"]
+protected_deletions: ["P08-chassis-volatile-controller-state"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

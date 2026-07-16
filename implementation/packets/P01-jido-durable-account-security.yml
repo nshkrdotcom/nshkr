@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-jido-durable-account-security
+phase: 1
+driving_consumer: managed-provider-effects
+repository: /home/home/p/g/n/jido_integration
+base_revision: bd2306b2a792a1123bea7735937e8272781efd32
+owned_paths: ["/home/home/p/g/n/jido_integration/core/store_postgres","/home/home/p/g/n/jido_integration/core/auth","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/jido_integration/core/control_plane"]
+read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/citadel/core/citadel_governance","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["citadel.scoped-grant.v1","jido.credential-lease.v1","jido.credential-materialization.v1","jido.provider-attempt.v1","jido.provider-event.v1","jido.lease-revocation.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["make managed account, credential version, lease, redemption, attempt, and revocation durable","materialize secrets only inside the bounded effect process","redact every durable and telemetry boundary"]
+negative_invariants: ["no secret-bearing durable encoding","no raw API key managed option","expired, revoked, cross-account, and cross-tenant leases fail closed"]
+minimal_qc: ["cd /home/home/p/g/n/jido_integration && mix format --check-formatted","cd /home/home/p/g/n/jido_integration && mix compile --warnings-as-errors","run targeted Postgres auth and credential lifecycle tests"]
+mandatory_qc: ["cd /home/home/p/g/n/jido_integration && mix test core/auth/test/jido/integration/v2/auth_lease_redemption_test.exs core/auth/test/jido/integration/v2/auth_secret_envelope_test.exs core/contracts/test/jido/integration/v2/credential_materialization_test.exs core/contracts/test/jido/integration/v2/redaction_test.exs core/store_postgres/test/jido/integration/v2/store_postgres/auth_store_test.exs"]
+protected_deletions: ["P01-managed-secret-and-account-bypasses"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

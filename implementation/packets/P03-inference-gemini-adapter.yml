@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P03-inference-gemini-adapter
+phase: 3
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/inference
+base_revision: aa8da90b11490b0610be12d72ba086376ecfd1d1
+owned_paths: ["/home/home/p/g/n/inference/apps/inference/lib","/home/home/p/g/n/inference/apps/inference/test"]
+read_only_dependencies: ["/home/home/p/g/n/gemini_ex/lib","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.credential-materialization.v1","jido.provider-event.v1"]
+dependency_nodes: ["P02-durable-synapse-acceptance"]
+behavior: ["implement the managed Gemini incremental adapter","preserve chunk ordering, usage, terminal error, and cancellation semantics","accept only isolated materialization for managed mode"]
+negative_invariants: ["no global Gemini config in managed mode","no collected static success response","no secret-bearing error"]
+minimal_qc: ["cd /home/home/p/g/n/inference/apps/inference && mix format --check-formatted && mix compile --warnings-as-errors","run targeted managed adapter, incremental, error, and cancellation tests"]
+mandatory_qc: ["cd /home/home/p/g/n/inference/apps/inference && mix test test/inference/governed_authority_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P07-gemini-http-family
+phase: 7
+driving_consumer: runtime-admitted-http
+repository: /home/home/p/g/n/gemini_ex
+base_revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/streaming"]
+read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["execution-plane.runtime-client.v1","execution-plane.runtime-families.v1","jido.credential-materialization.v1"]
+dependency_nodes: ["P04-governed-codex"]
+behavior: ["reuse Gemini decoding and telemetry behind local and runtime HTTP family gateways","preserve incremental provider semantics and account isolation","project truthful local/runtime modes"]
+negative_invariants: ["no separate unmanaged stream","no ambient credential fallback","no local-only claim as runtime"]
+minimal_qc: ["compile GeminiEx","run targeted HTTP local/runtime, stream, cancellation, and redaction tests"]
+mandatory_qc: ["cd /home/home/p/g/n/gemini_ex && mix test test/gemini/auth_test.exs test/gemini/governed_authority_test.exs test/gemini/client/websocket_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: dormant
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P08-chassis-health-reconcile
+phase: 8
+driving_consumer: nshkr-single-host
+repository: /home/home/p/g/n/chassis
+base_revision: d9a496037aaf2e630be60828e0646c04a794ef3b
+owned_paths: ["/home/home/p/g/n/chassis/host/chassis_health_probe","/home/home/p/g/n/chassis/core/chassis_inventory","/home/home/p/g/n/chassis/core/chassis_mesh"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["chassis.release-resource.v1"]
+dependency_nodes: ["P01-runtime-security","P06-synapse-mvp","P08-chassis-foundation-preparation"]
+behavior: ["observe real health and inventory snapshots","reconcile desired and observed single-host state across restart","support deterministic local placement"]
+negative_invariants: ["no fixture inventory","no current-node fallback as durable truth","no default-health success"]
+minimal_qc: ["compile changed Chassis health, inventory, and mesh packages","run targeted health, inventory, placement, reconciliation, and restart tests"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

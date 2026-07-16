@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P08-appkit-chassis-bridge-preparation
+phase: 8
+driving_consumer: nshkr-single-host
+repository: /home/home/p/g/n/app_kit
+base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+owned_paths: ["/home/home/p/g/n/app_kit/bridges/chassis_bridge"]
+read_only_dependencies: ["/home/home/p/g/n/chassis/core/chassis_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["chassis.release-resource.v1","app-kit.governed-effect.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["prepare product-safe Chassis command and observed-state mappings","remove bridge-local truth from the target design","keep the bridge uncomposed until the real controller is available"]
+negative_invariants: ["no ETS/default-health durable truth","no lower Chassis imports exposed to products"]
+minimal_qc: ["cd /home/home/p/g/n/app_kit/bridges/chassis_bridge && mix format --check-formatted && mix compile --warnings-as-errors","cd /home/home/p/g/n/app_kit/bridges/chassis_bridge && mix test"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/app_kit --profile hazmat --include 'core/**/*.ex' --include 'bridges/**/*.ex' --include 'web/**/*.ex' --include 'examples/**/*.ex'","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/synapse --profile product --profile hazmat --include 'apps/synapse_core/lib/**/*.ex' --include 'apps/synapse_web/lib/**/*.ex'"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: dormant
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P10-mezzanine-issue-pr-workflow
+phase: 10
+driving_consumer: extravaganza-issue-to-pr
+repository: /home/home/p/g/n/mezzanine
+base_revision: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+owned_paths: ["/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/mezzanine/core/projection_engine"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["mezzanine.run-acceptance.v1","mezzanine.effect-record.v1"]
+dependency_nodes: ["P05-recovery-cognition","P07-execution-placement","P09-chassis-remote-cluster"]
+behavior: ["coordinate durable issue admission, coding, verification, publication, feedback, and restart recovery","persist idempotent external write intents and receipts","project AppKit readback"]
+negative_invariants: ["no duplicate provider write","no blind retry of unknown publication","no workflow state only in Temporal"]
+minimal_qc: ["compile changed Mezzanine packages","run targeted issue-PR workflow, external receipt, ambiguity, feedback, and restart tests"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

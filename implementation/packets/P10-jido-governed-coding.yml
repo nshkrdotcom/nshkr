@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P10-jido-governed-coding
+phase: 10
+driving_consumer: extravaganza-issue-to-pr
+repository: /home/home/p/g/n/jido_integration
+base_revision: bd2306b2a792a1123bea7735937e8272781efd32
+owned_paths: ["/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/asm_runtime_bridge","/home/home/p/g/n/jido_integration/core/runtime_router"]
+read_only_dependencies: ["/home/home/p/g/n/chassis","/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.credential-materialization.v1","asm.managed-session.v1","execution-plane.runtime-client.v1"]
+dependency_nodes: ["P05-recovery-cognition","P07-execution-placement","P09-chassis-remote-cluster"]
+behavior: ["run governed coding and verification in the isolated workspace","bind authority, account, session, resource, and issue identities","persist sanitized attempts and receipts"]
+negative_invariants: ["no ambient repository credential","no workspace escape","no local substitution for admitted runtime when requested"]
+minimal_qc: ["compile changed Jido packages","run targeted coding route, workspace binding, credential isolation, cancellation, revocation, and receipt tests"]
+mandatory_qc: ["cd /home/home/p/g/n/jido_integration && mix test core/auth/test/jido/integration/v2/auth_lease_redemption_test.exs core/auth/test/jido/integration/v2/auth_secret_envelope_test.exs core/contracts/test/jido/integration/v2/credential_materialization_test.exs core/contracts/test/jido/integration/v2/redaction_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P04-appkit-governed-effect
+phase: 4
+driving_consumer: synapse-journey-2
+repository: /home/home/p/g/n/app_kit
+base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+owned_paths: ["/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/core/governed_effect_dtos.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/review_decision_ledger.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/operator_action_service.ex"]
+read_only_dependencies: ["/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.governed-effect.v1","mezzanine.effect-record.v1"]
+dependency_nodes: ["P03-governed-gemini"]
+behavior: ["map product review and effect requests to durable Mezzanine operations","return safe receipt, ambiguity, continuation, and cleanup DTOs","preserve AppKit-only product boundary"]
+negative_invariants: ["no product access to Jido, CLI, ASM, or Citadel modules","no locally fabricated effect success"]
+minimal_qc: ["compile changed AppKit packages","run targeted effect DTO, review, receipt, ambiguity, and bridge tests"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/app_kit --profile hazmat --include 'core/**/*.ex' --include 'bridges/**/*.ex' --include 'web/**/*.ex' --include 'examples/**/*.ex'"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

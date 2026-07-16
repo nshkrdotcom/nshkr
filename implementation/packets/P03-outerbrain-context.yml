@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P03-outerbrain-context
+phase: 3
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/outer_brain
+base_revision: 1d2f27a7f28c17f20e0833f7300bc948c64e86a5
+owned_paths: ["/home/home/p/g/n/outer_brain/core/outer_brain_core","/home/home/p/g/n/outer_brain/core/outer_brain_prompting","/home/home/p/g/n/outer_brain/core/outer_brain_persistence"]
+read_only_dependencies: ["/home/home/p/g/n/outer_brain/core/outer_brain_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["outer-brain.semantic-context-provenance.v1","outer-brain.reply-publication.v1","ground-plane.artifact-descriptor.v1"]
+dependency_nodes: ["P02-durable-synapse-acceptance"]
+behavior: ["build and persist immutable prompt context with provenance","publish immutable assistant reply and next context revision","resolve payloads through authorized artifact references"]
+negative_invariants: ["no mutable prompt artifact","no secret in provenance or artifact metadata","no unpinned retrieval input"]
+minimal_qc: ["compile changed OuterBrain packages","run targeted context, publication, artifact, and redaction tests"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

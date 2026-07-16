@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-citadel-durable-authority
+phase: 1
+driving_consumer: governed-provider-and-tool-effects
+repository: /home/home/p/g/n/citadel
+base_revision: b15e9b4f4bb2013d024e01dbff5c4bbf9b4e5598
+owned_paths: ["/home/home/p/g/n/citadel/core/citadel_governance"]
+read_only_dependencies: ["/home/home/p/g/n/citadel/core/policy_packs","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["citadel.scoped-grant.v1","ground-plane.opaque-ref.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["persist decisions, grants, revocations, and decision-session lifecycle","make reconstruction and revocation fail closed","provide the exact governed ingress consumed by P03 and P04"]
+negative_invariants: ["no invalid reconstructed grant becomes valid","no grant outlives expiry or revocation","no alternate authority ingress"]
+minimal_qc: ["cd /home/home/p/g/n/citadel && mix format --check-formatted","cd /home/home/p/g/n/citadel/core/citadel_governance && mix compile --warnings-as-errors","run targeted decision, grant, revocation, and persistence tests"]
+mandatory_qc: ["cd /home/home/p/g/n/citadel && mix hardening.governance","cd /home/home/p/g/n/citadel/core/citadel_governance && mix dialyzer"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

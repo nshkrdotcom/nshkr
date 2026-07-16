@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P04-jido-codex-route
+phase: 4
+driving_consumer: synapse-journey-2
+repository: /home/home/p/g/n/jido_integration
+base_revision: bd2306b2a792a1123bea7735937e8272781efd32
+owned_paths: ["/home/home/p/g/n/jido_integration/core/asm_runtime_bridge","/home/home/p/g/n/jido_integration/core/runtime_router","/home/home/p/g/n/jido_integration/core/session_runtime","/home/home/p/g/n/jido_integration/core/control_plane"]
+read_only_dependencies: ["/home/home/p/g/n/cli_subprocess_core","/home/home/p/g/n/agent_session_manager","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["citadel.scoped-grant.v1","jido.credential-materialization.v1","asm.managed-session.v1","cli-core.runtime-gateway.v1"]
+dependency_nodes: ["P03-governed-gemini"]
+behavior: ["converge the normal governed Codex route on ASM and CLI Core","persist attempt and continuation state","delete direct and distributed bypass routes"]
+negative_invariants: ["no direct runtime bridge","no distributed bridge fallback","no anonymous compensation callback"]
+minimal_qc: ["compile changed Jido packages","run targeted route, materializer, attempt, continuation, revocation, and downgrade tests"]
+mandatory_qc: ["cd /home/home/p/g/n/jido_integration && mix test core/auth/test/jido/integration/v2/auth_lease_redemption_test.exs core/auth/test/jido/integration/v2/auth_secret_envelope_test.exs core/contracts/test/jido/integration/v2/credential_materialization_test.exs core/contracts/test/jido/integration/v2/redaction_test.exs"]
+protected_deletions: ["P04-jido-direct-distributed-placement"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

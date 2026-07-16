@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P02-appkit-mezzanine-intake
+phase: 2
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/app_kit
+base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+owned_paths: ["/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/app_kit/bridges/mezzanine_bridge","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge"]
+read_only_dependencies: ["/home/home/p/g/n/mezzanine/core/mezzanine_core","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1","mezzanine.run-acceptance.v1"]
+dependency_nodes: ["P01-runtime-security"]
+behavior: ["map product-safe intake DTOs to the Mezzanine owner transaction","return typed acceptance, conflict, unavailable, snapshot, and cursor DTOs","remove bridge-local projection truth"]
+negative_invariants: ["AppKit owns no durable run projection","no lower modules escape the bridge","no local accepted DTO fabrication"]
+minimal_qc: ["cd /home/home/p/g/n/app_kit/bridges/mezzanine_bridge && mix format --check-formatted && mix compile --warnings-as-errors","run targeted intake, query, and bridge mapping tests"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/app_kit --profile hazmat --include 'core/**/*.ex' --include 'bridges/**/*.ex' --include 'web/**/*.ex' --include 'examples/**/*.ex'"]
+protected_deletions: ["P02-appkit-bridge-local-run-truth"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P11-nshkr-live-composition
+phase: 11
+driving_consumer: gemini-live
+repository: /home/home/p/g/n/nshkr
+base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
+owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/gemini_ex","/home/home/p/g/n/execution_plane","/home/home/p/g/n/jido_integration","/home/home/p/g/n/mezzanine"]
+contract_versions: ["nshkr.production-profile.v1","execution-plane.runtime-client.v1","execution-plane.runtime-families.v1"]
+dependency_nodes: ["P11-gemini-live"]
+behavior: ["compose local and separate-node Gemini Live gateways","activate local and runtime Live modes separately after real lifecycle QC","own two-account integration and cleanup"]
+negative_invariants: ["no placeholder package in production catalog","no mode aliasing","no leaked session after QC"]
+minimal_qc: ["compile nshkr_runtime","run targeted Live composition and capability discovery tests","run one approved two-account Live lifecycle with one session on the P07 effect node"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: activate_live_local_and_runtime_modes_separately
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

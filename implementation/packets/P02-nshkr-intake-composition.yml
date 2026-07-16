@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P02-nshkr-intake-composition
+phase: 2
+driving_consumer: synapse-journey-1
+repository: /home/home/p/g/n/nshkr
+base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
+owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/mezzanine/core/mezzanine_core","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge","/home/home/p/g/n/synapse/apps/synapse_core"]
+contract_versions: ["nshkr.production-profile.v1","mezzanine.run-acceptance.v1","app-kit.agent-intake.v1"]
+dependency_nodes: ["P01-runtime-security"]
+behavior: ["compose the real Mezzanine intake and AppKit query backends","supervise outbox relay and worker in production order","own the restart readback integration command"]
+negative_invariants: ["no fixture selection in normal release","no model effect in P02 acceptance QC"]
+minimal_qc: ["compile root and nshkr_runtime","run targeted composition tests","run one create, restart, snapshot and cursor readback without a model call"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

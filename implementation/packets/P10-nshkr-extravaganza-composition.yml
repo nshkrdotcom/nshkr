@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P10-nshkr-extravaganza-composition
+phase: 10
+driving_consumer: extravaganza-issue-to-pr
+repository: /home/home/p/g/n/nshkr
+base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
+owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/extravaganza","/home/home/p/g/n/app_kit","/home/home/p/g/n/chassis","/home/home/p/g/n/mezzanine"]
+contract_versions: ["nshkr.production-profile.v1","app-kit.agent-intake.v1","chassis.release-resource.v1"]
+dependency_nodes: ["P10-extravaganza-mvp"]
+behavior: ["compose the real Extravaganza product path and owner services","own the approved disposable issue-to-PR integration command","activate product capability only after durable restart readback"]
+negative_invariants: ["no fixture/live-example production route","no lower service started by product","no external write without confirmed envelope"]
+minimal_qc: ["compile nshkr_runtime","run targeted product composition and discovery tests","run one approved real issue-to-PR lifecycle and restart readback"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: activate_extravaganza_only_after_real_issue_to_pr
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

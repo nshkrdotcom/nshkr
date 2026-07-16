@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P10-extravaganza-durable-coordinator
+phase: 10
+driving_consumer: extravaganza-issue-to-pr
+repository: /home/home/p/g/n/extravaganza
+base_revision: 808b329e3067b5e663b2191ac36462441a3f8e96
+owned_paths: ["/home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/sources.ex","/home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/workflows.ex","/home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/queries.ex","/home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/product_bootstrap.ex","/home/home/p/g/n/extravaganza/apps/extravaganza_core/lib/extravaganza/product_surface.ex"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
+dependency_nodes: ["P05-recovery-cognition","P07-execution-placement","P09-chassis-remote-cluster"]
+behavior: ["coordinate durable admission, source cursor, dedupe, workflow state, feedback, and restart recovery through AppKit","bind one real issue to one repository and isolated workspace","remove fixture and live-example production selection"]
+negative_invariants: ["no MapSet-only dedupe","no product-started lower service","no direct lower-owner import"]
+minimal_qc: ["compile extravaganza_core","run targeted source, dedupe, coordinator, restart, and product-surface tests","run one approved real issue-to-PR lifecycle"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/extravaganza --profile product --profile hazmat --include 'apps/extravaganza_core/lib/**/*.ex' --include 'apps/extravaganza_web/lib/**/*.ex'"]
+protected_deletions: ["P10-extravaganza-fixture-and-live-example-production-routes"]
+external_effects:
+  authority_required: true
+  target: "one user-designated disposable Linear issue source and GitHub repository"
+  effect_class: "linear_and_github_issue_comment_branch_push_and_pull_request_writes"
+  cost_or_lifecycle_scope: "one issue-to-PR lifecycle including feedback and cleanup"
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

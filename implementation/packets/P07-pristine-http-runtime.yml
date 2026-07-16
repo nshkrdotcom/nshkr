@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P07-pristine-http-runtime
+phase: 7
+driving_consumer: runtime-admitted-http
+repository: /home/home/p/g/n/pristine
+base_revision: 24506addc290cb9184116f1daff5836d8ebcb99b
+owned_paths: ["/home/home/p/g/n/pristine/apps/pristine_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["execution-plane.runtime-client.v1","execution-plane.runtime-families.v1"]
+dependency_nodes: ["P04-governed-codex","P07-family-preparation"]
+behavior: ["complete local and Runtime Client HTTP request/stream implementations","enforce bounded backpressure, cancellation, egress, and receipts","run one real separate-node HTTP effect"]
+negative_invariants: ["no unmanaged duplicate stream","no collected fake stream","no local response presented as remote"]
+minimal_qc: ["compile pristine_runtime","run targeted request, stream, backpressure, cancel, egress, and receipt tests","run one peer-backed separate-node HTTP effect"]
+mandatory_qc: ["cd /home/home/p/g/n/pristine/apps/pristine_runtime && mix test test/pristine/governed_authority_test.exs test/pristine/adapters/admission_control/dispatch_test.exs test/pristine/adapters/transport/finch_stream_test.exs test/pristine/core/stream_response_test.exs test/pristine/runtime_dependency_boundary_test.exs","add and run narrow cancellation, egress, and downgrade tests if absent"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: dormant
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

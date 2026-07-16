@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P08-nshkr-chassis-composition
+phase: 8
+driving_consumer: nshkr-single-host
+repository: /home/home/p/g/n/nshkr
+base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
+owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/chassis","/home/home/p/g/n/app_kit/bridges/chassis_bridge"]
+contract_versions: ["nshkr.production-profile.v1","chassis.release-resource.v1"]
+dependency_nodes: ["P08-chassis-single-host"]
+behavior: ["expose the actual NSHKR release artifact and health contract to Chassis","compose Chassis owner services and AppKit readback","own real deploy, observation, rollback, and restart integration"]
+negative_invariants: ["no self-reported deployment success without observation","no fixture release","no bridge-local state"]
+minimal_qc: ["compile nshkr_runtime","run targeted release-role and Chassis composition tests","run one real local deploy, observation, rollback, and restart reconciliation"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: activate_chassis_single_host_only_after_real_lifecycle
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

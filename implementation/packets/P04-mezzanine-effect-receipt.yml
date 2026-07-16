@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P04-mezzanine-effect-receipt
+phase: 4
+driving_consumer: synapse-journey-2
+repository: /home/home/p/g/n/mezzanine
+base_revision: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+owned_paths: ["/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["mezzanine.effect-record.v1","citadel.scoped-grant.v1"]
+dependency_nodes: ["P03-governed-gemini"]
+behavior: ["persist review, effect intent, dispatch, receipt, ambiguity, and continuation lineage","make compensation an identified durable operation","project operator-visible terminal and ambiguous states"]
+negative_invariants: ["no effect before review and grant","no anonymous rollback callback","unknown outcome is never blind-retried"]
+minimal_qc: ["compile changed Mezzanine packages","run targeted review, effect, receipt, ambiguity, cancel, and continuation tests"]
+mandatory_qc: ["cd /home/home/p/g/n/mezzanine && mix test core/mezzanine_core/test/mezzanine/effects/effect_contracts_test.exs core/execution_engine/test/mezzanine/operator_actions_test.exs core/projection_engine/test/mezzanine/projections/receipt_reducer_test.exs core/workflow_runtime/test/mezzanine/workflow_runtime/terminal_lower_receipt_shape_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P04-synapse-reviewed-effect
+phase: 4
+driving_consumer: synapse-journey-2
+repository: /home/home/p/g/n/synapse
+base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/reviews.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/turns.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/review_show_live.ex"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit/core/app_kit_core","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.governed-effect.v1"]
+dependency_nodes: ["P03-governed-gemini"]
+behavior: ["drive real review, approval, effect progress, ambiguity, cancellation, and continuation through AppKit","replace fixture review and effect defaults","render durable receipt state"]
+negative_invariants: ["no fixture backend in production","no direct CLI or Jido import","no static success"]
+minimal_qc: ["compile changed Synapse apps","run targeted review and turn tests plus stable-DOM LiveView tests"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/synapse --profile product --profile hazmat --include 'apps/synapse_core/lib/**/*.ex' --include 'apps/synapse_web/lib/**/*.ex'"]
+protected_deletions: ["P04-synapse-production-effect-fixtures"]
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

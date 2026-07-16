@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P05-synapse-recovery-memory
+phase: 5
+driving_consumer: synapse-recovery-and-memory
+repository: /home/home/p/g/n/synapse
+base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/memory.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/context_packs.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
+dependency_nodes: ["P04-governed-codex"]
+behavior: ["present pause, cancel, resume, retry, supersession, deadline, recovery, memory, and context states through AppKit","resume from durable cursor after UI restart","render ambiguity and degraded states explicitly"]
+negative_invariants: ["no PubSub as durable truth","no local memory map as production truth","no direct owner imports"]
+minimal_qc: ["compile changed Synapse apps","run targeted recovery, memory, context, reconnect, and stable-DOM LiveView tests"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/synapse --profile product --profile hazmat --include 'apps/synapse_core/lib/**/*.ex' --include 'apps/synapse_web/lib/**/*.ex'"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

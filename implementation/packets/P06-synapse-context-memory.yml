@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P06-synapse-context-memory
+phase: 6
+driving_consumer: synapse-mvp-context-memory
+repository: /home/home/p/g/n/synapse
+base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/context_packs.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/memory.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/context_pack_show_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/memory_index_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/memory_show_live.ex"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["app-kit.agent-intake.v1","outer-brain.memory-context-provenance.v1"]
+dependency_nodes: ["P05-recovery-cognition"]
+behavior: ["complete provenance, retrieval snapshot, deletion, reindex, and degraded memory/context presentation","resolve artifacts through AppKit","preserve immutable snapshot identity"]
+negative_invariants: ["no product Map memory truth","no mutable retrieval display without snapshot ref","no OuterBrain import"]
+minimal_qc: ["compile changed Synapse apps","run targeted context, memory, deletion, reindex, and LiveView tests","reuse the P05 real memory journey"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/synapse --profile product --profile hazmat --include 'apps/synapse_core/lib/**/*.ex' --include 'apps/synapse_web/lib/**/*.ex'"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

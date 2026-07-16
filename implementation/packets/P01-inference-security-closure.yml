@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-inference-security-closure
+phase: 1
+driving_consumer: managed-gemini
+repository: /home/home/p/g/n/inference
+base_revision: aa8da90b11490b0610be12d72ba086376ecfd1d1
+owned_paths: ["/home/home/p/g/n/inference/apps/inference/lib"]
+read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["jido.credential-lease.v1","jido.credential-materialization.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["separate managed credential materialization from standalone explicit provider options","reject reference-only managed calls without materialization","preserve sanitized incremental provider results"]
+negative_invariants: ["no managed raw token option","no downgrade to standalone direct adapter","no secret in durable result"]
+minimal_qc: ["cd /home/home/p/g/n/inference && mix format --check-formatted","cd /home/home/p/g/n/inference/apps/inference && mix compile --warnings-as-errors","cd /home/home/p/g/n/inference/apps/inference && mix test test/inference/governed_authority_test.exs","add and run narrow negative/redaction tests if absent"]
+mandatory_qc: ["cd /home/home/p/g/n/inference/apps/inference && mix test test/inference/governed_authority_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,0 +1,25 @@
+schema: nshkr.packet.v1
+packet_id: P09-chassis-inventory-placement
+phase: 9
+driving_consumer: chassis-remote-cluster
+repository: /home/home/p/g/n/chassis
+base_revision: d9a496037aaf2e630be60828e0646c04a794ef3b
+owned_paths: ["/home/home/p/g/n/chassis/core/chassis_inventory","/home/home/p/g/n/chassis/core/chassis_environments","/home/home/p/g/n/chassis/core/chassis_stack"]
+read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["chassis.release-resource.v1"]
+dependency_nodes: ["P07-execution-placement","P08-chassis-single-host"]
+behavior: ["persist deterministic inventory and resource snapshots","place releases against a pinned snapshot","reconcile network, volume, host, and release observations"]
+negative_invariants: ["no current-node or static inventory fallback","no placement without pinned snapshot","no activation before observation"]
+minimal_qc: ["compile changed Chassis inventory, environment, and stack packages","run targeted snapshot, deterministic placement, observation, replacement, and restart tests"]
+mandatory_qc: []
+standard_deletions: ["P09-chassis-placeholder-infrastructure-providers"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: blocked_dependency
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]
