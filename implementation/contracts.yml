@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
   reconciled_on: "2026-07-15"
-  checklist_revision: 7016771fc0da8d5ec61e7ad82762ae1163201600
+  checklist_revision: 4a9c51528ad5234776d4e607a00e479c9fad07c7
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
     application: /home/home/p/g/n/nshkr/apps/nshkr_runtime
@@ -9,19 +9,22 @@ baseline:
     production_host: true
     stack_lab_role: proof_and_regression_harness_only
   source_revisions:
-    nshkr: d71e80dbac640b5ad449a49794e70b3c9d71c6ff
+    nshkr: ea34c4cc718497b332aa07901e9208cc231aacf4
     synapse: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
     app_kit: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
-    mezzanine: 10e6dff87daa7baf8c3726809fdbaf07115a7869
-    citadel: 2dfea4492a45916f4b334dcf60e2f040a6a452f6
+    ground_plane: 950f40b8d37e7751c75bdf5e69a3666b964ac8a2
+    mezzanine: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+    citadel: b15e9b4f4bb2013d024e01dbff5c4bbf9b4e5598
     outer_brain: 1d2f27a7f28c17f20e0833f7300bc948c64e86a5
-    jido_integration: c98ac480c3dc7f7cfcb76820df4aa97e8abcf937
+    jido_integration: bd2306b2a792a1123bea7735937e8272781efd32
     inference: aa8da90b11490b0610be12d72ba086376ecfd1d1
     gemini_ex: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
-    agent_session_manager: 08296a768a4cbd96c9dcab5bcc2422c99c000c6d
+    agent_session_manager: a5764929ab7318c611af46c04f1d27154e069526
     codex_sdk: 54c4d2d008f4fbf82790c4dcd74192005171eea4
-    cli_subprocess_core: d536847d6683acf12bec2465daeb076856e8f483
-    execution_plane: 1b462e12a73a4973bd90dc4df95217579d57ee52
+    cli_subprocess_core: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+    execution_plane: ff19877742c8d44fab72c31e7c965938ff2ab565
+    chassis: d9a496037aaf2e630be60828e0646c04a794ef3b
+    aitrace: 2cc5e4cd4bf5a8f24be3f32e452ee336e4bdf288
   vocabulary:
     - term: NSHKR
       meaning: governed AI operations ecosystem and production composition workspace
@@ -63,6 +66,8 @@ baseline:
       provider_stream_operation: streamGenerateContent
       transport: local_https_sse
       runtime_client_admission: false
+      external_authority_required: true
+      external_authority_reason: billable_gemini_provider_call
       official_model_source: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash
       official_protocol_source: https://ai.google.dev/gemini-api/docs/generate-content
     first_codex_tool_journey:
@@ -291,7 +296,7 @@ call_traces:
       - not selected by the normal Synapse production release
       - Mezzanine runtime adapter performs the effect before canonical durable effect orchestration
       - Jido runtime sessions are held in an Agent store and include process-backed handles
-      - CLI Core bypasses ExecutionPlane.Runtime.Client and directly selects Process.Transport
+      - CLI Core directly selects Process.Transport instead of the owned local RuntimeGateway
       - AppKit runtime projection readback is bridge-local process memory
 
   - id: codex-tool.target.v1
@@ -336,15 +341,15 @@ call_traces:
       - sequence: 8
         direction: transport
         owner: cli_subprocess_core
-        operation: use the Execution Plane Runtime Client lifecycle without exposing a process pid
+        operation: use the complete local RuntimeGateway lifecycle without exposing a process pid
       - sequence: 9
         direction: effect
-        owner: execution_plane
-        operation: local admitted start, subscribe, send_input, end_input, status, and real cancel around the Codex subprocess
+        owner: cli_subprocess_core
+        operation: run the supervised local Process.Transport behind RuntimeGateway.Local with incremental output and real cancel
       - sequence: 10
         direction: return
-        owner: execution_plane
-        operation: emit terminal or ambiguous lower receipt bound to execution ref and fence
+        owner: cli_subprocess_core
+        operation: emit a terminal or ambiguous local receipt bound to the opaque session generation and cancellation or exit evidence
       - sequence: 11
         direction: return
         owner: jido_integration
@@ -369,4 +374,326 @@ call_traces:
       - cancellation and provider loss cannot be reported as successful completion
       - local effect and runtime-admitted effect remain separately advertised
 
+owner_map:
+  universal_contracts:
+    owner: ground_plane
+    owns:
+      - opaque identity and causality references
+      - command-envelope identity and request hashes
+      - fences, leases, checkpoints, and persistence posture vocabulary
+      - immutable cross-owner artifact metadata
+    does_not_own:
+      - application tables
+      - owner migrations
+      - business or execution lifecycle
+    contract_sources:
+      - /home/home/p/g/n/ground_plane/core/ground_plane_contracts/lib/ground_plane/contracts/opaque_ref.ex
+      - /home/home/p/g/n/ground_plane/core/ground_plane_contracts/lib/ground_plane/boundary_protocol/command_envelope.ex
+      - /home/home/p/g/n/ground_plane/core/ground_plane_contracts/lib/ground_plane/contracts/artifact_descriptor.ex
+
+  durable_facts:
+    - owner: mezzanine
+      owns:
+        - tenant and installation operational scope
+        - run, turn, command, review, operator-control, and business decision truth
+        - business event order, outbox and inbox identity, workflow handoff, projection, and cursor
+        - operational budgets, deadlines, supersession, retries, and business lineage
+      does_not_own:
+        - policy evaluation
+        - provider credentials or attempts
+        - semantic context bodies
+        - lower execution or spatial placement truth
+      contract_sources:
+        - /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/runs/journey_contracts.ex
+        - /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/effects/effect_contracts.ex
+    - owner: citadel
+      owns:
+        - policy source and compiled artifact revisions
+        - hashed decision input snapshots, authority decisions, and decision hashes
+        - scoped grants, obligations, expiry, revocation, and enforcement receipts
+        - policy epochs and governance continuity
+      does_not_own:
+        - Mezzanine review or run state
+        - provider accounts or secrets
+        - product state
+      contract_sources:
+        - /home/home/p/g/n/citadel/core/citadel_governance/lib/citadel/scoped_grant.ex
+    - owner: outer_brain
+      owns:
+        - semantic sessions and leases
+        - context units and revisions, prompt packs, and tool-manifest snapshots
+        - retrieval snapshots, memory provenance, promotion, deletion, and reindex state
+        - semantic failures, reply publications, and immutable semantic lineage
+      does_not_own:
+        - provider attempts
+        - operational run state
+        - policy authority
+      contract_sources:
+        - /home/home/p/g/n/outer_brain/core/outer_brain_contracts/lib/outer_brain/contracts/semantic_context_provenance.ex
+        - /home/home/p/g/n/outer_brain/core/outer_brain_contracts/lib/outer_brain/contracts/reply_publication.ex
+        - /home/home/p/g/n/outer_brain/core/outer_brain_contracts/lib/outer_brain/contracts/memory_context_provenance.ex
+    - owner: jido_integration
+      owns:
+        - connector manifests, installations, connections, and provider account bindings
+        - credential handles, generations, leases, rotation, and revocation facts
+        - provider attempts, normalized provider events, usage, connector artifacts, and ambiguity
+        - credential outbox identity, reaction inbox dedupe, and stale-generation rejection
+      does_not_own:
+        - raw durable secret values
+        - Mezzanine workflow truth
+        - Citadel authority
+        - Execution Plane placement
+      contract_sources:
+        - /home/home/p/g/n/jido_integration/core/contracts/lib/jido/integration/v2/credential_lease.ex
+        - /home/home/p/g/n/jido_integration/core/contracts/lib/jido/integration/v2/credential_materialization.ex
+        - /home/home/p/g/n/jido_integration/core/contracts/lib/jido/integration/v2/attempt.ex
+        - /home/home/p/g/n/jido_integration/core/contracts/lib/jido/integration/v2/event.ex
+        - /home/home/p/g/n/jido_integration/core/contracts/lib/jido/integration/v2/lease_revocation.ex
+    - owner: execution_plane
+      owns:
+        - admitted targets, lanes, attestations, and placement decisions
+        - active lower execution sessions, fences, transport state, and lower event cursors
+        - lower cancellation, ambiguity, and terminal receipts
+      does_not_own:
+        - local-effect execution that has not entered Runtime Client admission
+        - credentials or provider-account selection
+        - Mezzanine business interpretation
+      contract_sources:
+        - /home/home/p/g/n/execution_plane/core/execution_plane/lib/execution_plane/boundary.ex
+        - /home/home/p/g/n/execution_plane/core/execution_plane/lib/execution_plane/runtime_contracts.ex
+    - owner: cli_subprocess_core
+      owns:
+        - local RuntimeGateway session and execution identity
+        - local process output, exit, cancellation, cleanup, ambiguity, and terminal receipt
+      does_not_own:
+        - provider account or credential facts
+        - remote admission or placement
+        - Mezzanine business interpretation
+      contract_sources:
+        - /home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core/runtime_gateway.ex
+    - owner: agent_session_manager
+      owns:
+        - governed provider session identity and generation
+        - provider-session binding, session lifecycle, fencing, and optimistic revision
+        - pinned reaction to credential refresh, revocation, expiry, and rotation
+      does_not_own:
+        - provider account, credential generation, materialization, or lease facts
+        - provider process identity or local process receipt
+        - remote admission, placement, or Mezzanine business interpretation
+      contract_sources:
+        - /home/home/p/g/n/agent_session_manager/lib/asm/managed_session.ex
+    - owner: chassis
+      owns:
+        - clusters, hosts, inventory, capacity, and placement assignments
+        - release artifacts, desired and observed deployments, and deployment revisions
+        - rollout, rollback, drain, replacement, reconciliation, leases, fences, and checkpoints
+        - host and infrastructure materialization receipts
+      does_not_own:
+        - Mezzanine deployment-request workflow or priority
+        - Jido provider usage
+        - Citadel authority
+      contract_sources:
+        - /home/home/p/g/n/chassis/core/chassis_contracts/lib/chassis/release_resource_contracts.ex
+    - owner: nshkr_runtime
+      owns:
+        - immutable production substrate and composition profile
+        - executable capability activation and absence truth
+        - exact separation of local-effect and runtime-admitted modes
+      does_not_own:
+        - any domain owner's private records or migrations
+        - provider protocol or lower execution state
+      contract_sources:
+        - /home/home/p/g/n/nshkr/apps/nshkr_runtime/lib/nshkr/runtime/contracts.ex
+    - owner: aitrace
+      owns:
+        - trace, span, and trace-event encoding
+        - trace redaction and bounds
+        - retained trace export artifacts
+      does_not_own:
+        - audit, policy, billing, operational metrics, or business truth
+      contract_sources:
+        - /home/home/p/g/n/AITrace/lib/aitrace/trace.ex
+        - /home/home/p/g/n/AITrace/lib/aitrace/span.ex
+        - /home/home/p/g/n/AITrace/lib/aitrace/event.ex
+        - /home/home/p/g/n/AITrace/lib/aitrace/export_bounds.ex
+        - /home/home/p/g/n/AITrace/lib/aitrace/governed_effect_evidence.ex
+        - /home/home/p/g/n/AITrace/lib/aitrace/exporter.ex
+    - owner: app_kit
+      owns:
+        - typed product-safe request, result, event, cursor, review, effect, and capability DTOs
+      durable_database_truth: none
+      contract_sources:
+        - /home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/core/agent_intake/dtos.ex
+        - /home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/core/governed_effect_dtos.ex
+    - owner: products
+      members: [synapse, extravaganza]
+      owns:
+        - presentation and product configuration
+        - product workflows expressed only through AppKit
+      durable_lower_stack_truth: none
+    - owner: provider_sdks_and_inference
+      members: [gemini_ex, codex_sdk, inference]
+      owns:
+        - provider protocol execution and semantic response normalization
+      durable_managed_truth: none
+
+  secrets:
+    durable_value_owner:
+      owner: hashicorp_vault_kv_v2
+      mount_ref: vault-mount://nshkr/kv-v2
+      values:
+        - provider credentials
+        - Codex account material
+        - Chassis enrollment and infrastructure secrets
+        - BEAM distribution bootstrap material
+    control_fact_owner:
+      owner: jido_integration
+      owns:
+        - secret-envelope and credential-handle refs
+        - provider-account generation and fence
+        - exact-effect credential lease and materialization authorization
+    transient_material_owner:
+      owner: provider_family_materializer
+      lifecycle: in_memory_or_isolated_ephemeral_root_only
+      durable_encoding: forbidden
+      cleanup_owner: jido_integration
+    session_reaction_owner:
+      owner: agent_session_manager
+      owns:
+        - pinned session generation reaction to refresh, reconnect, regenerate, drain, cancel, or operator action
+      credential_fact_authority: false
+
+  effects:
+    - id: gemini-managed-account-local-effect
+      mode: managed_account_local_effect
+      authority_owner: citadel
+      attempt_owner: jido_integration
+      protocol_owners: [inference, gemini_ex]
+      placement_owner: none
+      business_owner: mezzanine
+    - id: codex-reviewed-local-effect
+      mode: managed_account_local_effect
+      authority_owner: citadel
+      review_and_business_owner: mezzanine
+      account_and_attempt_owner: jido_integration
+      session_owner: agent_session_manager
+      protocol_owner: codex_sdk
+      local_process_and_receipt_owner: cli_subprocess_core
+      placement_owner: none
+    - id: admitted-process-http-websocket-effects
+      mode: runtime_admitted_effect
+      authority_owner: citadel
+      account_and_attempt_owner: jido_integration
+      admission_placement_execution_and_receipt_owner: execution_plane
+      business_owner: mezzanine
+    - id: chassis-host-and-infrastructure-effects
+      authority_owner: citadel
+      workflow_owner: mezzanine
+      placement_reconciliation_and_receipt_owner: chassis
+    - id: extravaganza-issue-repository-publication-effects
+      product_owner: extravaganza
+      workflow_owner: mezzanine
+      connector_account_attempt_and_external_receipt_owner: jido_integration
+      lower_execution_owner: execution_plane
+
+  lifecycle:
+    operational_and_business: mezzanine
+    policy_authority_and_revocation: citadel
+    semantic_context_memory_and_publication: outer_brain
+    connector_account_credential_and_provider_attempt: jido_integration
+    admitted_lower_execution: execution_plane
+    spatial_deployment_and_host: chassis
+    provider_process_session_generation: agent_session_manager
+    local_cli_process: cli_subprocess_core
+
+  receipts:
+    command_review_control_and_business_terminal: mezzanine
+    decision_grant_revocation_and_enforcement: citadel
+    semantic_context_and_reply_publication: outer_brain
+    connector_provider_attempt_usage_and_external_effect: jido_integration
+    runtime_admission_lower_execution_and_cancellation: execution_plane
+    local_cli_exit_cancellation_and_cleanup: cli_subprocess_core
+    deployment_host_and_infrastructure_materialization: chassis
+    trace_export_only: aitrace
+
+substrates:
+  postgres:
+    provider: postgresql
+    topology: shared_cluster_separate_owner_databases
+    cluster_ref: postgres://nshkr/primary
+    cross_owner_foreign_keys: forbidden
+    databases:
+      mezzanine:
+        database: nshkr_mezzanine
+        repository: /home/home/p/g/n/mezzanine
+        migration_owner_path: core/mezzanine_core/priv/repo/migrations
+        path_state: planned_P01
+      citadel:
+        database: nshkr_citadel
+        repository: /home/home/p/g/n/citadel
+        migration_owner_path: core/citadel_governance/priv/repo/migrations
+        path_state: planned_P01
+      outer_brain:
+        database: nshkr_outer_brain
+        repository: /home/home/p/g/n/outer_brain
+        migration_owner_path: core/outer_brain_persistence/priv/repo/migrations
+        path_state: existing
+      jido_integration:
+        database: nshkr_jido_integration
+        repository: /home/home/p/g/n/jido_integration
+        migration_owner_path: core/store_postgres/priv/repo/migrations
+        path_state: existing
+      execution_plane:
+        database: nshkr_execution_plane
+        repository: /home/home/p/g/n/execution_plane
+        migration_owner_path: runtimes/execution_plane_node/priv/repo/migrations
+        path_state: planned_P07
+      chassis:
+        database: nshkr_chassis
+        repository: /home/home/p/g/n/chassis
+        migration_owner_path: core/chassis_control_store/priv/repo/migrations
+        path_state: planned_P08
+    host_command_journal:
+      owner: chassis_host_daemon
+      provider: sqlite
+      scope: one_local_host
+  temporal:
+    provider: temporal
+    endpoint_ref: endpoint://nshkr/temporal
+    namespace: nshkr-production
+    postgres_remains_domain_truth: true
+    workers:
+      - owner: mezzanine
+        worker: mezzanine.agent_run
+        task_queue: nshkr.mezzanine.agent-run.v1
+      - owner: outer_brain
+        worker: outer_brain.semantic
+        task_queue: nshkr.outer-brain.semantic.v1
+      - owner: chassis
+        worker: chassis.reconcile
+        task_queue: nshkr.chassis.reconcile.v1
+      - owner: extravaganza
+        worker: extravaganza.issue_pr
+        task_queue: nshkr.extravaganza.issue-pr.v1
+    start_and_signal_handoff: transactional_owner_outbox
+  object_store:
+    provider: minio_s3
+    endpoint_ref: endpoint://nshkr/minio
+    bucket_ref: bucket://nshkr/artifacts
+    tenant_prefix: tenants/{tenant_ref}/
+    encryption: server_side
+    access: owner_authorized_location_resolution
+  secret_store:
+    provider: hashicorp_vault_kv_v2
+    endpoint_ref: endpoint://nshkr/vault
+    mount_ref: vault-mount://nshkr/kv-v2
+    auth_role_ref: vault-role://nshkr/runtime
+    lease_required: true
+  semantic_index:
+    provider: postgresql_pgvector
+    database_owner: outer_brain
+    source_of_truth: false
+    rebuildable: true
+
+contract_sources_frozen: true
 contracts: []
