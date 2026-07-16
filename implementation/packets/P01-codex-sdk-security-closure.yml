@@ -4,7 +4,7 @@ phase: 1
 driving_consumer: governed-codex
 repository: /home/home/p/g/n/codex_sdk
 base_revision: 54c4d2d008f4fbf82790c4dcd74192005171eea4
-owned_paths: ["/home/home/p/g/n/codex_sdk/lib/codex/auth","/home/home/p/g/n/codex_sdk/lib/codex/app_server","/home/home/p/g/n/codex_sdk/lib/codex/exec"]
+owned_paths: ["/home/home/p/g/n/codex_sdk/lib/codex/auth","/home/home/p/g/n/codex_sdk/lib/codex/app_server","/home/home/p/g/n/codex_sdk/lib/codex/exec","/home/home/p/g/n/codex_sdk/lib/codex/options.ex","/home/home/p/g/n/codex_sdk/lib/codex/governed_authority.ex","/home/home/p/g/n/codex_sdk/lib/codex/cli.ex","/home/home/p/g/n/codex_sdk/lib/codex/runtime"]
 read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-lease.v1","jido.credential-materialization.v1","cli-core.runtime-gateway.v1"]
 dependency_nodes: ["P00-contract-spine"]
