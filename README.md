@@ -54,5 +54,10 @@ mix compile
 The runtime supervision tree is the integration point for the owner services
 frozen by the NSHKR implementation program. Product code receives the
 host-built AppKit backend stack and does not start lower owner services.
-Until that production composition is frozen and wired, application boot fails
-closed instead of starting an empty or no-op release.
+
+For the real single-host developer profile, start Vault and MinIO with
+`apps/nshkr_runtime/priv/dev/services.sh up`, provide the four owner database
+URLs named by `Nshkr.Runtime.DeveloperLocalProfile`, and set
+`NSHKR_PROFILE_FILE` to `apps/nshkr_runtime/priv/dev/profile.exs`. Boot performs
+migration-head, Postgres, Vault, MinIO, Temporal, owner-store, outbox, and
+capability-truth preflight before any configured product endpoint can start.

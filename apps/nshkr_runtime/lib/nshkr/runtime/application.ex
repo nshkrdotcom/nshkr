@@ -2,17 +2,22 @@ defmodule Nshkr.Runtime.Application do
   @moduledoc """
   Production OTP application boundary for the NSHKR composition.
 
-  Owner services are added here in dependency order after their contracts and
-  production profiles are frozen by the implementation program.
+  The release loads one immutable profile, verifies every durable dependency,
+  and then starts owner services in dependency order. Product processes never
+  select lower backends themselves.
   """
 
   use Application
 
   @impl true
   def start(_type, _args) do
-    raise """
-    NSHKR production composition is not configured. Complete the P00 contract
-    freeze and P01 owner-service wiring before starting this release.
-    """
+    profile = Nshkr.Runtime.Profile.load!()
+    :ok = Nshkr.Runtime.Preflight.verify!(profile)
+
+    Supervisor.start_link(
+      Nshkr.Runtime.Profile.child_specs(profile),
+      strategy: :rest_for_one,
+      name: Nshkr.Runtime.Supervisor
+    )
   end
 end

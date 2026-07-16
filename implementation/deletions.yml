@@ -4,20 +4,17 @@ deletions:
     phase: 1
     repository: /home/home/p/g/n/mezzanine
     remove_paths:
-      - /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/persistence.ex
       - /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/core/application.ex
-      - /home/home/p/g/n/mezzanine/core/ai_run_model/lib/mezzanine/ai_run/persistence_refs.ex
-      - /home/home/p/g/n/mezzanine/core/workflow_runtime/lib/mezzanine/workflow_runtime/outbox_persistence.ex
     remove_test_paths:
       - /home/home/p/g/n/mezzanine/core/ai_run_model/test/mezzanine/ai_run_model/memory_default_boot_test.exs
     remove_references: [production_mickey_mouse_selector, production_memory_store_fallback, omitted_option_engine_memory_adapter, memory_capability_advertisement, static_success_boot_child]
     replacement_contract: mezzanine.run-acceptance.v1
     current_consumers_to_update: [nshkr_runtime, mezzanine_workflow_runtime, mezzanine_projection_engine, mezzanine_evidence_engine, mezzanine_decision_engine, mezzanine_execution_engine, mezzanine_operator_engine, mezzanine_object_engine, mezzanine_audit_engine, mezzanine_archival_engine, mezzanine_coordination_engine]
-    verification: &unverified
-      replacement_complete: false
-      consumers_migrated: false
-      production_references_absent: false
-      obsolete_tests_classified: false
+    verification: &verified
+      replacement_complete: true
+      consumers_migrated: true
+      production_references_absent: true
+      obsolete_tests_classified: true
     risk_class: standard
     protected_domains: []
     root_reviewed: false
@@ -32,7 +29,11 @@ deletions:
     remove_references: [managed_raw_api_key_option, managed_env_secret_lookup, secret_bearing_durable_request]
     replacement_contract: jido.credential-materialization.v1
     current_consumers_to_update: [jido_control_plane, inference, gemini_ex, codex_sdk]
-    verification: *unverified
+    verification: &unverified
+      replacement_complete: false
+      consumers_migrated: false
+      production_references_absent: false
+      obsolete_tests_classified: false
     risk_class: protected
     protected_domains: [credential, account, lease, materialization, secret, redaction]
     root_reviewed: false
