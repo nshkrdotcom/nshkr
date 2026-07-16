@@ -4,7 +4,7 @@ phase: 1
 driving_consumer: managed-gemini
 repository: /home/home/p/g/n/gemini_ex
 base_revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
-owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini/auth","/home/home/p/g/n/gemini_ex/lib/gemini/config.ex","/home/home/p/g/n/gemini_ex/lib/gemini/env.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/governed_authority.ex","/home/home/p/g/n/gemini_ex/lib/gemini/rate_limiter","/home/home/p/g/n/gemini_ex/lib/gemini/telemetry.ex"]
+owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini/auth","/home/home/p/g/n/gemini_ex/lib/gemini/config.ex","/home/home/p/g/n/gemini_ex/lib/gemini/env.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/governed_authority.ex","/home/home/p/g/n/gemini_ex/lib/gemini/rate_limiter","/home/home/p/g/n/gemini_ex/lib/gemini/telemetry.ex","/home/home/p/g/n/gemini_ex/test/gemini/auth/token_cache_test.exs","/home/home/p/g/n/gemini_ex/test/gemini/config_test.exs","/home/home/p/g/n/gemini_ex/test/gemini/governed_authority_test.exs","/home/home/p/g/n/gemini_ex/test/gemini/rate_limiter_test.exs"]
 read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-lease.v1","jido.credential-materialization.v1"]
 dependency_nodes: ["P00-contract-spine"]
