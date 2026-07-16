@@ -1,0 +1,372 @@
+schema: nshkr.contracts.v1
+baseline:
+  reconciled_on: "2026-07-15"
+  checklist_revision: 7016771fc0da8d5ec61e7ad82762ae1163201600
+  runtime_composition:
+    workspace: /home/home/p/g/n/nshkr
+    application: /home/home/p/g/n/nshkr/apps/nshkr_runtime
+    style: poncho_non_umbrella
+    production_host: true
+    stack_lab_role: proof_and_regression_harness_only
+  source_revisions:
+    nshkr: d71e80dbac640b5ad449a49794e70b3c9d71c6ff
+    synapse: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+    app_kit: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+    mezzanine: 10e6dff87daa7baf8c3726809fdbaf07115a7869
+    citadel: 2dfea4492a45916f4b334dcf60e2f040a6a452f6
+    outer_brain: 1d2f27a7f28c17f20e0833f7300bc948c64e86a5
+    jido_integration: c98ac480c3dc7f7cfcb76820df4aa97e8abcf937
+    inference: aa8da90b11490b0610be12d72ba086376ecfd1d1
+    gemini_ex: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+    agent_session_manager: 08296a768a4cbd96c9dcab5bcc2422c99c000c6d
+    codex_sdk: 54c4d2d008f4fbf82790c4dcd74192005171eea4
+    cli_subprocess_core: d536847d6683acf12bec2465daeb076856e8f483
+    execution_plane: 1b462e12a73a4973bd90dc4df95217579d57ee52
+  vocabulary:
+    - term: NSHKR
+      meaning: governed AI operations ecosystem and production composition workspace
+      canonical_path: /home/home/p/g/n/nshkr
+    - term: Synapse
+      meaning: AppKit-only product, never a proof host
+      canonical_path: /home/home/p/g/n/synapse
+    - term: StackLab Synapse staged-live
+      meaning: regression harness command, not Synapse product acceptance or production composition
+      canonical_path: /home/home/p/g/n/stack_lab
+      command: mix stack_lab.synapse.staged_live.v1
+    - term: gn-ten
+      meaning: ranked-workspace manifest and proof corpus, not program control
+      canonical_path: /home/home/p/g/n/stack_lab/gn-ten.yml
+    - term: product profile
+      meaning: permits AppKit and explicitly allowed pure authoring contracts only
+      canonical_path: /home/home/p/g/n/app_kit
+    - term: hazmat profile
+      meaning: detects direct product access to lower runtime and Execution Plane modules
+      canonical_path: /home/home/p/g/n/app_kit
+    - term: driving consumer
+      meaning: named real journey that justifies the complete owner-service surface
+      source: /home/home/p/g/j/jido_brainstorm/nshkrdotcom/docs/20260715/IMPLEMENTATION_CHECKLIST.md
+    - term: fixture path
+      meaning: deterministic test or proof infrastructure unreachable from normal production selection
+      source: /home/home/p/g/j/jido_brainstorm/nshkrdotcom/docs/20260715/IMPLEMENTATION_CHECKLIST.md
+    - term: local effect
+      meaning: effect executed on the admitted production host without Runtime Client placement
+      capability_mode: managed_account_local_effect
+    - term: runtime-admitted effect
+      meaning: separately advertised effect admitted and placed through Execution Plane Runtime Client
+      capability_mode: runtime_admitted_effect
+  frozen_choices:
+    first_gemini_operation:
+      capability_id: model.gemini.managed-account.local-effect
+      mode: managed_account_local_effect
+      model: gemini-2.5-flash
+      provider_api: generateContent
+      provider_stream_operation: streamGenerateContent
+      transport: local_https_sse
+      runtime_client_admission: false
+      official_model_source: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash
+      official_protocol_source: https://ai.google.dev/gemini-api/docs/generate-content
+    first_codex_tool_journey:
+      capability_id: codex.session.turn
+      mode: managed_account_local_effect
+      driving_consumer: synapse-journey-2
+      requested_effect: reviewed_write_in_isolated_disposable_workspace
+      effect_scope: create_or_replace_one_named_text_file_beneath_the_pinned_workspace_root
+      verification: read_the_named_file_and_match_the_reviewed_content
+      provider_transport: codex_app_server_json_rpc
+      runtime_client_admission: false
+      external_authority_required: true
+      external_authority_reason: billable_codex_provider_call
+
+call_traces:
+  - id: synapse-journey-1.current.v1
+    kind: current
+    production_reachable: true
+    outcome: fixture_backed_acceptance_without_durable_owner_or_model_effect
+    request:
+      route: /runs/new
+      event: start
+      required_fields: [title, goal_summary, team_template_ref]
+    steps:
+      - sequence: 1
+        direction: request
+        repository: /home/home/p/g/n/synapse
+        path: /home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_new_live.ex
+        symbol: SynapseWeb.RunNewLive.handle_event/3
+        operation: Synapse.AgentRuns.start_run/2
+      - sequence: 2
+        direction: request
+        repository: /home/home/p/g/n/synapse
+        path: /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex
+        symbol: Synapse.AgentRuns.start_default_run/5
+        operation: AppKit.AgentIntake.start_agent_run/3
+        selection: Synapse.Fixtures.AgentIntakeBackend
+      - sequence: 3
+        direction: request
+        repository: /home/home/p/g/n/app_kit
+        path: /home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/headless_surface.ex
+        symbol: AppKit.AgentIntake.start_agent_run/3
+        operation: validate AgentRunRequest and invoke selected backend
+      - sequence: 4
+        direction: effect
+        repository: /home/home/p/g/n/synapse
+        path: /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/agent_intake_backend.ex
+        symbol: Synapse.Fixtures.AgentIntakeBackend.start_agent_run/3
+        operation: construct deterministic RunOutcomeFuture
+        real_effect: false
+      - sequence: 5
+        direction: return
+        repository: /home/home/p/g/n/synapse
+        path: /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex
+        symbol: Synapse.AgentRuns.start_view/4
+        operation: construct accepted fixture-backed product map
+      - sequence: 6
+        direction: return
+        repository: /home/home/p/g/n/synapse
+        path: /home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_new_live.ex
+        symbol: SynapseWeb.RunNewLive.handle_event/3
+        operation: assign fixture-backed result to LiveView socket
+    readback:
+      list_source: Synapse.AgentRuns.list_runs/1
+      list_behavior: static module attribute
+      detail_backend: Synapse.Fixtures.HeadlessBackend
+      durable_cursor: false
+      restart_safe: false
+    missing_edges:
+      - Mezzanine durable run and first-turn transaction
+      - Mezzanine outbox to Temporal workflow handoff
+      - OuterBrain context build and publication
+      - Citadel persisted provider grant
+      - Jido managed account lease and secret materialization
+      - Inference to GeminiEx incremental call
+      - durable terminal projection and cursor readback
+
+  - id: synapse-journey-1.target.v1
+    kind: target
+    driving_consumer: synapse-journey-1
+    production_reachable: required
+    request:
+      route: /runs/new
+      appkit_operation: AppKit.AgentIntake.start_agent_run/3
+      stable_identity: tenant_ref plus installation_ref plus idempotency_key
+      selected_model: gemini-2.5-flash
+      selected_mode: managed_account_local_effect
+    steps:
+      - sequence: 1
+        direction: request
+        owner: synapse
+        operation: Synapse.AgentRuns.start_run/2 sends the validated AppKit AgentRunRequest
+      - sequence: 2
+        direction: request
+        owner: app_kit
+        operation: AppKit.AgentIntake.start_agent_run/3 maps only product-safe DTOs
+      - sequence: 3
+        direction: command
+        owner: mezzanine
+        operation: atomically commit canonical run, first turn, command identity, and outbox row
+      - sequence: 4
+        direction: coordination
+        owner: mezzanine
+        operation: relay committed outbox row to the pinned Temporal journey-1 workflow
+      - sequence: 5
+        direction: context
+        owner: outer_brain
+        operation: commit context revision and immutable prompt artifact with lineage
+      - sequence: 6
+        direction: authority
+        owner: citadel
+        operation: persist the exact model decision and bounded grant
+      - sequence: 7
+        direction: credential
+        owner: jido_integration
+        operation: resolve managed Gemini account, issue bounded lease, and materialize secret in memory
+      - sequence: 8
+        direction: effect
+        owner: inference
+        operation: invoke the GeminiEx managed adapter incrementally
+      - sequence: 9
+        direction: provider
+        owner: gemini_ex
+        operation: Gemini.stream_generate/2 calls gemini-2.5-flash streamGenerateContent over local HTTPS SSE
+      - sequence: 10
+        direction: return
+        owner: jido_integration
+        operation: persist attempt lifecycle, sanitized provider events, usage, and terminal artifact reference
+      - sequence: 11
+        direction: return
+        owner: outer_brain
+        operation: publish immutable assistant reply and resulting context revision
+      - sequence: 12
+        direction: return
+        owner: mezzanine
+        operation: commit terminal turn lineage and advance durable projection cursor
+      - sequence: 13
+        direction: readback
+        owner: app_kit
+        operation: AppKit.HeadlessSurface.run_detail/4 and AppKit.AgentIntake.catch_up_agent_events/3 return durable DTOs
+      - sequence: 14
+        direction: readback
+        owner: synapse
+        operation: run show replaces provisional deltas with committed turn state and resumes from cursor after restart
+    invariants:
+      - no product import below AppKit
+      - no secret enters durable command, event, projection, trace, or artifact metadata
+      - provider success cannot precede durable attempt identity
+      - provisional deltas never masquerade as committed turn state
+      - restart readback uses owner state, not process memory
+      - Execution Plane placement is absent from this local-effect capability
+
+  - id: codex-tool.current-configurable.v1
+    kind: current
+    production_reachable: false
+    outcome: dormant_direct_adapter_path_with_process_identity_and_memory_state
+    entry:
+      appkit_operation: AppKit.AgentIntake.start_agent_run/3
+      required_runtime_binding: codex_cli
+    steps:
+      - sequence: 1
+        direction: request
+        repository: /home/home/p/g/n/app_kit
+        path: /home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/app_kit/bridges/mezzanine_bridge/runtime_adapter.ex
+        symbol: AppKit.Bridges.MezzanineBridge.RuntimeAdapter.invoke_runtime_operation/5
+        operation: map AgentRunRequest and invoke runtime gateway
+      - sequence: 2
+        direction: request
+        repository: /home/home/p/g/n/app_kit
+        path: /home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/runtime_gateway_service.ex
+        symbol: Mezzanine.AppKitBridge.RuntimeGatewayService.invoke_runtime_operation/6
+        operation: forward configured runtime binding
+      - sequence: 3
+        direction: request
+        repository: /home/home/p/g/n/mezzanine
+        path: /home/home/p/g/n/mezzanine/bridges/integration_bridge/lib/mezzanine/integration_bridge/runtime_dispatcher.ex
+        symbol: Mezzanine.IntegrationBridge.RuntimeDispatcher.invoke_runtime_operation/6
+        operation: resolve codex_cli runtime adapter and call run/2
+      - sequence: 4
+        direction: request
+        repository: /home/home/p/g/n/mezzanine
+        path: /home/home/p/g/n/mezzanine/bridges/integration_bridge/lib/mezzanine/integration_bridge/provider_adapters/codex_cli/agent_runtime.ex
+        symbol: Mezzanine.IntegrationBridge.ProviderAdapters.CodexCli.AgentRuntime.run/2
+        operation: prepare workspace and invoke codex.session.turn
+      - sequence: 5
+        direction: request
+        repository: /home/home/p/g/n/jido_integration
+        path: /home/home/p/g/n/jido_integration/core/control_plane/lib/jido/integration/v2/control_plane/service_core.ex
+        symbol: Jido.Integration.V2.ControlPlane.ServiceCore.invoke/3
+        operation: evaluate local policy, issue local lease, and route session capability
+      - sequence: 6
+        direction: request
+        repository: /home/home/p/g/n/jido_integration
+        path: /home/home/p/g/n/jido_integration/core/runtime_router/lib/jido/integration/v2/runtime_router.ex
+        symbol: Jido.Integration.V2.RuntimeRouter.execute/3
+        operation: select ASM driver and keep session in Agent-backed SessionStore
+      - sequence: 7
+        direction: credential
+        repository: /home/home/p/g/n/agent_session_manager
+        path: /home/home/p/g/n/agent_session_manager/lib/asm/runtime_auth/codex_materialization.ex
+        symbol: ASM.RuntimeAuth.CodexMaterialization.authorize_config/2
+        operation: validate exact in-memory Codex materialization
+      - sequence: 8
+        direction: request
+        repository: /home/home/p/g/n/agent_session_manager
+        path: /home/home/p/g/n/agent_session_manager/lib/asm/provider_backend/sdk.ex
+        symbol: ASM.ProviderBackend.SDK.start_codex_app_server_run/2
+        operation: connect Codex app-server and start streamed turn
+      - sequence: 9
+        direction: request
+        repository: /home/home/p/g/n/codex_sdk
+        path: /home/home/p/g/n/codex_sdk/lib/codex/app_server.ex
+        symbol: Codex.AppServer.connect/2
+        operation: supervise JSON-RPC connection
+      - sequence: 10
+        direction: effect
+        repository: /home/home/p/g/n/cli_subprocess_core
+        path: /home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core/raw_session.ex
+        symbol: CliSubprocessCore.RawSession.start/2
+        operation: directly start ExecutionPlane.Process.Transport subprocess and execute Codex tool actions
+      - sequence: 11
+        direction: return
+        owner_chain: codex_sdk -> agent_session_manager -> jido_integration -> mezzanine -> app_kit
+        operation: normalize events, result, attempt artifacts, and adapter-local readback projection
+    defects:
+      - not selected by the normal Synapse production release
+      - Mezzanine runtime adapter performs the effect before canonical durable effect orchestration
+      - Jido runtime sessions are held in an Agent store and include process-backed handles
+      - CLI Core bypasses ExecutionPlane.Runtime.Client and directly selects Process.Transport
+      - AppKit runtime projection readback is bridge-local process memory
+
+  - id: codex-tool.target.v1
+    kind: target
+    driving_consumer: synapse-journey-2
+    production_reachable: required
+    reviewed_request:
+      appkit_entry: AppKit.EffectSurface.propose_effect/3
+      capability_id: codex.session.turn
+      workspace_policy: isolated_disposable_workspace
+      requested_effect: create_or_replace_one_named_text_file
+      exact_grant_scope: one session generation, one workspace root, one reviewed file operation
+    steps:
+      - sequence: 1
+        direction: request
+        owner: app_kit
+        operation: accept product-safe governed-effect proposal and readback DTOs only
+      - sequence: 2
+        direction: command
+        owner: mezzanine
+        operation: durably commit effect command, expected version, pinned tool manifest, and review unit
+      - sequence: 3
+        direction: authority
+        owner: citadel
+        operation: persist permit-with-review decision, obligations, and exact grant
+      - sequence: 4
+        direction: review
+        owner: mezzanine
+        operation: commit authorized actor approval before dispatch
+      - sequence: 5
+        direction: credential
+        owner: jido_integration
+        operation: resolve managed Codex account, issue one-generation lease, and materialize isolated CODEX_HOME in memory
+      - sequence: 6
+        direction: session
+        owner: agent_session_manager
+        operation: start or resume pinned Codex session generation using opaque session and execution refs
+      - sequence: 7
+        direction: provider
+        owner: codex_sdk
+        operation: run codex.session.turn over Codex app-server JSON-RPC
+      - sequence: 8
+        direction: transport
+        owner: cli_subprocess_core
+        operation: use the Execution Plane Runtime Client lifecycle without exposing a process pid
+      - sequence: 9
+        direction: effect
+        owner: execution_plane
+        operation: local admitted start, subscribe, send_input, end_input, status, and real cancel around the Codex subprocess
+      - sequence: 10
+        direction: return
+        owner: execution_plane
+        operation: emit terminal or ambiguous lower receipt bound to execution ref and fence
+      - sequence: 11
+        direction: return
+        owner: jido_integration
+        operation: persist attempt, sanitized incremental events, receipt ref, lease cleanup, and terminal artifact refs
+      - sequence: 12
+        direction: return
+        owner: mezzanine
+        operation: commit effect terminal or ambiguous state exactly once and advance projection cursor
+      - sequence: 13
+        direction: continuation
+        owner: outer_brain
+        operation: publish immutable tool result and next context revision
+      - sequence: 14
+        direction: readback
+        owner_chain: app_kit -> synapse
+        operation: expose review, incremental output, terminal or ambiguous state, receipt, artifacts, and continuation from durable owner state
+    invariants:
+      - no ambient credential or shell environment selects the account
+      - no provider process starts before persisted decision, review, grant, attempt, and lease identity exist
+      - one session generation cannot reuse a revoked or expired materialization
+      - cleanup revokes materialized secret files and isolated account state
+      - cancellation and provider loss cannot be reported as successful completion
+      - local effect and runtime-admitted effect remain separately advertised
+
+contracts: []
