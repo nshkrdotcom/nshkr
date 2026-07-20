@@ -75,7 +75,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, execution-plane.runtime-families.v1]
   - id: codex_sdk
     path: /home/home/p/g/n/codex_sdk
-    revision: 54c4d2d008f4fbf82790c4dcd74192005171eea4
+    revision: 9c491da622f6f4aff115d53e69df4d261d63acd1
     branch: main
     dirty: false
     role: codex_app_server_protocol
@@ -83,7 +83,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
   - id: cli_subprocess_core
     path: /home/home/p/g/n/cli_subprocess_core
-    revision: af8e60867ee09e07f2b34c2b99f3260889d9969b
+    revision: 583280964197bd3816e4401ca3eb2575aa4e1b81
     branch: main
     dirty: false
     role: local_process_runtime_gateway

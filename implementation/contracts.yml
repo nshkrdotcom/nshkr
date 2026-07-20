@@ -20,8 +20,8 @@ baseline:
     inference: aa8da90b11490b0610be12d72ba086376ecfd1d1
     gemini_ex: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
     agent_session_manager: a5764929ab7318c611af46c04f1d27154e069526
-    codex_sdk: 54c4d2d008f4fbf82790c4dcd74192005171eea4
-    cli_subprocess_core: af8e60867ee09e07f2b34c2b99f3260889d9969b
+    codex_sdk: 9c491da622f6f4aff115d53e69df4d261d63acd1
+    cli_subprocess_core: 583280964197bd3816e4401ca3eb2575aa4e1b81
     execution_plane: ff19877742c8d44fab72c31e7c965938ff2ab565
     chassis: d9a496037aaf2e630be60828e0646c04a794ef3b
     aitrace: 2cc5e4cd4bf5a8f24be3f32e452ee336e4bdf288

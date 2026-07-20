@@ -3,7 +3,7 @@ packet_id: P12-codex-sdk-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/codex_sdk
-base_revision: 54c4d2d008f4fbf82790c4dcd74192005171eea4
+base_revision: 9c491da622f6f4aff115d53e69df4d261d63acd1
 owned_paths: ["/home/home/p/g/n/codex_sdk/lib"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

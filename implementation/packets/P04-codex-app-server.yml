@@ -3,7 +3,7 @@ packet_id: P04-codex-app-server
 phase: 4
 driving_consumer: synapse-journey-2
 repository: /home/home/p/g/n/codex_sdk
-base_revision: 54c4d2d008f4fbf82790c4dcd74192005171eea4
+base_revision: 9c491da622f6f4aff115d53e69df4d261d63acd1
 owned_paths: ["/home/home/p/g/n/codex_sdk/lib/codex/app_server","/home/home/p/g/n/codex_sdk/lib/codex/auth","/home/home/p/g/n/codex_sdk/lib/codex/exec"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-materialization.v1","cli-core.runtime-gateway.v1","asm.managed-session.v1"]

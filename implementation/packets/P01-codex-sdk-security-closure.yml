@@ -8,7 +8,7 @@ owned_paths: ["/home/home/p/g/n/codex_sdk/lib/codex/auth","/home/home/p/g/n/code
 read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-lease.v1","jido.credential-materialization.v1","cli-core.runtime-gateway.v1"]
 dependency_nodes: ["P00-contract-spine"]
-behavior: ["accept isolated governed account materialization","close ambient config and credential smuggling","preserve cancellation and sanitized app-server errors"]
+behavior: ["accept isolated governed account materialization","normalize the Codex materialization explicitly into cli-core.runtime-gateway.v1 before CLI Core invocation","close ambient config and credential smuggling","preserve cancellation and sanitized app-server errors"]
 negative_invariants: ["no home-directory account discovery for governed sessions","no secret in app-server JSON-RPC trace","cancellation cleans materialized state"]
 minimal_qc: ["cd /home/home/p/g/n/codex_sdk && mix format --check-formatted","cd /home/home/p/g/n/codex_sdk && mix compile --warnings-as-errors","run targeted account, auth, cancellation, and redaction tests"]
 mandatory_qc: ["cd /home/home/p/g/n/codex_sdk && mix test test/codex/app_server/account_test.exs test/codex/app_server/connection_test.exs test/codex/app_server/protocol_test.exs test/codex/app_server/remote_connection_test.exs test/codex/options_test.exs test/codex/exec_test.exs test/codex/auth_test.exs test/codex/auth/store_test.exs test/codex/secrets_redaction_test.exs test/codex/exec/cancellation_registry_test.exs"]

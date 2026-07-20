@@ -3,7 +3,7 @@ packet_id: P07-cli-process-family
 phase: 7
 driving_consumer: runtime-admitted-process
 repository: /home/home/p/g/n/cli_subprocess_core
-base_revision: af8e60867ee09e07f2b34c2b99f3260889d9969b
+base_revision: 583280964197bd3816e4401ca3eb2575aa4e1b81
 owned_paths: ["/home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core","/home/home/p/g/n/cli_subprocess_core/test/cli_subprocess_core"]
 read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["execution-plane.runtime-client.v1","execution-plane.runtime-families.v1","cli-core.runtime-gateway.v1"]
