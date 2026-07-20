@@ -3,7 +3,7 @@ packet_id: P12-app-kit-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/app_kit
-base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+base_revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
 owned_paths: ["/home/home/p/g/n/app_kit/core","/home/home/p/g/n/app_kit/bridges","/home/home/p/g/n/app_kit/lib"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

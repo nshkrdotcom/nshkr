@@ -11,7 +11,7 @@ repositories:
     consumes: []
   - id: nshkr
     path: /home/home/p/g/n/nshkr
-    revision: 10569a193043d7edba7f3d290213d45a0fa398ca
+    revision: 19a1b6c2892e6e6607bee3a72ec17bbea7673ff7
     branch: main
     dirty: false
     role: production_composition
@@ -27,7 +27,7 @@ repositories:
     consumes: []
   - id: mezzanine
     path: /home/home/p/g/n/mezzanine
-    revision: 089fb3771cbc14ea6408e6653bc9db874849e337
+    revision: f5f6a54d2e461f46fb71b35d3f1637eeca4b4900
     branch: main
     dirty: false
     role: durable_run_turn_and_effect_owner
@@ -131,7 +131,7 @@ repositories:
     consumes: []
   - id: app_kit
     path: /home/home/p/g/n/app_kit
-    revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+    revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
     branch: main
     dirty: false
     role: sole_product_boundary
@@ -139,7 +139,7 @@ repositories:
     consumes: [mezzanine.run-acceptance.v1, mezzanine.effect-record.v1, outer-brain.reply-publication.v1, chassis.release-resource.v1]
   - id: synapse
     path: /home/home/p/g/n/synapse
-    revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+    revision: 5bcb223339fa8a89a40a1347b39f929c89835e37
     branch: nshkr-agent-rewrite-20260518
     dirty: false
     role: appkit_only_product

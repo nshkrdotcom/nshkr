@@ -3,7 +3,7 @@ packet_id: P12-mezzanine-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/mezzanine
-base_revision: 089fb3771cbc14ea6408e6653bc9db874849e337
+base_revision: f5f6a54d2e461f46fb71b35d3f1637eeca4b4900
 owned_paths: ["/home/home/p/g/n/mezzanine/core"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

@@ -68,7 +68,7 @@ nodes:
         type: composition
     owned_paths: [/home/home/p/g/n/mezzanine, /home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
     catalog_effect: none
-    status: ready
+    status: complete
   - id: P03-governed-gemini
     phase: 3
     repository: /home/home/p/g/n/jido_integration
@@ -81,7 +81,7 @@ nodes:
         type: semantic
     owned_paths: [/home/home/p/g/n/outer_brain, /home/home/p/g/n/citadel, /home/home/p/g/n/jido_integration, /home/home/p/g/n/inference, /home/home/p/g/n/gemini_ex, /home/home/p/g/n/mezzanine, /home/home/p/g/n/nshkr]
     catalog_effect: none
-    status: blocked_dependencies
+    status: ready
   - id: P03-gemini-activation
     phase: 3
     repository: /home/home/p/g/n/nshkr

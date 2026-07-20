@@ -3,7 +3,7 @@ packet_id: P05-mezzanine-recovery-control
 phase: 5
 driving_consumer: synapse-recovery
 repository: /home/home/p/g/n/mezzanine
-base_revision: 089fb3771cbc14ea6408e6653bc9db874849e337
+base_revision: f5f6a54d2e461f46fb71b35d3f1637eeca4b4900
 owned_paths: ["/home/home/p/g/n/mezzanine/core/lifecycle_engine","/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/mezzanine/core/operator_engine"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["mezzanine.effect-record.v1","mezzanine.run-acceptance.v1"]

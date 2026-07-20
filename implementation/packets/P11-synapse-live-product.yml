@@ -3,7 +3,7 @@ packet_id: P11-synapse-live-product
 phase: 11
 driving_consumer: gemini-live
 repository: /home/home/p/g/n/synapse
-base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+base_revision: 5bcb223339fa8a89a40a1347b39f929c89835e37
 owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live"]
 read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]

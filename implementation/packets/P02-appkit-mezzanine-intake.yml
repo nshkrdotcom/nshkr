@@ -3,8 +3,8 @@ packet_id: P02-appkit-mezzanine-intake
 phase: 2
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/app_kit
-base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
-owned_paths: ["/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/app_kit/bridges/mezzanine_bridge","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge"]
+base_revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
+owned_paths: ["/home/home/p/g/n/app_kit/build_support/dependency_sources.config.exs","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/app_kit/bridges/mezzanine_bridge","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/test","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/config","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/mix.exs","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/mix.lock"]
 read_only_dependencies: ["/home/home/p/g/n/mezzanine/core/mezzanine_core","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1","mezzanine.run-acceptance.v1"]
 dependency_nodes: ["P01-runtime-security"]
@@ -19,6 +19,6 @@ external_effects:
   effect_class: null
   cost_or_lifecycle_scope: null
 catalog_effect: none
-status: ready
+status: complete
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

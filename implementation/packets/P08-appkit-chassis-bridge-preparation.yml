@@ -3,7 +3,7 @@ packet_id: P08-appkit-chassis-bridge-preparation
 phase: 8
 driving_consumer: nshkr-single-host
 repository: /home/home/p/g/n/app_kit
-base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+base_revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
 owned_paths: ["/home/home/p/g/n/app_kit/bridges/chassis_bridge"]
 read_only_dependencies: ["/home/home/p/g/n/chassis/core/chassis_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["chassis.release-resource.v1","app-kit.governed-effect.v1"]

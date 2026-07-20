@@ -3,7 +3,7 @@ packet_id: P06-appkit-owner-bridges
 phase: 6
 driving_consumer: synapse-mvp
 repository: /home/home/p/g/n/app_kit
-base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+base_revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
 owned_paths: ["/home/home/p/g/n/app_kit/bridges/mezzanine_bridge"]
 read_only_dependencies: ["/home/home/p/g/n/mezzanine","/home/home/p/g/n/outer_brain","/home/home/p/g/n/citadel","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1","mezzanine.run-acceptance.v1","mezzanine.effect-record.v1"]

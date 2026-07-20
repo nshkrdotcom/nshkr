@@ -19,6 +19,6 @@ external_effects:
   effect_class: "billable_model_completion_and_stream"
   cost_or_lifecycle_scope: "one completion and one stream for Synapse journey 1"
 catalog_effect: dormant
-status: blocked_dependency
+status: ready
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

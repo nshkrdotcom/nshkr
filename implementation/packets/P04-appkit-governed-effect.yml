@@ -3,7 +3,7 @@ packet_id: P04-appkit-governed-effect
 phase: 4
 driving_consumer: synapse-journey-2
 repository: /home/home/p/g/n/app_kit
-base_revision: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
+base_revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
 owned_paths: ["/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/core/governed_effect_dtos.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/review_decision_ledger.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/operator_action_service.ex"]
 read_only_dependencies: ["/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.governed-effect.v1","mezzanine.effect-record.v1"]

@@ -48,14 +48,10 @@ deletions:
     remove_references: [bridge_local_ttl_projection, locally_constructed_accepted_dto]
     replacement_contract: mezzanine.run-acceptance.v1
     current_consumers_to_update: [app_kit_agent_intake, app_kit_headless_surface, synapse]
-    verification: &unverified
-      replacement_complete: false
-      consumers_migrated: false
-      production_references_absent: false
-      obsolete_tests_classified: false
+    verification: *verified
     risk_class: protected
     protected_domains: [appkit_schema_registry, product_boundary_bridge]
-    root_reviewed: false
+    root_reviewed: true
     compatibility_layer: forbidden
   - id: P02-mezzanine-parallel-run-truth
     phase: 2
@@ -77,16 +73,16 @@ deletions:
     phase: 2
     repository: /home/home/p/g/n/synapse
     remove_paths:
-      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex
       - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/agent_intake_backend.ex
+      - /home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/headless_backend.ex
     remove_test_paths: []
-    remove_references: [Synapse.Fixtures.AgentIntakeBackend, static_run_list, pubsub_only_workflow_truth]
+    remove_references: [Synapse.Fixtures.AgentIntakeBackend, Synapse.Fixtures.HeadlessBackend, static_run_list, pubsub_only_workflow_truth]
     replacement_contract: app-kit.agent-intake.v1
     current_consumers_to_update: [synapse_run_new, synapse_run_show, synapse_dashboard]
-    verification: *unverified
+    verification: *verified
     risk_class: protected
     protected_domains: [product_boundary_bridge]
-    root_reviewed: false
+    root_reviewed: true
     compatibility_layer: forbidden
   - id: P03-gemini-managed-global-credentials
     phase: 3
@@ -99,7 +95,11 @@ deletions:
     remove_references: [managed_global_api_key, managed_application_env_credentials, static_provider_capability_claim]
     replacement_contract: jido.credential-materialization.v1
     current_consumers_to_update: [jido_managed_inference, inference_gemini_adapter]
-    verification: *unverified
+    verification: &unverified
+      replacement_complete: false
+      consumers_migrated: false
+      production_references_absent: false
+      obsolete_tests_classified: false
     risk_class: protected
     protected_domains: [credential, account, lease, materialization, secret, redaction]
     root_reviewed: false

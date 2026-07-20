@@ -3,8 +3,8 @@ packet_id: P02-nshkr-intake-composition
 phase: 2
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/nshkr
-base_revision: 10569a193043d7edba7f3d290213d45a0fa398ca
-owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+base_revision: 19a1b6c2892e6e6607bee3a72ec17bbea7673ff7
+owned_paths: ["/home/home/p/g/n/nshkr/README.md","/home/home/p/g/n/nshkr/apps/nshkr_runtime","/home/home/p/g/n/nshkr/build_support"]
 read_only_dependencies: ["/home/home/p/g/n/mezzanine/core/mezzanine_core","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge","/home/home/p/g/n/synapse/apps/synapse_core"]
 contract_versions: ["nshkr.production-profile.v1","mezzanine.run-acceptance.v1","app-kit.agent-intake.v1"]
 dependency_nodes: ["P01-runtime-security"]
@@ -19,6 +19,6 @@ external_effects:
   effect_class: null
   cost_or_lifecycle_scope: null
 catalog_effect: none
-status: ready
+status: complete
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

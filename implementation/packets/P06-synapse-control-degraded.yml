@@ -3,7 +3,7 @@ packet_id: P06-synapse-control-degraded
 phase: 6
 driving_consumer: synapse-mvp-control
 repository: /home/home/p/g/n/synapse
-base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
+base_revision: 5bcb223339fa8a89a40a1347b39f929c89835e37
 owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/product_bootstrap.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/product_profile.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/dashboard_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/router.ex"]
 read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/capabilities.yml"]
 contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
