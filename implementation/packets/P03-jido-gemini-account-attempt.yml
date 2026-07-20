@@ -4,7 +4,7 @@ phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/jido_integration
 base_revision: 392a11cb1a1f829dc46dfd4d13f4af659eb5f768
-owned_paths: ["/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/model_provider_registry","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/jido_integration/core/store_postgres"]
+owned_paths: ["/home/home/p/g/n/jido_integration/build_support/dependency_resolver.exs","/home/home/p/g/n/jido_integration/build_support/dependency_sources.config.exs","/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/model_provider_registry","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/jido_integration/core/store_postgres"]
 read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/citadel/core/citadel_governance","/home/home/p/g/n/outer_brain/core/outer_brain_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["citadel.scoped-grant.v1","jido.credential-lease.v1","jido.credential-materialization.v1","jido.provider-attempt.v1","jido.provider-event.v1"]
 dependency_nodes: ["P02-durable-synapse-acceptance"]
