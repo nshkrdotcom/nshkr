@@ -4,7 +4,7 @@ phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/gemini_ex
 base_revision: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
-owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http_streaming.ex","/home/home/p/g/n/gemini_ex/lib/gemini/governed_authority.ex","/home/home/p/g/n/gemini_ex/lib/gemini/rate_limiter.ex","/home/home/p/g/n/gemini_ex/lib/gemini/rate_limiter","/home/home/p/g/n/gemini_ex/lib/gemini/streaming","/home/home/p/g/n/gemini_ex/test/gemini"]
+owned_paths: ["/home/home/p/g/n/gemini_ex/build_support/dependency_sources.exs","/home/home/p/g/n/gemini_ex/mix.exs","/home/home/p/g/n/gemini_ex/lib/gemini.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http_streaming.ex","/home/home/p/g/n/gemini_ex/lib/gemini/governed_authority.ex","/home/home/p/g/n/gemini_ex/lib/gemini/rate_limiter.ex","/home/home/p/g/n/gemini_ex/lib/gemini/rate_limiter","/home/home/p/g/n/gemini_ex/lib/gemini/streaming","/home/home/p/g/n/gemini_ex/test/gemini"]
 read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-materialization.v1","jido.provider-event.v1"]
 dependency_nodes: ["P02-durable-synapse-acceptance"]
