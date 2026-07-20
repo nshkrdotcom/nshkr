@@ -3,7 +3,7 @@ packet_id: P12-cli-subprocess-core-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/cli_subprocess_core
-base_revision: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+base_revision: af8e60867ee09e07f2b34c2b99f3260889d9969b
 owned_paths: ["/home/home/p/g/n/cli_subprocess_core/lib"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

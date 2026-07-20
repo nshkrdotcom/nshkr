@@ -83,7 +83,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
   - id: cli_subprocess_core
     path: /home/home/p/g/n/cli_subprocess_core
-    revision: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+    revision: af8e60867ee09e07f2b34c2b99f3260889d9969b
     branch: main
     dirty: false
     role: local_process_runtime_gateway

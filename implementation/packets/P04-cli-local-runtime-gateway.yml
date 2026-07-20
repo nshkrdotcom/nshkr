@@ -3,7 +3,7 @@ packet_id: P04-cli-local-runtime-gateway
 phase: 4
 driving_consumer: synapse-journey-2
 repository: /home/home/p/g/n/cli_subprocess_core
-base_revision: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+base_revision: af8e60867ee09e07f2b34c2b99f3260889d9969b
 owned_paths: ["/home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core","/home/home/p/g/n/cli_subprocess_core/test/cli_subprocess_core"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["cli-core.runtime-gateway.v1","jido.credential-materialization.v1"]

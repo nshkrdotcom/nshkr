@@ -21,7 +21,7 @@ baseline:
     gemini_ex: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
     agent_session_manager: a5764929ab7318c611af46c04f1d27154e069526
     codex_sdk: 54c4d2d008f4fbf82790c4dcd74192005171eea4
-    cli_subprocess_core: 8a11a9e1db81ecbeade919a75c5a5bc1bf4ca4f7
+    cli_subprocess_core: af8e60867ee09e07f2b34c2b99f3260889d9969b
     execution_plane: ff19877742c8d44fab72c31e7c965938ff2ab565
     chassis: d9a496037aaf2e630be60828e0646c04a794ef3b
     aitrace: 2cc5e4cd4bf5a8f24be3f32e452ee336e4bdf288
@@ -853,7 +853,7 @@ contracts:
     authority: cli_subprocess_core
     path: /home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core/runtime_gateway.ex
     version: 1
-    digest: 301b42ff693c460c2539632e2de425b666cc97d5b784c267d635d17d66e75ee7
+    digest: 9cec5f57bc2d4d584a51245fbed6231886c60f47a9c5b77cec39c694da031f6e
     producers: [cli_subprocess_core]
     consumers: [codex_sdk, agent_session_manager, jido_integration]
     compatibility: clean_break
