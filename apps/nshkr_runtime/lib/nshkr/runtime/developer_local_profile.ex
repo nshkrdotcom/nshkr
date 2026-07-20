@@ -97,7 +97,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
       name: Jido.Integration.V2.StorePostgres.DurableRuntime,
       repo_mode: :external,
       repo_options: [],
-      persistence_profile: :ops_durable,
+      persistence_profile: :integration_postgres,
       credential_materializers: %{
         "codex" => Jido.Integration.Secrets.ManagedCredentialMaterializer,
         "gemini" => Jido.Integration.Secrets.ManagedCredentialMaterializer

@@ -211,6 +211,11 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
 
     assert temporal_options[:temporal][:address] == "temporal.internal:7233"
 
+    assert %{options: jido_options} =
+             Enum.find(document.production_profile.services, &(&1.id == "jido-owner-store"))
+
+    assert jido_options[:persistence_profile] == :integration_postgres
+
     assert_raise ArgumentError, ~r/NSHKR_JIDO_DATABASE_URL/, fn ->
       env |> Map.delete("NSHKR_JIDO_DATABASE_URL") |> DeveloperLocalProfile.document()
     end

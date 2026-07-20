@@ -39,6 +39,8 @@ defmodule Nshkr.Runtime.MixProject do
     [
       DependencySources.dep(:citadel_governance, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_secrets_provider, @repo_root, runtime: false),
+      DependencySources.dep(:jido_integration_v2_auth, @repo_root, runtime: false),
+      DependencySources.dep(:jido_integration_v2_control_plane, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_v2_store_postgres, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_core, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_workflow_runtime, @repo_root, runtime: false),
@@ -58,6 +60,8 @@ defmodule Nshkr.Runtime.MixProject do
         applications: [
           citadel_governance: :load,
           jido_integration_secrets_provider: :load,
+          jido_integration_v2_auth: :load,
+          jido_integration_v2_control_plane: :load,
           jido_integration_v2_store_postgres: :load,
           mezzanine_core: :load,
           mezzanine_workflow_runtime: :load,

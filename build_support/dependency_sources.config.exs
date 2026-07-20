@@ -27,6 +27,9 @@ end
     citadel_governance: internal.("citadel", "core/citadel_governance"),
     jido_integration_secrets_provider:
       internal.("jido_integration", "core/secrets_provider"),
+    jido_integration_v2_auth: internal.("jido_integration", "core/auth"),
+    jido_integration_v2_control_plane:
+      internal.("jido_integration", "core/control_plane"),
     jido_integration_v2_store_postgres:
       internal.("jido_integration", "core/store_postgres"),
     mezzanine_core: internal.("mezzanine", "core/mezzanine_core"),
