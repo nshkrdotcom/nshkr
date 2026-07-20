@@ -3,7 +3,7 @@ packet_id: P11-gemini-live-local
 phase: 11
 driving_consumer: gemini-live
 repository: /home/home/p/g/n/gemini_ex
-base_revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+base_revision: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
 owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini/live","/home/home/p/g/n/gemini_ex/lib/gemini/client/websocket.ex","/home/home/p/g/n/gemini_ex/lib/gemini/streaming","/home/home/p/g/n/gemini_ex/test/gemini/live","/home/home/p/g/n/gemini_ex/test/gemini/client/websocket_test.exs"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-materialization.v1","jido.lease-revocation.v1","execution-plane.runtime-families.v1"]

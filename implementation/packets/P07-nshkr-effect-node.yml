@@ -3,7 +3,7 @@ packet_id: P07-nshkr-effect-node
 phase: 7
 driving_consumer: runtime-admitted-effects
 repository: /home/home/p/g/n/nshkr
-base_revision: 6b26d1343d76356f6dea7ffbfc67d7b4d79d93fe
+base_revision: 10569a193043d7edba7f3d290213d45a0fa398ca
 owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
 read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/pristine","/home/home/p/g/n/cli_subprocess_core"]
 contract_versions: ["nshkr.production-profile.v1","execution-plane.runtime-client.v1","execution-plane.runtime-families.v1"]

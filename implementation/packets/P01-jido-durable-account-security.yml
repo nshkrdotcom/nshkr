@@ -10,8 +10,8 @@ contract_versions: ["citadel.scoped-grant.v1","jido.credential-lease.v1","jido.c
 dependency_nodes: ["P00-contract-spine"]
 behavior: ["make managed account, credential version, lease, redemption, attempt, and revocation durable","materialize secrets only inside the bounded effect process","redact every durable and telemetry boundary"]
 negative_invariants: ["no secret-bearing durable encoding","no raw API key managed option","expired, revoked, cross-account, and cross-tenant leases fail closed"]
-minimal_qc: ["cd /home/home/p/g/n/jido_integration && mix format --check-formatted","cd /home/home/p/g/n/jido_integration && mix compile --warnings-as-errors","run targeted Postgres auth and credential lifecycle tests"]
-mandatory_qc: ["cd /home/home/p/g/n/jido_integration && mix test core/auth/test/jido/integration/v2/auth_lease_redemption_test.exs core/auth/test/jido/integration/v2/auth_secret_envelope_test.exs core/contracts/test/jido/integration/v2/credential_materialization_test.exs core/contracts/test/jido/integration/v2/redaction_test.exs core/store_postgres/test/jido/integration/v2/store_postgres/auth_store_test.exs"]
+minimal_qc: ["compile and format core/auth, core/contracts, core/control_plane, core/secrets_provider, and core/store_postgres from their package roots"]
+mandatory_qc: ["cd /home/home/p/g/n/jido_integration/core/control_plane && mix test test/jido/integration/v2/control_plane_inference_adapter_test.exs test/jido/integration/v2/control_plane_inference_execution_test.exs test/jido/integration/v2/control_plane_inference_test.exs","cd /home/home/p/g/n/jido_integration/core/secrets_provider && mix test test/jido/integration/secrets/provider_test.exs","cd /home/home/p/g/n/jido_integration/core/store_postgres && mix test test/jido/integration/v2/store_postgres/auth_store_test.exs test/jido/integration/v2/store_postgres/managed_account_store_test.exs","cd /home/home/p/g/n/jido_integration/core/auth && mix test test/jido/integration/v2/auth_lease_redemption_test.exs test/jido/integration/v2/auth_secret_envelope_test.exs test/jido/integration/v2/auth_managed_account_test.exs","cd /home/home/p/g/n/jido_integration/core/contracts && mix test test/jido/integration/v2/credential_materialization_test.exs test/jido/integration/v2/redaction_test.exs"]
 protected_deletions: ["P01-managed-secret-and-account-bypasses"]
 external_effects:
   authority_required: false
@@ -19,6 +19,6 @@ external_effects:
   effect_class: null
   cost_or_lifecycle_scope: null
 catalog_effect: none
-status: ready
+status: complete
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

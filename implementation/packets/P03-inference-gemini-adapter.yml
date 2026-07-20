@@ -3,7 +3,7 @@ packet_id: P03-inference-gemini-adapter
 phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/inference
-base_revision: aa8da90b11490b0610be12d72ba086376ecfd1d1
+base_revision: 396eb6c538eb093142fd5018f298f8e5e1f2561b
 owned_paths: ["/home/home/p/g/n/inference/apps/inference/lib","/home/home/p/g/n/inference/apps/inference/test"]
 read_only_dependencies: ["/home/home/p/g/n/gemini_ex/lib","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-materialization.v1","jido.provider-event.v1"]

@@ -3,7 +3,7 @@ packet_id: P10-mezzanine-issue-pr-workflow
 phase: 10
 driving_consumer: extravaganza-issue-to-pr
 repository: /home/home/p/g/n/mezzanine
-base_revision: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+base_revision: bdd1bd6ddd0d7b84d98e1b01e1372817ac464f3c
 owned_paths: ["/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/mezzanine/core/projection_engine"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["mezzanine.run-acceptance.v1","mezzanine.effect-record.v1"]

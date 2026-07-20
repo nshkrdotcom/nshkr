@@ -3,7 +3,7 @@ packet_id: P07-asm-runtime-client-route
 phase: 7
 driving_consumer: runtime-admitted-process
 repository: /home/home/p/g/n/agent_session_manager
-base_revision: a5764929ab7318c611af46c04f1d27154e069526
+base_revision: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
 owned_paths: ["/home/home/p/g/n/agent_session_manager/lib/asm/remote","/home/home/p/g/n/agent_session_manager/lib/asm/control.ex","/home/home/p/g/n/agent_session_manager/lib/asm/managed_session.ex"]
 read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["asm.managed-session.v1","execution-plane.runtime-client.v1"]

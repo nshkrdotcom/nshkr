@@ -3,7 +3,7 @@ packet_id: P12-inference-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/inference
-base_revision: aa8da90b11490b0610be12d72ba086376ecfd1d1
+base_revision: 396eb6c538eb093142fd5018f298f8e5e1f2561b
 owned_paths: ["/home/home/p/g/n/inference/apps/inference"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

@@ -3,7 +3,7 @@ packet_id: P02-mezzanine-run-acceptance
 phase: 2
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/mezzanine
-base_revision: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
+base_revision: bdd1bd6ddd0d7b84d98e1b01e1372817ac464f3c
 owned_paths: ["/home/home/p/g/n/mezzanine/core/mezzanine_core","/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["mezzanine.run-acceptance.v1","ground-plane.command-envelope.v1"]
@@ -20,6 +20,6 @@ external_effects:
   effect_class: null
   cost_or_lifecycle_scope: null
 catalog_effect: none
-status: blocked_dependency
+status: ready
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

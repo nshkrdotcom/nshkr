@@ -3,7 +3,7 @@ packet_id: P12-citadel-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/citadel
-base_revision: b15e9b4f4bb2013d024e01dbff5c4bbf9b4e5598
+base_revision: de8bbca5145649a78ddf45c03ca19954734e74a7
 owned_paths: ["/home/home/p/g/n/citadel/core/citadel_governance","/home/home/p/g/n/citadel/core/policy_packs"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

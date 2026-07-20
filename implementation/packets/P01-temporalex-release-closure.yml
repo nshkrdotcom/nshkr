@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P01-temporalex-release-closure
+phase: 1
+driving_consumer: production-runtime
+repository: /home/home/p/g/n/temporalex
+base_revision: 8fd4abab9431d7dfff3598e674d22c30df31b873
+owned_paths: ["/home/home/p/g/n/temporalex/mix.exs","/home/home/p/g/n/temporalex/mix.lock"]
+read_only_dependencies: ["/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
+contract_versions: ["nshkr.production-profile.v1"]
+dependency_nodes: ["P00-contract-spine"]
+behavior: ["produce one release-safe Temporalex dependency graph with one owner for Google protobuf well-known modules","preserve the real Rust Core NIF and Temporal client/worker behavior used by the NSHKR production release"]
+negative_invariants: ["no duplicated BEAM module in the assembled release","no removal of Temporal worker or protocol behavior","no release-only compatibility shim"]
+minimal_qc: ["cd /home/home/p/g/n/temporalex && mix format --check-formatted","cd /home/home/p/g/n/temporalex && mix compile --warnings-as-errors","cd /home/home/p/g/n/temporalex && mix test test/temporalex/retry_policy_test.exs test/temporalex/converter_test.exs","cd /home/home/p/g/n/nshkr/apps/nshkr_runtime && MIX_ENV=prod mix release --overwrite"]
+mandatory_qc: []
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: complete
+non_goals: ["backwards compatibility","Temporal protocol redesign","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

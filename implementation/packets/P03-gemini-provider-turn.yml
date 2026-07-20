@@ -3,7 +3,7 @@ packet_id: P03-gemini-provider-turn
 phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/gemini_ex
-base_revision: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
+base_revision: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
 owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini.ex","/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/streaming","/home/home/p/g/n/gemini_ex/test/gemini"]
 read_only_dependencies: ["/home/home/p/g/n/jido_integration/core/contracts","/home/home/p/g/n/jido_integration/core/secrets_provider","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-materialization.v1","jido.provider-event.v1"]

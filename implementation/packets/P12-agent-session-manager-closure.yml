@@ -3,7 +3,7 @@ packet_id: P12-agent-session-manager-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/agent_session_manager
-base_revision: a5764929ab7318c611af46c04f1d27154e069526
+base_revision: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
 owned_paths: ["/home/home/p/g/n/agent_session_manager/lib"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

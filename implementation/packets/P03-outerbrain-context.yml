@@ -3,7 +3,7 @@ packet_id: P03-outerbrain-context
 phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/outer_brain
-base_revision: 1d2f27a7f28c17f20e0833f7300bc948c64e86a5
+base_revision: befa85ae174c83dae0926f67bbe53d6358be1d87
 owned_paths: ["/home/home/p/g/n/outer_brain/core/outer_brain_core","/home/home/p/g/n/outer_brain/core/outer_brain_prompting","/home/home/p/g/n/outer_brain/core/outer_brain_persistence"]
 read_only_dependencies: ["/home/home/p/g/n/outer_brain/core/outer_brain_contracts","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["outer-brain.semantic-context-provenance.v1","outer-brain.reply-publication.v1","ground-plane.artifact-descriptor.v1"]

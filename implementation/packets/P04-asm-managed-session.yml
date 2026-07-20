@@ -3,7 +3,7 @@ packet_id: P04-asm-managed-session
 phase: 4
 driving_consumer: synapse-journey-2
 repository: /home/home/p/g/n/agent_session_manager
-base_revision: a5764929ab7318c611af46c04f1d27154e069526
+base_revision: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
 owned_paths: ["/home/home/p/g/n/agent_session_manager/lib/asm","/home/home/p/g/n/agent_session_manager/test/asm"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["asm.managed-session.v1","cli-core.runtime-gateway.v1","jido.credential-materialization.v1"]

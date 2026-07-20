@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
-  reconciled_on: "2026-07-15"
-  checklist_revision: 3308ef59c9c976c87a7e22ab18fda984291ab673
+  reconciled_on: "2026-07-20"
+  checklist_revision: ae43abf019ee564523302d98fb85e7b357a9f732
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
     application: /home/home/p/g/n/nshkr/apps/nshkr_runtime
@@ -9,22 +9,23 @@ baseline:
     production_host: true
     stack_lab_role: proof_and_regression_harness_only
   source_revisions:
-    nshkr: ea34c4cc718497b332aa07901e9208cc231aacf4
+    nshkr: 10569a193043d7edba7f3d290213d45a0fa398ca
     synapse: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
     app_kit: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
     ground_plane: 950f40b8d37e7751c75bdf5e69a3666b964ac8a2
-    mezzanine: 826ecf4cabfe6ef7b13661c4e8696abe2e5e5973
-    citadel: b15e9b4f4bb2013d024e01dbff5c4bbf9b4e5598
-    outer_brain: 1d2f27a7f28c17f20e0833f7300bc948c64e86a5
-    jido_integration: bd2306b2a792a1123bea7735937e8272781efd32
-    inference: aa8da90b11490b0610be12d72ba086376ecfd1d1
-    gemini_ex: 49a57c4c6a54452ca8708a0dcfef80325f12b7a5
-    agent_session_manager: a5764929ab7318c611af46c04f1d27154e069526
+    mezzanine: bdd1bd6ddd0d7b84d98e1b01e1372817ac464f3c
+    citadel: de8bbca5145649a78ddf45c03ca19954734e74a7
+    outer_brain: befa85ae174c83dae0926f67bbe53d6358be1d87
+    jido_integration: 392a11cb1a1f829dc46dfd4d13f4af659eb5f768
+    inference: 396eb6c538eb093142fd5018f298f8e5e1f2561b
+    gemini_ex: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
+    agent_session_manager: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
     codex_sdk: 9c491da622f6f4aff115d53e69df4d261d63acd1
     cli_subprocess_core: 583280964197bd3816e4401ca3eb2575aa4e1b81
     execution_plane: ff19877742c8d44fab72c31e7c965938ff2ab565
     chassis: d9a496037aaf2e630be60828e0646c04a794ef3b
     aitrace: 2cc5e4cd4bf5a8f24be3f32e452ee336e4bdf288
+    temporalex: 220280c3a886e199fc2c56d6a4cc02b416f11c19
   vocabulary:
     - term: NSHKR
       meaning: governed AI operations ecosystem and production composition workspace
