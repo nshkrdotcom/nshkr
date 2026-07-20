@@ -4,7 +4,7 @@ phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/mezzanine
 base_revision: f5f6a54d2e461f46fb71b35d3f1637eeca4b4900
-owned_paths: ["/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine","/home/home/p/g/n/mezzanine/core/ai_run_model"]
+owned_paths: ["/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine","/home/home/p/g/n/mezzanine/core/ai_run_model","/home/home/p/g/n/mezzanine/core/ops_domain"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["mezzanine.run-acceptance.v1","mezzanine.effect-record.v1","jido.provider-attempt.v1","outer-brain.reply-publication.v1"]
 dependency_nodes: ["P02-durable-synapse-acceptance"]
