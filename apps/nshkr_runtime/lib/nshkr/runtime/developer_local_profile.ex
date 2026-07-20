@@ -20,14 +20,15 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
 
     vault_options = vault_options(env)
     temporal_options = temporal_options(env)
+    app_kit_backend_options = app_kit_backend_options(env)
 
     %{
       production_profile: %{
         topology: topology(),
-        services: services(env, vault_options, temporal_options),
+        services: services(env, vault_options, temporal_options, app_kit_backend_options),
         migration_plan: migration_plan()
       },
-      runtime_config: runtime_config(urls, temporal_options)
+      runtime_config: runtime_config(urls, temporal_options, app_kit_backend_options)
     }
   end
 
@@ -90,7 +91,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
     }
   end
 
-  defp services(env, vault_options, temporal_options) do
+  defp services(env, vault_options, temporal_options, app_kit_backend_options) do
     mezzanine_health = [repo: Mezzanine.OpsDomain.Repo]
 
     jido_options = [
@@ -208,6 +209,13 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
           allowed_active: []
         ],
         {CapabilityTruth, :probe, []}
+      ),
+      service(
+        "app-kit-backend-stack",
+        :app_kit_backend_stack,
+        Nshkr.Runtime.AppKitBackendStack,
+        [name: Nshkr.Runtime.AppKitBackendStack] ++ app_kit_backend_options,
+        {Nshkr.Runtime.AppKitBackendStack, :probe, []}
       )
     ]
   end
@@ -255,7 +263,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
     }
   end
 
-  defp runtime_config(urls, temporal_options) do
+  defp runtime_config(urls, temporal_options, app_kit_backend_options) do
     [
       mezzanine_core: [run_store: Mezzanine.WorkflowRuntime.Store.Postgres],
       mezzanine_ops_domain:
@@ -275,7 +283,18 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         managed_providers: %{
           "vault" => [provider: JidoVaultProvider, vault_server: VaultKvV2]
         }
+      ],
+      synapse_core: [
+        app_kit_backend_stack: Nshkr.Runtime.AppKitBackendStack,
+        app_kit_backend_options: app_kit_backend_options
       ]
+    ]
+  end
+
+  defp app_kit_backend_options(env) do
+    [
+      program_id: required(env, "NSHKR_SYNAPSE_PROGRAM_ID"),
+      work_class_id: required(env, "NSHKR_SYNAPSE_WORK_CLASS_ID")
     ]
   end
 

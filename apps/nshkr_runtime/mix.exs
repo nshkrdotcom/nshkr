@@ -37,7 +37,10 @@ defmodule Nshkr.Runtime.MixProject do
 
   defp deps do
     [
+      DependencySources.dep(:app_kit_core, @repo_root, runtime: false),
+      DependencySources.dep(:app_kit_mezzanine_bridge, @repo_root, runtime: false),
       DependencySources.dep(:citadel_governance, @repo_root, runtime: false),
+      DependencySources.dep(:execution_plane, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_secrets_provider, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_v2_auth, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_v2_control_plane, @repo_root, runtime: false),
@@ -59,6 +62,8 @@ defmodule Nshkr.Runtime.MixProject do
       nshkr: [
         include_executables_for: [:unix],
         applications: [
+          app_kit_core: :load,
+          app_kit_mezzanine_bridge: :load,
           citadel_governance: :load,
           jido_integration_secrets_provider: :load,
           jido_integration_v2_auth: :load,

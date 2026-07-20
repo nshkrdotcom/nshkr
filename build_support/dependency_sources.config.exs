@@ -14,6 +14,8 @@ end
 
 %{
   deps: %{
+    app_kit_core: internal.("app_kit", "core/app_kit_core"),
+    app_kit_mezzanine_bridge: internal.("app_kit", "bridges/mezzanine_bridge"),
     blitz: %{
       hex: "~> 0.3.0",
       default_order: [:hex],
@@ -25,6 +27,7 @@ end
       publish_order: [:hex]
     },
     citadel_governance: internal.("citadel", "core/citadel_governance"),
+    execution_plane: internal.("execution_plane", "core/execution_plane"),
     jido_integration_secrets_provider: internal.("jido_integration", "core/secrets_provider"),
     jido_integration_v2_auth: internal.("jido_integration", "core/auth"),
     jido_integration_v2_control_plane: internal.("jido_integration", "core/control_plane"),

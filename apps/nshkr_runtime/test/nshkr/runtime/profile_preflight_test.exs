@@ -192,6 +192,8 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
       "NSHKR_CITADEL_DATABASE_URL" => "ecto://localhost/citadel",
       "NSHKR_OUTER_BRAIN_DATABASE_URL" => "ecto://localhost/outer_brain",
       "NSHKR_JIDO_DATABASE_URL" => "ecto://localhost/jido",
+      "NSHKR_SYNAPSE_PROGRAM_ID" => "22222222-2222-4222-8222-222222222222",
+      "NSHKR_SYNAPSE_WORK_CLASS_ID" => "33333333-3333-4333-8333-333333333333",
       "NSHKR_RUNTIME_SECRET_DIR" => "/run/nshkr/secrets",
       "NSHKR_TEMPORAL_ADDRESS" => "temporal.internal:7233",
       "NSHKR_VAULT_ENDPOINT" => "https://vault.internal",
@@ -227,6 +229,46 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              Enum.find(document.production_profile.services, &(&1.id == "jido-owner-store"))
 
     assert jido_options[:persistence_profile] == :integration_postgres
+
+    app_kit_service =
+      Enum.find(
+        document.production_profile.services,
+        &(&1.id == "app-kit-backend-stack")
+      )
+
+    assert %{role: :app_kit_backend_stack, module: Nshkr.Runtime.AppKitBackendStack} =
+             app_kit_service
+
+    assert {:ok, %{durable_owner: Mezzanine.OpsDomain.Repo}} =
+             Nshkr.Runtime.AppKitBackendStack.probe(app_kit_service.options)
+
+    assert {:error, :app_kit_agent_intake_unavailable} =
+             Nshkr.Runtime.AppKitBackendStack.probe(
+               Keyword.delete(app_kit_service.options, :work_class_id)
+             )
+
+    assert {:error, :app_kit_agent_intake_unavailable} =
+             Nshkr.Runtime.AppKitBackendStack.probe(
+               Keyword.put(app_kit_service.options, :program_id, "not-a-canonical-id")
+             )
+
+    assert document.runtime_config[:synapse_core][:app_kit_backend_stack] ==
+             Nshkr.Runtime.AppKitBackendStack
+
+    assert document.runtime_config[:synapse_core][:app_kit_backend_options] == [
+             program_id: "22222222-2222-4222-8222-222222222222",
+             work_class_id: "33333333-3333-4333-8333-333333333333"
+           ]
+
+    assert {:ok, AppKit.Bridges.MezzanineBridge.AgentIntakeAdapter} =
+             document.runtime_config[:synapse_core][:app_kit_backend_stack]
+             |> apply(:backend_stack, [])
+             |> AppKit.BackendStack.fetch(:agent_intake_backend)
+
+    assert {:ok, AppKit.Bridges.MezzanineBridge} =
+             document.runtime_config[:synapse_core][:app_kit_backend_stack]
+             |> apply(:backend_stack, [])
+             |> AppKit.BackendStack.fetch(:headless_backend)
 
     assert_raise ArgumentError, ~r/NSHKR_JIDO_DATABASE_URL/, fn ->
       env |> Map.delete("NSHKR_JIDO_DATABASE_URL") |> DeveloperLocalProfile.document()

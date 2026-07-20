@@ -57,7 +57,9 @@ host-built AppKit backend stack and does not start lower owner services.
 
 For the real single-host developer profile, start Vault and MinIO with
 `apps/nshkr_runtime/priv/dev/services.sh up`, provide the four owner database
-URLs named by `Nshkr.Runtime.DeveloperLocalProfile`, and set
+URLs plus the canonical `NSHKR_SYNAPSE_PROGRAM_ID` and
+`NSHKR_SYNAPSE_WORK_CLASS_ID` routing identifiers named by
+`Nshkr.Runtime.DeveloperLocalProfile`, and set
 `NSHKR_PROFILE_FILE` to `apps/nshkr_runtime/priv/dev/profile.exs`. Boot performs
 migration-head, Postgres, Vault, MinIO, Temporal, owner-store, outbox, and
 capability-truth preflight before any configured product endpoint can start.
