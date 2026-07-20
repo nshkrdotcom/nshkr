@@ -3,7 +3,7 @@ packet_id: P03-mezzanine-model-lineage
 phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/mezzanine
-base_revision: 9f8054ae941d1889f3873962ddb387c9c471c161
+base_revision: 089fb3771cbc14ea6408e6653bc9db874849e337
 owned_paths: ["/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine","/home/home/p/g/n/mezzanine/core/ai_run_model"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["mezzanine.run-acceptance.v1","mezzanine.effect-record.v1","jido.provider-attempt.v1","outer-brain.reply-publication.v1"]

@@ -13,7 +13,7 @@ baseline:
     synapse: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
     app_kit: f49c7b7c2908b38df7142d0ecca5d8005f9ece1c
     ground_plane: 950f40b8d37e7751c75bdf5e69a3666b964ac8a2
-    mezzanine: 9f8054ae941d1889f3873962ddb387c9c471c161
+    mezzanine: 089fb3771cbc14ea6408e6653bc9db874849e337
     citadel: de8bbca5145649a78ddf45c03ca19954734e74a7
     outer_brain: befa85ae174c83dae0926f67bbe53d6358be1d87
     jido_integration: 392a11cb1a1f829dc46dfd4d13f4af659eb5f768

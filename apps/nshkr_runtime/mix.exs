@@ -43,6 +43,7 @@ defmodule Nshkr.Runtime.MixProject do
       DependencySources.dep(:jido_integration_v2_control_plane, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_v2_store_postgres, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_core, @repo_root, runtime: false),
+      DependencySources.dep(:mezzanine_ops_domain, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_workflow_runtime, @repo_root, runtime: false),
       DependencySources.dep(:outer_brain_runtime, @repo_root, runtime: false),
       {:ecto_sql, "~> 3.13"},
@@ -64,6 +65,7 @@ defmodule Nshkr.Runtime.MixProject do
           jido_integration_v2_control_plane: :load,
           jido_integration_v2_store_postgres: :load,
           mezzanine_core: :load,
+          mezzanine_ops_domain: :load,
           mezzanine_workflow_runtime: :load,
           outer_brain_runtime: :load
         ],

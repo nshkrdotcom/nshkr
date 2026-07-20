@@ -27,7 +27,7 @@ repositories:
     consumes: []
   - id: mezzanine
     path: /home/home/p/g/n/mezzanine
-    revision: 9f8054ae941d1889f3873962ddb387c9c471c161
+    revision: 089fb3771cbc14ea6408e6653bc9db874849e337
     branch: main
     dirty: false
     role: durable_run_turn_and_effect_owner

@@ -68,7 +68,7 @@ deletions:
     remove_references: [Mezzanine.Repo, mezzanine_runs, second_run_lifecycle]
     replacement_contract: mezzanine.run-acceptance.v1
     current_consumers_to_update: [mezzanine_workflow_runtime, nshkr_runtime]
-    verification: *unverified
+    verification: *verified
     risk_class: standard
     protected_domains: []
     root_reviewed: false

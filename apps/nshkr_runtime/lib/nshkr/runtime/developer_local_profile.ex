@@ -91,7 +91,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
   end
 
   defp services(env, vault_options, temporal_options) do
-    mezzanine_health = [repo: Mezzanine.Repo]
+    mezzanine_health = [repo: Mezzanine.OpsDomain.Repo]
 
     jido_options = [
       name: Jido.Integration.V2.StorePostgres.DurableRuntime,
@@ -108,9 +108,9 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
       service(
         "mezzanine-postgres",
         :postgres_repo,
-        Mezzanine.Repo,
+        Mezzanine.OpsDomain.Repo,
         [],
-        {Nshkr.Runtime.Probes, :postgres, [Mezzanine.Repo]}
+        {Nshkr.Runtime.Probes, :postgres, [Mezzanine.OpsDomain.Repo]}
       ),
       service(
         "citadel-postgres",
@@ -146,7 +146,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         Mezzanine.WorkflowRuntime.Store,
         :health,
         [mezzanine_health],
-        Mezzanine.Repo
+        Mezzanine.OpsDomain.Repo
       ),
       durable_owner(
         "citadel-authority-store",
@@ -187,7 +187,12 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
           runtime: Mezzanine.WorkflowRuntime.TemporalexAdapter
         ],
         {Nshkr.Runtime.Probes, :owner_store,
-         [Mezzanine.Repo, Mezzanine.WorkflowRuntime.Store, :health, [mezzanine_health]]}
+         [
+           Mezzanine.OpsDomain.Repo,
+           Mezzanine.WorkflowRuntime.Store,
+           :health,
+           [mezzanine_health]
+         ]}
       ),
       service(
         "capability-truth",
@@ -230,7 +235,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
 
   defp migration_plan do
     [
-      migration("mezzanine", Mezzanine.Repo, :mezzanine_core),
+      migration("mezzanine", Mezzanine.OpsDomain.Repo, :mezzanine_ops_domain),
       migration("citadel", Citadel.Governance.Repo, :citadel_governance),
       migration("outer_brain", OuterBrain.Persistence.Repo, :outer_brain_persistence),
       migration(
@@ -252,9 +257,10 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
 
   defp runtime_config(urls, temporal_options) do
     [
-      mezzanine_core:
-        repo_runtime(Mezzanine.Repo, urls.mezzanine) ++
-          [ecto_repos: [Mezzanine.Repo], run_store: Mezzanine.WorkflowRuntime.Store.Postgres],
+      mezzanine_core: [run_store: Mezzanine.WorkflowRuntime.Store.Postgres],
+      mezzanine_ops_domain:
+        repo_runtime(Mezzanine.OpsDomain.Repo, urls.mezzanine) ++
+          [ecto_repos: [Mezzanine.OpsDomain.Repo], start_runtime_children?: false],
       mezzanine_workflow_runtime: [temporal: temporal_options],
       citadel_governance:
         repo_runtime(Citadel.Governance.Repo, urls.citadel) ++
