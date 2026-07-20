@@ -87,12 +87,9 @@ deletions:
   - id: P03-gemini-managed-global-credentials
     phase: 3
     repository: /home/home/p/g/n/gemini_ex
-    remove_paths:
-      - /home/home/p/g/n/gemini_ex/lib/gemini/config.ex
-      - /home/home/p/g/n/gemini_ex/lib/gemini/env.ex
-      - /home/home/p/g/n/gemini_ex/lib/gemini/auth/gemini_strategy.ex
+    remove_paths: []
     remove_test_paths: []
-    remove_references: [managed_global_api_key, managed_application_env_credentials, static_provider_capability_claim]
+    remove_references: [managed_global_api_key, managed_application_env_credentials, managed_configure_entrypoint, managed_http_config_fallback, static_provider_capability_claim]
     replacement_contract: jido.credential-materialization.v1
     current_consumers_to_update: [jido_managed_inference, inference_gemini_adapter]
     verification: &unverified
