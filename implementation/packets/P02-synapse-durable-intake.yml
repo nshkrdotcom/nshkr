@@ -4,7 +4,7 @@ phase: 2
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/synapse
 base_revision: 7b3121952136cdd1d7606683c9ca2fc00e17ec18
-owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/product_bootstrap.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_new_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_show_live.ex"]
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/turns.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/product_bootstrap.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/fixtures/agent_intake_backend.ex","/home/home/p/g/n/synapse/apps/synapse_core/test","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_new_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_show_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/test","/home/home/p/g/n/synapse/config/test.exs"]
 read_only_dependencies: ["/home/home/p/g/n/app_kit/core/app_kit_core","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1"]
 dependency_nodes: ["P01-runtime-security"]

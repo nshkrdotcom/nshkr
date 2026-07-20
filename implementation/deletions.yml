@@ -57,6 +57,22 @@ deletions:
     protected_domains: [appkit_schema_registry, product_boundary_bridge]
     root_reviewed: false
     compatibility_layer: forbidden
+  - id: P02-mezzanine-parallel-run-truth
+    phase: 2
+    repository: /home/home/p/g/n/mezzanine
+    remove_paths:
+      - /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/repo.ex
+      - /home/home/p/g/n/mezzanine/core/mezzanine_core/priv/repo/migrations/20260715100000_create_canonical_run_truth.exs
+    remove_test_paths:
+      - /home/home/p/g/n/mezzanine/core/workflow_runtime/test/mezzanine/workflow_runtime/store_postgres_test.exs
+    remove_references: [Mezzanine.Repo, mezzanine_runs, second_run_lifecycle]
+    replacement_contract: mezzanine.run-acceptance.v1
+    current_consumers_to_update: [mezzanine_workflow_runtime, nshkr_runtime]
+    verification: *unverified
+    risk_class: standard
+    protected_domains: []
+    root_reviewed: false
+    compatibility_layer: forbidden
   - id: P02-synapse-nontest-intake-fixture-default
     phase: 2
     repository: /home/home/p/g/n/synapse
