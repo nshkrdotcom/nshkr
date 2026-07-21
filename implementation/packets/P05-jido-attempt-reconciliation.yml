@@ -3,7 +3,7 @@ packet_id: P05-jido-attempt-reconciliation
 phase: 5
 driving_consumer: synapse-recovery
 repository: /home/home/p/g/n/jido_integration
-base_revision: 392a11cb1a1f829dc46dfd4d13f4af659eb5f768
+base_revision: 705fccc2e049235bcf9cf2f9de6afc7668c2605b
 owned_paths: ["/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/store_postgres","/home/home/p/g/n/jido_integration/core/auth"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.provider-attempt.v1","jido.lease-revocation.v1"]

@@ -3,7 +3,7 @@ packet_id: P03-inference-gemini-adapter
 phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/inference
-base_revision: 396eb6c538eb093142fd5018f298f8e5e1f2561b
+base_revision: d2316ba2bc0a0e0d5437d553bed94605253e9336
 owned_paths: ["/home/home/p/g/n/inference/apps/inference/lib","/home/home/p/g/n/inference/apps/inference/test"]
 read_only_dependencies: ["/home/home/p/g/n/gemini_ex/lib","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-materialization.v1","jido.provider-event.v1"]
@@ -19,6 +19,6 @@ external_effects:
   effect_class: null
   cost_or_lifecycle_scope: null
 catalog_effect: none
-status: ready
+status: complete
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -3,7 +3,7 @@ packet_id: P11-mezzanine-live-publication
 phase: 11
 driving_consumer: gemini-live
 repository: /home/home/p/g/n/mezzanine
-base_revision: f5f6a54d2e461f46fb71b35d3f1637eeca4b4900
+base_revision: 780f41de51a0e79edbf536c17218c489437abd01
 owned_paths: ["/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine","/home/home/p/g/n/mezzanine/core/ai_run_model"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["mezzanine.run-acceptance.v1","mezzanine.effect-record.v1","jido.provider-event.v1"]

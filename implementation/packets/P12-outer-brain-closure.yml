@@ -3,7 +3,7 @@ packet_id: P12-outer-brain-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/outer_brain
-base_revision: befa85ae174c83dae0926f67bbe53d6358be1d87
+base_revision: 5437bf6c46fb7c7286c00288cdd1fec4d7d2dbda
 owned_paths: ["/home/home/p/g/n/outer_brain/core"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

@@ -3,7 +3,7 @@ packet_id: P07-gemini-http-family
 phase: 7
 driving_consumer: runtime-admitted-http
 repository: /home/home/p/g/n/gemini_ex
-base_revision: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
+base_revision: 8a9d4cca7412ef34c0690f391186fca793629f2c
 owned_paths: ["/home/home/p/g/n/gemini_ex/lib/gemini/client/http.ex","/home/home/p/g/n/gemini_ex/lib/gemini/streaming"]
 read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["execution-plane.runtime-client.v1","execution-plane.runtime-families.v1","jido.credential-materialization.v1"]

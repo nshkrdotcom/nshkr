@@ -3,7 +3,7 @@ packet_id: P10-jido-governed-coding
 phase: 10
 driving_consumer: extravaganza-issue-to-pr
 repository: /home/home/p/g/n/jido_integration
-base_revision: 392a11cb1a1f829dc46dfd4d13f4af659eb5f768
+base_revision: 705fccc2e049235bcf9cf2f9de6afc7668c2605b
 owned_paths: ["/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/asm_runtime_bridge","/home/home/p/g/n/jido_integration/core/runtime_router"]
 read_only_dependencies: ["/home/home/p/g/n/chassis","/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["jido.credential-materialization.v1","asm.managed-session.v1","execution-plane.runtime-client.v1"]

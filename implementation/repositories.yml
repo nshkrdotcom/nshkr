@@ -1,9 +1,9 @@
 schema: nshkr.repositories.v1
-reconciled_on: "2026-07-20"
+reconciled_on: "2026-07-21"
 repositories:
   - id: program_control
     path: /home/home/p/g/j/jido_brainstorm
-    revision: ae43abf019ee564523302d98fb85e7b357a9f732
+    revision: abbd4f60410a6b68492075ff5348ceb402faf7e7
     branch: main
     dirty: false
     role: checklist_and_architecture
@@ -11,7 +11,7 @@ repositories:
     consumes: []
   - id: nshkr
     path: /home/home/p/g/n/nshkr
-    revision: 19a1b6c2892e6e6607bee3a72ec17bbea7673ff7
+    revision: c6e1944183be9e547e313e4c47223acc87cf0d1c
     branch: main
     dirty: false
     role: production_composition
@@ -27,7 +27,7 @@ repositories:
     consumes: []
   - id: mezzanine
     path: /home/home/p/g/n/mezzanine
-    revision: f5f6a54d2e461f46fb71b35d3f1637eeca4b4900
+    revision: 780f41de51a0e79edbf536c17218c489437abd01
     branch: main
     dirty: false
     role: durable_run_turn_and_effect_owner
@@ -35,7 +35,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.command-envelope.v1, ground-plane.artifact-descriptor.v1, citadel.scoped-grant.v1]
   - id: citadel
     path: /home/home/p/g/n/citadel
-    revision: de8bbca5145649a78ddf45c03ca19954734e74a7
+    revision: 1cf7cdeef5ee3fa8b46c261aa41f3df6b247f753
     branch: main
     dirty: false
     role: authority_governance_and_grant_owner
@@ -43,7 +43,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1]
   - id: outer_brain
     path: /home/home/p/g/n/outer_brain
-    revision: befa85ae174c83dae0926f67bbe53d6358be1d87
+    revision: 5437bf6c46fb7c7286c00288cdd1fec4d7d2dbda
     branch: main
     dirty: false
     role: semantic_context_memory_and_reply_owner
@@ -51,7 +51,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.artifact-descriptor.v1, mezzanine.run-acceptance.v1, citadel.scoped-grant.v1]
   - id: jido_integration
     path: /home/home/p/g/n/jido_integration
-    revision: 392a11cb1a1f829dc46dfd4d13f4af659eb5f768
+    revision: 705fccc2e049235bcf9cf2f9de6afc7668c2605b
     branch: main
     dirty: false
     role: provider_account_lease_materialization_and_attempt_owner
@@ -59,7 +59,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, citadel.scoped-grant.v1, outer-brain.semantic-context-provenance.v1, execution-plane.runtime-client.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
   - id: inference
     path: /home/home/p/g/n/inference
-    revision: 396eb6c538eb093142fd5018f298f8e5e1f2561b
+    revision: d2316ba2bc0a0e0d5437d553bed94605253e9336
     branch: main
     dirty: false
     role: managed_model_adapter
@@ -67,7 +67,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1]
   - id: gemini_ex
     path: /home/home/p/g/n/gemini_ex
-    revision: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
+    revision: 8a9d4cca7412ef34c0690f391186fca793629f2c
     branch: main
     dirty: false
     role: gemini_provider_protocol

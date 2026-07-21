@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
-  reconciled_on: "2026-07-20"
-  checklist_revision: ae43abf019ee564523302d98fb85e7b357a9f732
+  reconciled_on: "2026-07-21"
+  checklist_revision: abbd4f60410a6b68492075ff5348ceb402faf7e7
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
     application: /home/home/p/g/n/nshkr/apps/nshkr_runtime
@@ -9,16 +9,16 @@ baseline:
     production_host: true
     stack_lab_role: proof_and_regression_harness_only
   source_revisions:
-    nshkr: 19a1b6c2892e6e6607bee3a72ec17bbea7673ff7
+    nshkr: c6e1944183be9e547e313e4c47223acc87cf0d1c
     synapse: 5bcb223339fa8a89a40a1347b39f929c89835e37
     app_kit: b023d3cf6f389c5fefdde2690e5b7148bba7591f
     ground_plane: 950f40b8d37e7751c75bdf5e69a3666b964ac8a2
-    mezzanine: f5f6a54d2e461f46fb71b35d3f1637eeca4b4900
-    citadel: de8bbca5145649a78ddf45c03ca19954734e74a7
-    outer_brain: befa85ae174c83dae0926f67bbe53d6358be1d87
-    jido_integration: 392a11cb1a1f829dc46dfd4d13f4af659eb5f768
-    inference: 396eb6c538eb093142fd5018f298f8e5e1f2561b
-    gemini_ex: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
+    mezzanine: 780f41de51a0e79edbf536c17218c489437abd01
+    citadel: 1cf7cdeef5ee3fa8b46c261aa41f3df6b247f753
+    outer_brain: 5437bf6c46fb7c7286c00288cdd1fec4d7d2dbda
+    jido_integration: 705fccc2e049235bcf9cf2f9de6afc7668c2605b
+    inference: d2316ba2bc0a0e0d5437d553bed94605253e9336
+    gemini_ex: 8a9d4cca7412ef34c0690f391186fca793629f2c
     agent_session_manager: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
     codex_sdk: 9c491da622f6f4aff115d53e69df4d261d63acd1
     cli_subprocess_core: 583280964197bd3816e4401ca3eb2575aa4e1b81

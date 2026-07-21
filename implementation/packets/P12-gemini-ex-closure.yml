@@ -3,7 +3,7 @@ packet_id: P12-gemini-ex-closure
 phase: 12
 driving_consumer: advertised-capability-closure
 repository: /home/home/p/g/n/gemini_ex
-base_revision: 404b8479e5cc341f531d08f8c19d7e9e46ef3040
+base_revision: 8a9d4cca7412ef34c0690f391186fca793629f2c
 owned_paths: ["/home/home/p/g/n/gemini_ex/lib"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/capabilities.yml","/home/home/p/g/n/nshkr/implementation/deletions.yml"]
 contract_versions: ["nshkr.production-profile.v1"]

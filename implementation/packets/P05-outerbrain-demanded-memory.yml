@@ -3,7 +3,7 @@ packet_id: P05-outerbrain-demanded-memory
 phase: 5
 driving_consumer: synapse-memory
 repository: /home/home/p/g/n/outer_brain
-base_revision: befa85ae174c83dae0926f67bbe53d6358be1d87
+base_revision: 5437bf6c46fb7c7286c00288cdd1fec4d7d2dbda
 owned_paths: ["/home/home/p/g/n/outer_brain/core/memory_engine","/home/home/p/g/n/outer_brain/core/memory_contracts","/home/home/p/g/n/outer_brain/core/outer_brain_prompting","/home/home/p/g/n/outer_brain/core/outer_brain_persistence"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["outer-brain.memory-context-provenance.v1","ground-plane.artifact-descriptor.v1"]

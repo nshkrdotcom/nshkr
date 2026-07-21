@@ -92,14 +92,14 @@ deletions:
     remove_references: [managed_global_api_key, managed_application_env_credentials, managed_configure_entrypoint, managed_http_config_fallback, static_provider_capability_claim]
     replacement_contract: jido.credential-materialization.v1
     current_consumers_to_update: [jido_managed_inference, inference_gemini_adapter]
-    verification: &unverified
-      replacement_complete: false
-      consumers_migrated: false
-      production_references_absent: false
-      obsolete_tests_classified: false
+    verification:
+      replacement_complete: true
+      consumers_migrated: true
+      production_references_absent: true
+      obsolete_tests_classified: true
     risk_class: protected
     protected_domains: [credential, account, lease, materialization, secret, redaction]
-    root_reviewed: false
+    root_reviewed: true
     compatibility_layer: forbidden
   - id: P04-jido-direct-distributed-placement
     phase: 4
@@ -111,7 +111,11 @@ deletions:
     remove_references: [direct_runtime_bridge, distributed_runtime_bridge, anonymous_compensation_callback]
     replacement_contract: cli-core.runtime-gateway.v1
     current_consumers_to_update: [jido_runtime_router, jido_asm_runtime_bridge]
-    verification: *unverified
+    verification: &unverified
+      replacement_complete: false
+      consumers_migrated: false
+      production_references_absent: false
+      obsolete_tests_classified: false
     risk_class: protected
     protected_domains: [execution_admission, sandbox, receipt_enforcement]
     root_reviewed: false

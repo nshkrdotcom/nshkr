@@ -3,7 +3,7 @@ packet_id: P03-nshkr-gemini-composition
 phase: 3
 driving_consumer: synapse-journey-1
 repository: /home/home/p/g/n/nshkr
-base_revision: 19a1b6c2892e6e6607bee3a72ec17bbea7673ff7
+base_revision: c6e1944183be9e547e313e4c47223acc87cf0d1c
 owned_paths: ["/home/home/p/g/n/nshkr/apps/nshkr_runtime"]
 read_only_dependencies: ["/home/home/p/g/n/outer_brain","/home/home/p/g/n/citadel","/home/home/p/g/n/jido_integration","/home/home/p/g/n/inference","/home/home/p/g/n/gemini_ex","/home/home/p/g/n/mezzanine"]
 contract_versions: ["nshkr.production-profile.v1","citadel.scoped-grant.v1","jido.credential-materialization.v1"]
