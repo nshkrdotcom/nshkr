@@ -521,7 +521,8 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
       workspace: %{
         workspace_ref: attrs.workspace_ref,
         relative_path: attrs.relative_path,
-        content_digest: refs.reviewed_content_digest
+        content_digest: refs.reviewed_content_digest,
+        reviewed_content: attrs.reviewed_content
       },
       provider_metadata: %{app_server: true, skip_git_repo_check: true},
       authority_metadata: %{
