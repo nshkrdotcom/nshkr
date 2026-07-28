@@ -270,6 +270,18 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              |> apply(:backend_stack, [])
              |> AppKit.BackendStack.fetch(:headless_backend)
 
+    capability_service =
+      Enum.find(
+        document.production_profile.services,
+        &(&1.id == "capability-truth")
+      )
+
+    assert capability_service.options[:allowed_active] == [
+             "model.gemini.managed-account.local-effect"
+           ]
+
+    assert :ok = CapabilityTruth.probe(capability_service.options)
+
     assert_raise ArgumentError, ~r/NSHKR_JIDO_DATABASE_URL/, fn ->
       env |> Map.delete("NSHKR_JIDO_DATABASE_URL") |> DeveloperLocalProfile.document()
     end

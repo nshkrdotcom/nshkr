@@ -5,18 +5,31 @@
       "contract_version": 1,
       "capability_ref": "capability://nshkr/model.gemini.managed-account.local-effect",
       "capability_id": "model.gemini.managed-account.local-effect",
-      "producer_revision": "p01-dormant",
-      "adapter_revision": "not-composed",
-      "runtime_revision": "p01-dormant",
-      "contract_revisions": {},
+      "producer_revision": "7ad78e2dee9022ce051469a3a7ada5d3dc937811",
+      "adapter_revision": "74754d7bde788a1647e35be6bdddf1fa27892ec7",
+      "runtime_revision": "88344487e8c01e66c15c511678f71404842da267",
+      "contract_revisions": {
+        "citadel.scoped-grant.v1": "8689bbba64e5b416dd31f06529f3e0c44b54a2873835d3c8e2e579c501cdda7e",
+        "outer-brain.semantic-context-provenance.v1": "a7739cb13803b96d58dca93329cc6292095e8b0d6467a57038f9699444b30718",
+        "jido.credential-lease.v1": "62cdad73a9250ccbc21a0f790a5c1a577f14bac6c2738214cc2e28fa679324fd",
+        "jido.credential-materialization.v1": "7ea76d6a02300f748d3fd1af358afa46e26420c1c08e5342a9c49b459a1d1e6e",
+        "jido.provider-attempt.v1": "244c4e7eb9df6176052332d693b8b6911368a032c841b9ad220e8bbcdc98de09",
+        "jido.provider-event.v1": "033632edf0348d8c956bc32c8a6811f653adcaf788038d5e9cc0692339e7ad47"
+      },
       "mode": "managed_account_local_effect",
       "required_components": ["nshkr_runtime", "mezzanine", "outer_brain", "citadel", "jido_integration", "inference", "gemini_ex"],
       "optional_features": [],
-      "readiness": "absent",
-      "health": "unknown",
-      "absence_reason": "not_composed",
+      "readiness": "ready",
+      "health": "healthy",
       "release_ref": "release://nshkr/0.1.0",
-      "evidence_refs": []
+      "evidence_refs": [
+        "run://mezzanine/nshkr-p03-live-completion-20260727-6",
+        "turn://mezzanine/YuN6iPxfnh-qBMDUerG5W_lwIhFW-0HSlwvNDtWS4iM",
+        "jido-run://nshkr/gemini/3a097eb92df5b354197f512a:1",
+        "run://mezzanine/nshkr-p03-live-stream-20260727-stream-5",
+        "turn://mezzanine/lTApX78gZM8rxfruH4CN3OHNWagd-xojlIcZCdKz4UA",
+        "jido-run://nshkr/gemini/cc618c6adc7c84a12717e526:1"
+      ]
     },
     {
       "contract_version": 1,

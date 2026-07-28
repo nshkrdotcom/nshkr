@@ -6,7 +6,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
   alias Nshkr.Runtime.ObjectStore.{MinioS3, VaultCredentialProvider}
   alias Nshkr.Runtime.SecretStore.{JidoVaultProvider, VaultAppRoleAuth, VaultKvV2}
 
-  @capability_manifest_sha256 "e5f05518213070a0f2949b5866afd4550cc7f75f3142a86135739be5226b099c"
+  @capability_manifest_sha256 "30d3aa20ccfc55eed8d97f6ad0183e377285314fd2e4bd1b8664e4dcefc6ffa1"
   @temporal_task_queue "nshkr.mezzanine.agent-run.v1"
 
   @spec document(map()) :: %{production_profile: map(), runtime_config: keyword()}
@@ -206,7 +206,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
             path: "priv/release_capabilities.json",
             sha256: @capability_manifest_sha256
           ],
-          allowed_active: []
+          allowed_active: ["model.gemini.managed-account.local-effect"]
         ],
         {CapabilityTruth, :probe, []}
       ),
