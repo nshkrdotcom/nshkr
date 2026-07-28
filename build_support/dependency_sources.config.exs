@@ -28,6 +28,14 @@ end
     },
     citadel_governance: internal.("citadel", "core/citadel_governance"),
     execution_plane: internal.("execution_plane", "core/execution_plane"),
+    gemini_ex: %{
+      path: Path.join(siblings_root, "gemini_ex"),
+      github: %{repo: "nshkrdotcom/gemini_ex", branch: "main"},
+      hex: "~> 0.15.0",
+      opts: [override: true],
+      default_order: [:path, :github, :hex],
+      publish_order: [:hex]
+    },
     jido_integration_secrets_provider: internal.("jido_integration", "core/secrets_provider"),
     jido_integration_v2_auth: internal.("jido_integration", "core/auth"),
     jido_integration_v2_control_plane: internal.("jido_integration", "core/control_plane"),

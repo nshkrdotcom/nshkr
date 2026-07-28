@@ -41,6 +41,7 @@ defmodule Nshkr.Runtime.MixProject do
       DependencySources.dep(:app_kit_mezzanine_bridge, @repo_root, runtime: false),
       DependencySources.dep(:citadel_governance, @repo_root, runtime: false),
       DependencySources.dep(:execution_plane, @repo_root, runtime: false),
+      DependencySources.dep(:gemini_ex, @repo_root),
       DependencySources.dep(:jido_integration_secrets_provider, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_v2_auth, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_v2_control_plane, @repo_root, runtime: false),

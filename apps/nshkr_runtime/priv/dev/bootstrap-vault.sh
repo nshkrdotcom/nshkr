@@ -14,6 +14,10 @@ vault kv put kv/object-store/minio \
   access_key_id="$MINIO_ACCESS_KEY" \
   secret_access_key="$MINIO_SECRET_KEY" >/dev/null
 
+if [ -n "${GEMINI_API_KEY:-}" ]; then
+  vault kv put kv/gemini/primary api_key="$GEMINI_API_KEY" >/dev/null
+fi
+
 vault write auth/approle/role/nshkr-runtime \
   token_policies=nshkr-runtime \
   token_ttl=10m \
@@ -23,3 +27,4 @@ vault write auth/approle/role/nshkr-runtime \
 umask 077
 vault read -field=role_id auth/approle/role/nshkr-runtime/role-id > /out/vault-role-id
 vault write -field=secret_id -f auth/approle/role/nshkr-runtime/secret-id > /out/vault-secret-id
+chmod 600 /out/vault-role-id /out/vault-secret-id

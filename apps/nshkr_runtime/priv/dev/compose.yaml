@@ -53,6 +53,7 @@ services:
       VAULT_TOKEN: ${NSHKR_DEV_VAULT_ROOT_TOKEN:?required}
       MINIO_ACCESS_KEY: ${NSHKR_DEV_MINIO_ACCESS_KEY:?required}
       MINIO_SECRET_KEY: ${NSHKR_DEV_MINIO_SECRET_KEY:?required}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
     volumes:
       - ${NSHKR_DEV_RUNTIME_DIR:?required}:/out
       - ./bootstrap-vault.sh:/bootstrap-vault.sh:ro

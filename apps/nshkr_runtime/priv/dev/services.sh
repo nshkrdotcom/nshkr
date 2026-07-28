@@ -7,15 +7,19 @@ env_file="$runtime_dir/dev.env"
 compose_file="$app_root/priv/dev/compose.yaml"
 
 ensure_env_file() {
+  mkdir -p "$runtime_dir"
+  chmod 700 "$runtime_dir"
+
   if [ ! -f "$env_file" ]; then
     umask 077
-    mkdir -p "$runtime_dir"
     {
       printf 'NSHKR_DEV_VAULT_ROOT_TOKEN=%s\n' "$(openssl rand -hex 32)"
       printf 'NSHKR_DEV_MINIO_ACCESS_KEY=%s\n' "nshkr$(openssl rand -hex 8)"
       printf 'NSHKR_DEV_MINIO_SECRET_KEY=%s\n' "$(openssl rand -hex 32)"
     } > "$env_file"
   fi
+
+  chmod 600 "$env_file"
 }
 
 compose() {
