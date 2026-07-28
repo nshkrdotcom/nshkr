@@ -1,7 +1,8 @@
 schema: nshkr.contracts.v1
 baseline:
-  reconciled_on: "2026-07-21"
-  checklist_revision: abbd4f60410a6b68492075ff5348ceb402faf7e7
+  reconciled_on: "2026-07-27"
+  checklist_revision: 891d4d3067109a0fcd315ee385e4c4d7521450ce
+  checklist_revision_policy: control_input_anchor
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
     application: /home/home/p/g/n/nshkr/apps/nshkr_runtime
@@ -9,23 +10,71 @@ baseline:
     production_host: true
     stack_lab_role: proof_and_regression_harness_only
   source_revisions:
-    nshkr: c6e1944183be9e547e313e4c47223acc87cf0d1c
+    nshkr: f1fbbe66f15e656d322d1ca661d25abd06dff163
     synapse: 5bcb223339fa8a89a40a1347b39f929c89835e37
-    app_kit: b023d3cf6f389c5fefdde2690e5b7148bba7591f
-    ground_plane: 950f40b8d37e7751c75bdf5e69a3666b964ac8a2
-    mezzanine: 780f41de51a0e79edbf536c17218c489437abd01
-    citadel: 1cf7cdeef5ee3fa8b46c261aa41f3df6b247f753
-    outer_brain: 5437bf6c46fb7c7286c00288cdd1fec4d7d2dbda
-    jido_integration: 705fccc2e049235bcf9cf2f9de6afc7668c2605b
-    inference: d2316ba2bc0a0e0d5437d553bed94605253e9336
-    gemini_ex: 8a9d4cca7412ef34c0690f391186fca793629f2c
-    agent_session_manager: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
-    codex_sdk: 9c491da622f6f4aff115d53e69df4d261d63acd1
-    cli_subprocess_core: 583280964197bd3816e4401ca3eb2575aa4e1b81
-    execution_plane: ff19877742c8d44fab72c31e7c965938ff2ab565
-    chassis: d9a496037aaf2e630be60828e0646c04a794ef3b
-    aitrace: 2cc5e4cd4bf5a8f24be3f32e452ee336e4bdf288
-    temporalex: 220280c3a886e199fc2c56d6a4cc02b416f11c19
+    app_kit: 0b0a17b61315091b0107fa5e77c1d3220e54e6b8
+    ground_plane: d0af5e68745ea16438dd93711341cb47ddc7860c
+    mezzanine: 7ad78e2dee9022ce051469a3a7ada5d3dc937811
+    citadel: 65d32bb117dd11d01a50a39b6b206edf8b1d56fe
+    outer_brain: ddb2d9af206fc00305208d1636161d2859c2cc95
+    jido_integration: e5c4d06aa27d5f8e9a39fcc86841c9e889c0909d
+    inference: 6a734e522779ba383a6e29c60b7af5e472ba90dc
+    gemini_ex: 7a7ff5bdb6715d72be436a292d6d4fe9c3b948e2
+    agent_session_manager: ec9a1c6a1e4ed0915f834ebfd608197ea947459c
+    codex_sdk: 6e602d6a03284826e4c9f81fde65b16c0bb541f0
+    cli_subprocess_core: 3d342153eeee2a9f363aa3e469bace5f96b7e013
+    execution_plane: a1820b5dbb8cd8aeb1da35483af7a7ad6507d209
+    chassis: 8e2964b428dacbc3bc890e317990a8f0ed65229c
+    aitrace: 956c4ba9d41f32974ac89e6bdeec9408c68ce92d
+    temporalex: 6e256cde035d0c4267565ad6babdc93d0285ecb5
+  source_revision_policy:
+    default: exact_source_revision
+    nshkr: last_non_control_source_revision
+  released_cli_runtime_baseline:
+    verified_on: "2026-07-27"
+    evidence: /home/home/p/g/j/jido_brainstorm/nshkrdotcom/docs/20260725/ANTIGRAVITY_AMP_SDK_CONFORMANCE_20260727/0007_implementation_closeout.md
+    packages:
+      execution_plane:
+        version: 0.2.0
+        tag: v0.2.0
+        release_revision: 8a4f8a22e5716225cc3294955a2e146e432c0534
+      cli_subprocess_core:
+        version: 0.4.0
+        tag: v0.4.0
+        release_revision: 3d342153eeee2a9f363aa3e469bace5f96b7e013
+      codex_sdk:
+        version: 0.18.0
+        tag: v0.18.0
+        release_revision: 6e602d6a03284826e4c9f81fde65b16c0bb541f0
+      claude_agent_sdk:
+        version: 0.19.0
+        tag: v0.19.0
+        release_revision: 45d319675671e524c29ebc3cb778ad3fb89ebb19
+      cursor_cli_sdk:
+        version: 0.2.0
+        tag: v0.2.0
+        release_revision: 334706673976af8389db6d72655ed69d35ad1807
+      antigravity_cli_sdk:
+        version: 0.2.0
+        tag: v0.2.0
+        release_revision: 3ad67b8c2ebe439aff928d880b05a458dc8f9249
+      amp_sdk:
+        version: 0.7.0
+        tag: v0.7.0
+        release_revision: 37e0498a4b913c275739a20e6fdb07b9eaa29213
+      agent_session_manager:
+        version: 0.12.0
+        tag: v0.12.0
+        release_revision: ec9a1c6a1e4ed0915f834ebfd608197ea947459c
+      inference:
+        version: 0.3.0
+        tag: v0.3.0
+        release_revision: 6a734e522779ba383a6e29c60b7af5e472ba90dc
+    provider_contract:
+      asm_sdk_dependencies: optional_dynamic_discovery
+      asm_direct_cursor_dependency: false
+      inference_completion_only_supported: [claude, codex]
+      inference_completion_only_rejected: [amp, antigravity, cursor]
   vocabulary:
     - term: NSHKR
       meaning: governed AI operations ecosystem and production composition workspace
@@ -63,6 +112,8 @@ baseline:
       capability_id: model.gemini.managed-account.local-effect
       mode: managed_account_local_effect
       model: gemini-2.5-flash
+      live_model_revalidation_required: true
+      model_contradiction_action: use_root_owned_contract_amendment_before_call
       provider_api: generateContent
       provider_stream_operation: streamGenerateContent
       transport: local_https_sse

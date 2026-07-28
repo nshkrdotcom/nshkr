@@ -1,9 +1,11 @@
 schema: nshkr.repositories.v1
-reconciled_on: "2026-07-21"
+reconciled_on: "2026-07-27"
+default_revision_policy: exact_source_revision
 repositories:
   - id: program_control
     path: /home/home/p/g/j/jido_brainstorm
-    revision: abbd4f60410a6b68492075ff5348ceb402faf7e7
+    revision: 891d4d3067109a0fcd315ee385e4c4d7521450ce
+    revision_policy: control_input_anchor
     branch: main
     dirty: false
     role: checklist_and_architecture
@@ -11,7 +13,8 @@ repositories:
     consumes: []
   - id: nshkr
     path: /home/home/p/g/n/nshkr
-    revision: c6e1944183be9e547e313e4c47223acc87cf0d1c
+    revision: f1fbbe66f15e656d322d1ca661d25abd06dff163
+    revision_policy: last_non_control_source_revision
     branch: main
     dirty: false
     role: production_composition
@@ -19,7 +22,7 @@ repositories:
     consumes: [aitrace.exporter.v1]
   - id: ground_plane
     path: /home/home/p/g/n/ground_plane
-    revision: 950f40b8d37e7751c75bdf5e69a3666b964ac8a2
+    revision: d0af5e68745ea16438dd93711341cb47ddc7860c
     branch: main
     dirty: false
     role: shared_pure_contracts
@@ -27,7 +30,7 @@ repositories:
     consumes: []
   - id: mezzanine
     path: /home/home/p/g/n/mezzanine
-    revision: 780f41de51a0e79edbf536c17218c489437abd01
+    revision: 7ad78e2dee9022ce051469a3a7ada5d3dc937811
     branch: main
     dirty: false
     role: durable_run_turn_and_effect_owner
@@ -35,7 +38,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.command-envelope.v1, ground-plane.artifact-descriptor.v1, citadel.scoped-grant.v1]
   - id: citadel
     path: /home/home/p/g/n/citadel
-    revision: 1cf7cdeef5ee3fa8b46c261aa41f3df6b247f753
+    revision: 65d32bb117dd11d01a50a39b6b206edf8b1d56fe
     branch: main
     dirty: false
     role: authority_governance_and_grant_owner
@@ -43,7 +46,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1]
   - id: outer_brain
     path: /home/home/p/g/n/outer_brain
-    revision: 5437bf6c46fb7c7286c00288cdd1fec4d7d2dbda
+    revision: ddb2d9af206fc00305208d1636161d2859c2cc95
     branch: main
     dirty: false
     role: semantic_context_memory_and_reply_owner
@@ -51,7 +54,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.artifact-descriptor.v1, mezzanine.run-acceptance.v1, citadel.scoped-grant.v1]
   - id: jido_integration
     path: /home/home/p/g/n/jido_integration
-    revision: 705fccc2e049235bcf9cf2f9de6afc7668c2605b
+    revision: e5c4d06aa27d5f8e9a39fcc86841c9e889c0909d
     branch: main
     dirty: false
     role: provider_account_lease_materialization_and_attempt_owner
@@ -59,7 +62,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, citadel.scoped-grant.v1, outer-brain.semantic-context-provenance.v1, execution-plane.runtime-client.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
   - id: inference
     path: /home/home/p/g/n/inference
-    revision: d2316ba2bc0a0e0d5437d553bed94605253e9336
+    revision: 6a734e522779ba383a6e29c60b7af5e472ba90dc
     branch: main
     dirty: false
     role: managed_model_adapter
@@ -67,7 +70,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1]
   - id: gemini_ex
     path: /home/home/p/g/n/gemini_ex
-    revision: 8a9d4cca7412ef34c0690f391186fca793629f2c
+    revision: 7a7ff5bdb6715d72be436a292d6d4fe9c3b948e2
     branch: main
     dirty: false
     role: gemini_provider_protocol
@@ -75,7 +78,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, execution-plane.runtime-families.v1]
   - id: codex_sdk
     path: /home/home/p/g/n/codex_sdk
-    revision: 9c491da622f6f4aff115d53e69df4d261d63acd1
+    revision: 6e602d6a03284826e4c9f81fde65b16c0bb541f0
     branch: main
     dirty: false
     role: codex_app_server_protocol
@@ -83,7 +86,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
   - id: cli_subprocess_core
     path: /home/home/p/g/n/cli_subprocess_core
-    revision: 583280964197bd3816e4401ca3eb2575aa4e1b81
+    revision: 3d342153eeee2a9f363aa3e469bace5f96b7e013
     branch: main
     dirty: false
     role: local_process_runtime_gateway
@@ -91,7 +94,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, execution-plane.runtime-client.v1]
   - id: agent_session_manager
     path: /home/home/p/g/n/agent_session_manager
-    revision: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
+    revision: ec9a1c6a1e4ed0915f834ebfd608197ea947459c
     branch: main
     dirty: false
     role: durable_managed_session_lifecycle
@@ -99,7 +102,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, execution-plane.runtime-client.v1]
   - id: execution_plane
     path: /home/home/p/g/n/execution_plane
-    revision: ff19877742c8d44fab72c31e7c965938ff2ab565
+    revision: a1820b5dbb8cd8aeb1da35483af7a7ad6507d209
     branch: main
     dirty: false
     role: runtime_admission_placement_and_receipt_owner
@@ -107,7 +110,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, citadel.scoped-grant.v1]
   - id: pristine
     path: /home/home/p/g/n/pristine
-    revision: 24506addc290cb9184116f1daff5836d8ebcb99b
+    revision: 368815fe8caa63bcc32faa13f0a736395a6a02bb
     branch: main
     dirty: false
     role: http_execution_family
@@ -115,7 +118,7 @@ repositories:
     consumes: [execution-plane.runtime-client.v1, execution-plane.runtime-families.v1]
   - id: chassis
     path: /home/home/p/g/n/chassis
-    revision: d9a496037aaf2e630be60828e0646c04a794ef3b
+    revision: 8e2964b428dacbc3bc890e317990a8f0ed65229c
     branch: main
     dirty: false
     role: release_resource_and_cluster_lifecycle_owner
@@ -123,7 +126,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.artifact-descriptor.v1, citadel.scoped-grant.v1]
   - id: aitrace
     path: /home/home/p/g/n/AITrace
-    revision: 2cc5e4cd4bf5a8f24be3f32e452ee336e4bdf288
+    revision: 956c4ba9d41f32974ac89e6bdeec9408c68ce92d
     branch: main
     dirty: false
     role: trace_and_governed_effect_evidence_owner
@@ -131,7 +134,7 @@ repositories:
     consumes: []
   - id: app_kit
     path: /home/home/p/g/n/app_kit
-    revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
+    revision: 0b0a17b61315091b0107fa5e77c1d3220e54e6b8
     branch: main
     dirty: false
     role: sole_product_boundary
@@ -147,7 +150,7 @@ repositories:
     consumes: [app-kit.agent-intake.v1, app-kit.governed-effect.v1]
   - id: extravaganza
     path: /home/home/p/g/n/extravaganza
-    revision: 808b329e3067b5e663b2191ac36462441a3f8e96
+    revision: dfbeefddb29d5d79e84349273c71ca8a74f593a7
     branch: main
     dirty: false
     role: appkit_only_issue_to_pr_product
@@ -155,7 +158,7 @@ repositories:
     consumes: [app-kit.agent-intake.v1, app-kit.governed-effect.v1, chassis.release-resource.v1]
   - id: temporalex
     path: /home/home/p/g/n/temporalex
-    revision: 220280c3a886e199fc2c56d6a4cc02b416f11c19
+    revision: 6e256cde035d0c4267565ad6babdc93d0285ecb5
     branch: main
     dirty: false
     role: temporal_client_and_worker_runtime
@@ -163,7 +166,7 @@ repositories:
     consumes: []
   - id: stack_lab
     path: /home/home/p/g/n/stack_lab
-    revision: c7d3ce1e67a50efe3e15b89522ebb45841f78fde
+    revision: a271df19e5eb2f526db5f874e7cbde35adc5d275
     branch: main
     dirty: false
     role: proof_and_regression_harness_only

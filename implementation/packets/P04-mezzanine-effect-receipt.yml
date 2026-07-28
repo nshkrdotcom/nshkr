@@ -3,7 +3,7 @@ packet_id: P04-mezzanine-effect-receipt
 phase: 4
 driving_consumer: synapse-journey-2
 repository: /home/home/p/g/n/mezzanine
-base_revision: 780f41de51a0e79edbf536c17218c489437abd01
+base_revision: 7ad78e2dee9022ce051469a3a7ada5d3dc937811
 owned_paths: ["/home/home/p/g/n/mezzanine/core/execution_engine","/home/home/p/g/n/mezzanine/core/workflow_runtime","/home/home/p/g/n/mezzanine/core/projection_engine"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["mezzanine.effect-record.v1","citadel.scoped-grant.v1"]

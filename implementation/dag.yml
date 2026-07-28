@@ -72,6 +72,8 @@ nodes:
   - id: P03-governed-gemini
     phase: 3
     repository: /home/home/p/g/n/jido_integration
+    resume_state: awaiting_explicit_external_authority
+    external_authority_packet: P03-gemini-provider-turn
     produces: [governed_gemini_local_effect]
     requires: [P01-runtime-security, P02-durable-synapse-acceptance]
     edges:
@@ -96,6 +98,10 @@ nodes:
   - id: P04-governed-codex
     phase: 4
     repository: /home/home/p/g/n/jido_integration
+    released_baseline:
+      cli_subprocess_core: 0.4.0
+      codex_sdk: 0.18.0
+      agent_session_manager: 0.12.0
     produces: [governed_codex_local_effect, durable_effect_receipt_and_ambiguity]
     requires: [P03-governed-gemini]
     edges:

@@ -3,7 +3,7 @@ packet_id: P04-citadel-tool-grant
 phase: 4
 driving_consumer: synapse-journey-2
 repository: /home/home/p/g/n/citadel
-base_revision: 1cf7cdeef5ee3fa8b46c261aa41f3df6b247f753
+base_revision: 65d32bb117dd11d01a50a39b6b206edf8b1d56fe
 owned_paths: ["/home/home/p/g/n/citadel/core/citadel_governance","/home/home/p/g/n/citadel/core/policy_packs"]
 read_only_dependencies: ["/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["citadel.scoped-grant.v1"]
