@@ -58,6 +58,7 @@ end
     jido_integration_v2_control_plane: internal.("jido_integration", "core/control_plane"),
     jido_integration_v2_runtime_router: internal.("jido_integration", "core/runtime_router"),
     jido_integration_v2_store_postgres: internal.("jido_integration", "core/store_postgres"),
+    mezzanine_audit_engine: internal.("mezzanine", "core/audit_engine"),
     mezzanine_core: internal.("mezzanine", "core/mezzanine_core"),
     mezzanine_execution_engine: internal.("mezzanine", "core/execution_engine"),
     mezzanine_ops_domain: internal.("mezzanine", "core/ops_domain"),

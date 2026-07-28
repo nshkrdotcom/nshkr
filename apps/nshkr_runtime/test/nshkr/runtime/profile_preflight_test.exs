@@ -222,6 +222,12 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              :url
            ]) == "ecto://localhost/mezzanine"
 
+    assert get_in(document.runtime_config, [
+             :mezzanine_audit_engine,
+             Mezzanine.Audit.Repo,
+             :url
+           ]) == "ecto://localhost/mezzanine"
+
     assert document.runtime_config[:mezzanine_core][:run_store] ==
              Mezzanine.WorkflowRuntime.Store.Postgres
 
@@ -238,6 +244,12 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              Enum.find(
                document.production_profile.migration_plan,
                &(&1.owner == "mezzanine" and &1.repo == Mezzanine.Execution.Repo)
+             )
+
+    assert %{repo: Mezzanine.Audit.Repo, otp_app: :mezzanine_audit_engine} =
+             Enum.find(
+               document.production_profile.migration_plan,
+               &(&1.owner == "mezzanine" and &1.repo == Mezzanine.Audit.Repo)
              )
 
     assert %{options: temporal_options} =

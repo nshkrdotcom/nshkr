@@ -121,6 +121,13 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         {Nshkr.Runtime.Probes, :postgres, [Mezzanine.Execution.Repo]}
       ),
       service(
+        "mezzanine-audit-postgres",
+        :postgres_repo,
+        Mezzanine.Audit.Repo,
+        [],
+        {Nshkr.Runtime.Probes, :postgres, [Mezzanine.Audit.Repo]}
+      ),
+      service(
         "citadel-postgres",
         :postgres_repo,
         Citadel.Governance.Repo,
@@ -263,6 +270,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         Mezzanine.Execution.Repo,
         :mezzanine_execution_engine
       ),
+      migration("mezzanine", Mezzanine.Audit.Repo, :mezzanine_audit_engine),
       migration("citadel", Citadel.Governance.Repo, :citadel_governance),
       migration("outer_brain", OuterBrain.Persistence.Repo, :outer_brain_persistence),
       migration(
@@ -292,6 +300,12 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         repo_runtime(Mezzanine.Execution.Repo, urls.mezzanine) ++
           [
             ecto_repos: [Mezzanine.Execution.Repo],
+            start_runtime_children?: false
+          ],
+      mezzanine_audit_engine:
+        repo_runtime(Mezzanine.Audit.Repo, urls.mezzanine) ++
+          [
+            ecto_repos: [Mezzanine.Audit.Repo],
             start_runtime_children?: false
           ],
       mezzanine_workflow_runtime: [temporal: temporal_options],
