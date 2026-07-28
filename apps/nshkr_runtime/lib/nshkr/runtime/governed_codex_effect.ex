@@ -927,13 +927,22 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
 
   defp cleanup_lease(lease, refs) do
     cleanup_ref = "cleanup://jido/codex/#{refs.token}"
+    revocation_ref = "revocation://jido/codex/#{refs.token}/effect-scope-closed"
+    cleanup_time = now()
 
-    with {:ok, receipt} <-
+    with {:ok, _revocation} <-
+           Auth.revoke_lease(lease.lease_id, %{
+             revocation_ref: revocation_ref,
+             actor_id: "nshkr-runtime",
+             tenant_id: lease.tenant_id,
+             now: cleanup_time
+           }),
+         {:ok, receipt} <-
            Auth.cleanup_lease(lease.lease_id, %{
              cleanup_ref: cleanup_ref,
              actor_id: "nshkr-runtime",
              tenant_id: lease.tenant_id,
-             now: now()
+             now: cleanup_time
            }) do
       {:ok,
        %{
