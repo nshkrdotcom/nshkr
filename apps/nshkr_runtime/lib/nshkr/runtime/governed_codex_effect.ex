@@ -54,7 +54,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
          :ok <- validate_execute_attrs(attrs),
          {:ok, context} <- request_context(attrs),
          refs = refs(attrs) do
-      propose_effect(attrs, context, refs)
+      fetch_or_propose_effect(attrs, context, refs)
     end
   rescue
     error in [ArgumentError] ->
@@ -402,7 +402,9 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
            effect_options()
          ) do
       {:ok, effect} ->
-        {:ok, effect}
+        if same_effect_command?(effect, attrs, refs),
+          do: {:ok, effect},
+          else: {:error, :effect_idempotency_conflict}
 
       {:error, %SurfaceError{code: "effect_not_found"}} ->
         propose_effect(attrs, context, refs)
@@ -410,6 +412,29 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
       {:error, _reason} = error ->
         error
     end
+  end
+
+  defp same_effect_command?(effect, attrs, refs) do
+    manifest = Map.get(effect, :pinned_tool_manifest, %{})
+    operation = Map.get(effect, :reviewed_operation, %{})
+    review = Map.get(effect, :review)
+
+    effect.effect_ref == refs.effect_ref and
+      effect.run_ref == attrs.run_ref and
+      effect.turn_ref == attrs.turn_ref and
+      effect.command_ref == refs.command_ref and
+      effect.decision_ref == refs.decision_ref and
+      effect.grant_ref == refs.grant_ref and
+      effect.target_ref == refs.target_ref and
+      map_value(manifest, :manifest_ref) == refs.manifest_ref and
+      map_value(manifest, :manifest_hash) == refs.manifest_hash and
+      map_value(manifest, :action_ids) == ["create_or_replace_one_named_text_file"] and
+      map_value(operation, :operation) == "create_or_replace" and
+      map_value(operation, :workspace_ref) == attrs.workspace_ref and
+      map_value(operation, :file_ref) == refs.file_ref and
+      map_value(operation, :relative_path) == attrs.relative_path and
+      map_value(operation, :content_digest) == refs.reviewed_content_digest and
+      map_value(review, :review_unit_id) == attrs.review_unit_id
   end
 
   defp begin_dispatch(context, proposed) do
