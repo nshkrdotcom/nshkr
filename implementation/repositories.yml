@@ -4,7 +4,7 @@ default_revision_policy: exact_source_revision
 repositories:
   - id: program_control
     path: /home/home/p/g/j/jido_brainstorm
-    revision: 86fa4237eeca2c61b85e169296ec8aff98b3f72f
+    revision: 216e398749f75d92a8db259c48c74a52a8c9226a
     revision_policy: control_input_anchor
     branch: main
     dirty: false
@@ -13,7 +13,7 @@ repositories:
     consumes: []
   - id: nshkr
     path: /home/home/p/g/n/nshkr
-    revision: f1fbbe66f15e656d322d1ca661d25abd06dff163
+    revision: d87444509e92e34d0a1b5a3f894c0e4793bbc8aa
     revision_policy: last_non_control_source_revision
     branch: main
     dirty: false
@@ -38,7 +38,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.command-envelope.v1, ground-plane.artifact-descriptor.v1, citadel.scoped-grant.v1]
   - id: citadel
     path: /home/home/p/g/n/citadel
-    revision: 65d32bb117dd11d01a50a39b6b206edf8b1d56fe
+    revision: 65bfa27646eee6bb090e896bc09187502ec6dd5a
     branch: main
     dirty: false
     role: authority_governance_and_grant_owner
@@ -54,7 +54,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.artifact-descriptor.v1, mezzanine.run-acceptance.v1, citadel.scoped-grant.v1]
   - id: jido_integration
     path: /home/home/p/g/n/jido_integration
-    revision: e5c4d06aa27d5f8e9a39fcc86841c9e889c0909d
+    revision: 58c8a7cb33d98330a606f2ef56df5c3a1b57b2bf
     branch: main
     dirty: false
     role: provider_account_lease_materialization_and_attempt_owner
@@ -62,7 +62,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, citadel.scoped-grant.v1, outer-brain.semantic-context-provenance.v1, execution-plane.runtime-client.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1]
   - id: inference
     path: /home/home/p/g/n/inference
-    revision: 6a734e522779ba383a6e29c60b7af5e472ba90dc
+    revision: 74754d7bde788a1647e35be6bdddf1fa27892ec7
     branch: main
     dirty: false
     role: managed_model_adapter
@@ -70,7 +70,7 @@ repositories:
     consumes: [jido.credential-lease.v1, jido.credential-materialization.v1]
   - id: gemini_ex
     path: /home/home/p/g/n/gemini_ex
-    revision: 7a7ff5bdb6715d72be436a292d6d4fe9c3b948e2
+    revision: 352a9eb7ad564a15d1e2cd599176e215fd0763e5
     branch: main
     dirty: false
     role: gemini_provider_protocol

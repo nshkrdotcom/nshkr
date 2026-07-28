@@ -4,8 +4,7 @@ capabilities:
     mode: managed_account_local_effect
     required_contracts: [citadel.scoped-grant.v1, outer-brain.semantic-context-provenance.v1, jido.credential-lease.v1, jido.credential-materialization.v1, jido.provider-attempt.v1, jido.provider-event.v1]
     required_components: [nshkr_runtime, mezzanine, outer_brain, citadel, jido_integration, inference, gemini_ex]
-    active: false
-    absence_reason: not_composed
+    active: true
     activation_node: P03-governed-gemini
   - id: codex.session.turn
     mode: managed_account_local_effect
