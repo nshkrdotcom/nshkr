@@ -56,6 +56,7 @@ services:
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
     volumes:
       - ${NSHKR_DEV_RUNTIME_DIR:?required}:/out
+      - ${NSHKR_CODEX_AUTH_FILE:?required}:/input/codex-auth.json:ro
       - ./bootstrap-vault.sh:/bootstrap-vault.sh:ro
     entrypoint: ["/bin/sh", "/bootstrap-vault.sh"]
 

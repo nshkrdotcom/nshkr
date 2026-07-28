@@ -23,9 +23,17 @@ ensure_env_file() {
 }
 
 compose() {
+  codex_auth_file="${NSHKR_CODEX_AUTH_FILE:-${CODEX_HOME:-/home/home/.codex}/auth.json}"
+
+  if [ ! -r "$codex_auth_file" ]; then
+    printf '%s\n' "Codex auth file is not readable: $codex_auth_file" >&2
+    exit 66
+  fi
+
   NSHKR_DEV_RUNTIME_DIR="$runtime_dir" \
     NSHKR_DEV_UID="$(id -u)" \
     NSHKR_DEV_GID="$(id -g)" \
+    NSHKR_CODEX_AUTH_FILE="$codex_auth_file" \
     docker compose --env-file "$env_file" -f "$compose_file" "$@"
 }
 

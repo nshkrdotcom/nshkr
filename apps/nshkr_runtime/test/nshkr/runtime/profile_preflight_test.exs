@@ -197,7 +197,9 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
       "NSHKR_RUNTIME_SECRET_DIR" => "/run/nshkr/secrets",
       "NSHKR_TEMPORAL_ADDRESS" => "temporal.internal:7233",
       "NSHKR_VAULT_ENDPOINT" => "https://vault.internal",
-      "NSHKR_MINIO_ENDPOINT" => "https://minio.internal"
+      "NSHKR_MINIO_ENDPOINT" => "https://minio.internal",
+      "NSHKR_CODEX_COMMAND" => System.find_executable("true"),
+      "NSHKR_CODEX_SESSION_ROOT_PARENT" => "/run/nshkr/codex-sessions"
     }
 
     document = DeveloperLocalProfile.document(env)
@@ -214,11 +216,29 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              :url
            ]) == "ecto://localhost/mezzanine"
 
+    assert get_in(document.runtime_config, [
+             :mezzanine_execution_engine,
+             Mezzanine.Execution.Repo,
+             :url
+           ]) == "ecto://localhost/mezzanine"
+
     assert document.runtime_config[:mezzanine_core][:run_store] ==
              Mezzanine.WorkflowRuntime.Store.Postgres
 
     assert %{repo: Mezzanine.OpsDomain.Repo, otp_app: :mezzanine_ops_domain} =
-             Enum.find(document.production_profile.migration_plan, &(&1.owner == "mezzanine"))
+             Enum.find(
+               document.production_profile.migration_plan,
+               &(&1.owner == "mezzanine" and &1.repo == Mezzanine.OpsDomain.Repo)
+             )
+
+    assert %{
+             repo: Mezzanine.Execution.Repo,
+             otp_app: :mezzanine_execution_engine
+           } =
+             Enum.find(
+               document.production_profile.migration_plan,
+               &(&1.owner == "mezzanine" and &1.repo == Mezzanine.Execution.Repo)
+             )
 
     assert %{options: temporal_options} =
              Enum.find(document.production_profile.services, &(&1.id == "temporal-workers"))
@@ -229,6 +249,11 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              Enum.find(document.production_profile.services, &(&1.id == "jido-owner-store"))
 
     assert jido_options[:persistence_profile] == :integration_postgres
+
+    assert document.runtime_config[:jido_integration_v2_control_plane][:codex_materializer] == [
+             command: System.find_executable("true"),
+             session_root_parent: "/run/nshkr/codex-sessions"
+           ]
 
     app_kit_service =
       Enum.find(

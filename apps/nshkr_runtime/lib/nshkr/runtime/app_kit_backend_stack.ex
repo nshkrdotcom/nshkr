@@ -6,7 +6,9 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
   alias AppKit.BackendStack
 
   @agent_intake_backend AppKit.Bridges.MezzanineBridge.AgentIntakeAdapter
+  @effect_surface_backend AppKit.Bridges.MezzanineBridge.EffectAdapter
   @headless_backend AppKit.Bridges.MezzanineBridge
+  @review_backend AppKit.Bridges.MezzanineBridge.ReviewAdapter
 
   @spec start_link(keyword()) :: GenServer.on_start()
   def start_link(opts) when is_list(opts) do
@@ -17,6 +19,8 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
   def backend_stack do
     BackendStack.new!(
       agent_intake_backend: @agent_intake_backend,
+      effect_surface_backend: @effect_surface_backend,
+      review_backend: @review_backend,
       headless_backend: @headless_backend
     )
   end
@@ -31,17 +35,26 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
          true <- owner_id?(program_id),
          true <- owner_id?(work_class_id),
          {:ok, ^expected_backend} <- BackendStack.fetch(stack, :agent_intake_backend),
+         {:ok, @effect_surface_backend} <- BackendStack.fetch(stack, :effect_surface_backend),
+         {:ok, @review_backend} <- BackendStack.fetch(stack, :review_backend),
          {:ok, @headless_backend} <- BackendStack.fetch(stack, :headless_backend),
          true <- Code.ensure_loaded?(expected_backend),
+         true <- Code.ensure_loaded?(@effect_surface_backend),
+         true <- Code.ensure_loaded?(@review_backend),
          true <- Code.ensure_loaded?(@headless_backend),
          true <- function_exported?(expected_backend, :start_agent_run, 3),
          true <- function_exported?(expected_backend, :await_agent_outcome, 4),
          true <- function_exported?(expected_backend, :catch_up_agent_events, 3),
+         true <- function_exported?(@effect_surface_backend, :propose_effect, 3),
+         true <- function_exported?(@effect_surface_backend, :record_receipt, 4),
+         true <- function_exported?(@review_backend, :record_decision_by_id, 4),
          true <- function_exported?(@headless_backend, :runtime_run_detail, 4) do
       {:ok,
        %{
          agent_intake_backend: expected_backend,
+         effect_surface_backend: @effect_surface_backend,
          headless_backend: @headless_backend,
+         review_backend: @review_backend,
          durable_owner: Mezzanine.OpsDomain.Repo,
          program_id: program_id,
          work_class_id: work_class_id

@@ -18,6 +18,10 @@ if [ -n "${GEMINI_API_KEY:-}" ]; then
   vault kv put kv/gemini/primary api_key="$GEMINI_API_KEY" >/dev/null
 fi
 
+if [ -r /input/codex-auth.json ]; then
+  vault kv put kv/codex/primary auth_json=@/input/codex-auth.json >/dev/null
+fi
+
 vault write auth/approle/role/nshkr-runtime \
   token_policies=nshkr-runtime \
   token_ttl=10m \

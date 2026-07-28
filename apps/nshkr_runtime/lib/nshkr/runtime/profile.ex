@@ -9,6 +9,7 @@ defmodule Nshkr.Runtime.Profile do
     :secret_store,
     :object_store,
     :owner_store,
+    :session_runtime,
     :temporal,
     :outbox_dispatcher,
     :capability_truth,
@@ -22,7 +23,7 @@ defmodule Nshkr.Runtime.Profile do
     :temporal,
     :capability_truth
   ]
-  @optional_singular_roles [:app_kit_backend_stack, :product_endpoint]
+  @optional_singular_roles [:session_runtime, :app_kit_backend_stack, :product_endpoint]
   @enforce_keys [:topology, :services, :migration_plan]
   defstruct [:topology, :services, :migration_plan]
 
@@ -154,9 +155,10 @@ defmodule Nshkr.Runtime.Profile do
     plan_owners = Enum.map(plan, & &1.owner)
     required_owners = MapSet.new(@p01_durable_owners)
     plan_owner_set = MapSet.new(plan_owners)
+    migration_keys = Enum.map(plan, &{&1.owner, &1.repo, &1.migration_path})
 
     if MapSet.subset?(required_owners, plan_owner_set) and MapSet.subset?(plan_owner_set, owners) and
-         Enum.uniq(plan_owners) == plan_owners,
+         Enum.uniq(migration_keys) == migration_keys,
        do: {:ok, plan},
        else: {:error, :invalid_migration_owners}
   end

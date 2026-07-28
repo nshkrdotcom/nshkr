@@ -8,6 +8,7 @@ defmodule Nshkr.Runtime.Service do
     :secret_store,
     :object_store,
     :owner_store,
+    :session_runtime,
     :temporal,
     :outbox_dispatcher,
     :capability_truth,

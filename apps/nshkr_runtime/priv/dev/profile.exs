@@ -19,7 +19,20 @@
          ),
        "NSHKR_TEMPORAL_ADDRESS" => System.get_env("NSHKR_TEMPORAL_ADDRESS", "127.0.0.1:7233"),
        "NSHKR_VAULT_ENDPOINT" => System.get_env("NSHKR_VAULT_ENDPOINT", "http://127.0.0.1:18200"),
-       "NSHKR_MINIO_ENDPOINT" => System.get_env("NSHKR_MINIO_ENDPOINT", "http://127.0.0.1:19000")
+       "NSHKR_MINIO_ENDPOINT" => System.get_env("NSHKR_MINIO_ENDPOINT", "http://127.0.0.1:19000"),
+       "NSHKR_CODEX_COMMAND" =>
+         System.get_env("NSHKR_CODEX_COMMAND", System.find_executable("codex")),
+       "NSHKR_CODEX_SESSION_ROOT_PARENT" =>
+         System.get_env(
+           "NSHKR_CODEX_SESSION_ROOT_PARENT",
+           Path.join(
+             System.get_env(
+               "NSHKR_RUNTIME_SECRET_DIR",
+               Path.expand("../../.runtime-secrets", __DIR__)
+             ),
+             "codex-sessions"
+           )
+         )
      })
 
    Nshkr.Runtime.DeveloperLocalProfile.document(env)

@@ -37,16 +37,23 @@ defmodule Nshkr.Runtime.MixProject do
 
   defp deps do
     [
+      DependencySources.dep(:agent_session_manager, @repo_root),
       DependencySources.dep(:app_kit_core, @repo_root, runtime: false),
       DependencySources.dep(:app_kit_mezzanine_bridge, @repo_root, runtime: false),
       DependencySources.dep(:citadel_governance, @repo_root, runtime: false),
+      DependencySources.dep(:cli_subprocess_core, @repo_root),
+      DependencySources.dep(:codex_sdk, @repo_root),
       DependencySources.dep(:execution_plane, @repo_root, runtime: false),
       DependencySources.dep(:gemini_ex, @repo_root),
       DependencySources.dep(:jido_integration_secrets_provider, @repo_root, runtime: false),
       DependencySources.dep(:jido_integration_v2_auth, @repo_root, runtime: false),
+      DependencySources.dep(:jido_integration_v2_asm_runtime_bridge, @repo_root),
+      DependencySources.dep(:jido_integration_v2_codex_cli, @repo_root),
       DependencySources.dep(:jido_integration_v2_control_plane, @repo_root, runtime: false),
+      DependencySources.dep(:jido_integration_v2_runtime_router, @repo_root),
       DependencySources.dep(:jido_integration_v2_store_postgres, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_core, @repo_root, runtime: false),
+      DependencySources.dep(:mezzanine_execution_engine, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_ops_domain, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_workflow_runtime, @repo_root, runtime: false),
       DependencySources.dep(:outer_brain_runtime, @repo_root, runtime: false),
@@ -54,7 +61,7 @@ defmodule Nshkr.Runtime.MixProject do
       {:jason, "~> 1.4"},
       {:postgrex, "~> 0.22"},
       {:req, "~> 0.5"},
-      {:plug, "~> 1.20", only: :test}
+      {:plug, "~> 1.20"}
     ]
   end
 
@@ -71,6 +78,7 @@ defmodule Nshkr.Runtime.MixProject do
           jido_integration_v2_control_plane: :load,
           jido_integration_v2_store_postgres: :load,
           mezzanine_core: :load,
+          mezzanine_execution_engine: :load,
           mezzanine_ops_domain: :load,
           mezzanine_workflow_runtime: :load,
           outer_brain_runtime: :load

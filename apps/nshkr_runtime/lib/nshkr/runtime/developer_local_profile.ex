@@ -28,7 +28,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         services: services(env, vault_options, temporal_options, app_kit_backend_options),
         migration_plan: migration_plan()
       },
-      runtime_config: runtime_config(urls, temporal_options, app_kit_backend_options)
+      runtime_config: runtime_config(env, urls, temporal_options, app_kit_backend_options)
     }
   end
 
@@ -114,6 +114,13 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         {Nshkr.Runtime.Probes, :postgres, [Mezzanine.OpsDomain.Repo]}
       ),
       service(
+        "mezzanine-execution-postgres",
+        :postgres_repo,
+        Mezzanine.Execution.Repo,
+        [],
+        {Nshkr.Runtime.Probes, :postgres, [Mezzanine.Execution.Repo]}
+      ),
+      service(
         "citadel-postgres",
         :postgres_repo,
         Citadel.Governance.Repo,
@@ -169,6 +176,13 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         Jido.Integration.V2.StorePostgres.DurableRuntime,
         jido_options,
         {Nshkr.Runtime.Probes, :jido_owner, []}
+      ),
+      service(
+        "codex-session-stack",
+        :session_runtime,
+        Nshkr.Runtime.CodexSessionStack,
+        [name: Nshkr.Runtime.CodexSessionStack],
+        {Nshkr.Runtime.CodexSessionStack, :probe, []}
       ),
       service(
         "temporal-workers",
@@ -244,6 +258,11 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
   defp migration_plan do
     [
       migration("mezzanine", Mezzanine.OpsDomain.Repo, :mezzanine_ops_domain),
+      migration(
+        "mezzanine",
+        Mezzanine.Execution.Repo,
+        :mezzanine_execution_engine
+      ),
       migration("citadel", Citadel.Governance.Repo, :citadel_governance),
       migration("outer_brain", OuterBrain.Persistence.Repo, :outer_brain_persistence),
       migration(
@@ -263,12 +282,18 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
     }
   end
 
-  defp runtime_config(urls, temporal_options, app_kit_backend_options) do
+  defp runtime_config(env, urls, temporal_options, app_kit_backend_options) do
     [
       mezzanine_core: [run_store: Mezzanine.WorkflowRuntime.Store.Postgres],
       mezzanine_ops_domain:
         repo_runtime(Mezzanine.OpsDomain.Repo, urls.mezzanine) ++
           [ecto_repos: [Mezzanine.OpsDomain.Repo], start_runtime_children?: false],
+      mezzanine_execution_engine:
+        repo_runtime(Mezzanine.Execution.Repo, urls.mezzanine) ++
+          [
+            ecto_repos: [Mezzanine.Execution.Repo],
+            start_runtime_children?: false
+          ],
       mezzanine_workflow_runtime: [temporal: temporal_options],
       citadel_governance:
         repo_runtime(Citadel.Governance.Repo, urls.citadel) ++
@@ -283,6 +308,12 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         managed_providers: %{
           "vault" => [provider: JidoVaultProvider, vault_server: VaultKvV2]
         }
+      ],
+      jido_integration_v2_control_plane: [
+        codex_materializer: [
+          command: required(env, "NSHKR_CODEX_COMMAND"),
+          session_root_parent: required(env, "NSHKR_CODEX_SESSION_ROOT_PARENT")
+        ]
       ],
       synapse_core: [
         app_kit_backend_stack: Nshkr.Runtime.AppKitBackendStack,

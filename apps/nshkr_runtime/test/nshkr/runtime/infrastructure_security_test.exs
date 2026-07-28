@@ -117,6 +117,25 @@ defmodule Nshkr.Runtime.InfrastructureSecurityTest do
              )
   end
 
+  test "Codex auth enters only the one-shot Vault bootstrap boundary" do
+    package_root = Path.expand("../../..", __DIR__)
+    compose = File.read!(Path.join(package_root, "priv/dev/compose.yaml"))
+    bootstrap = File.read!(Path.join(package_root, "priv/dev/bootstrap-vault.sh"))
+    services = File.read!(Path.join(package_root, "priv/dev/services.sh"))
+    profile = File.read!(Path.join(package_root, "priv/dev/profile.exs"))
+
+    assert compose =~
+             "${NSHKR_CODEX_AUTH_FILE:?required}:/input/codex-auth.json:ro"
+
+    assert length(Regex.scan(~r{/input/codex-auth\.json}, compose)) == 1
+    assert bootstrap =~ "vault kv put kv/codex/primary auth_json=@/input/codex-auth.json"
+    assert services =~ "Codex auth file is not readable"
+    assert profile =~ "NSHKR_CODEX_SESSION_ROOT_PARENT"
+
+    refute compose =~ "CODEX_HOME"
+    refute profile =~ "auth.json"
+  end
+
   test "MinIO uses SigV4 credentials transiently for probe and object lifecycle" do
     Req.Test.stub(:minio_s3, fn conn ->
       [authorization] = Plug.Conn.get_req_header(conn, "authorization")
