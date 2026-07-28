@@ -19,6 +19,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
   alias Mezzanine.Reviews
   alias OuterBrain.Persistence.Store, as: OuterBrainStore
   alias OuterBrain.Prompting.SemanticTurnArtifacts
+  alias Nshkr.Runtime.ReviewedWorkspace
 
   @capability_id "codex.session.turn"
   @effect_mode "managed_account_local_effect"
@@ -965,17 +966,12 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
   end
 
   defp verify_reviewed_file(attrs, refs) do
-    path = Path.join(attrs.workspace_root, attrs.relative_path)
-
-    with true <- inside_workspace?(path, attrs.workspace_root),
-         {:ok, body} <- File.read(path),
-         true <- digest(body) == refs.reviewed_content_digest,
-         true <- body == attrs.reviewed_content do
-      {:ok, body}
-    else
-      false -> {:error, :reviewed_file_verification_failed}
-      {:error, reason} -> {:error, {:reviewed_file_unavailable, reason}}
-    end
+    ReviewedWorkspace.verify(
+      attrs.workspace_root,
+      attrs.relative_path,
+      attrs.reviewed_content,
+      refs.reviewed_content_digest
+    )
   end
 
   defp jido_events(run_id) do
@@ -1250,12 +1246,6 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
     else
       _other -> false
     end
-  end
-
-  defp inside_workspace?(path, root) do
-    expanded_root = Path.expand(root)
-    expanded_path = Path.expand(path)
-    expanded_path != expanded_root and String.starts_with?(expanded_path, expanded_root <> "/")
   end
 
   defp required_string(attrs, key) do
