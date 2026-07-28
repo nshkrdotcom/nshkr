@@ -314,10 +314,21 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
       )
 
     assert capability_service.options[:allowed_active] == [
+             "codex.session.turn",
              "model.gemini.managed-account.local-effect"
            ]
 
     assert :ok = CapabilityTruth.probe(capability_service.options)
+
+    assert {:ok, release_capabilities} =
+             ReleaseManifestSource.list(capability_service.options[:source_options])
+
+    codex = Enum.find(release_capabilities, &(&1["capability_id"] == "codex.session.turn"))
+    assert codex["readiness"] == "ready"
+    assert codex["health"] == "healthy"
+    refute Map.has_key?(codex, "absence_reason")
+
+    assert "receipt://nshkr/codex/490a22da9512e876a535f2a9/completed" in codex["evidence_refs"]
 
     assert_raise ArgumentError, ~r/NSHKR_JIDO_DATABASE_URL/, fn ->
       env |> Map.delete("NSHKR_JIDO_DATABASE_URL") |> DeveloperLocalProfile.document()
