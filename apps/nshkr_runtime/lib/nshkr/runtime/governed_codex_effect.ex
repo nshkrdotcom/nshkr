@@ -552,7 +552,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
       sandbox: %{
         level: :strict,
         egress: :restricted,
-        approvals: :auto,
+        approvals: :manual,
         file_scope: attrs.workspace_root,
         allowed_tools: [@capability_id]
       }
