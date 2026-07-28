@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
   reconciled_on: "2026-07-27"
-  checklist_revision: 891d4d3067109a0fcd315ee385e4c4d7521450ce
+  checklist_revision: 86fa4237eeca2c61b85e169296ec8aff98b3f72f
   checklist_revision_policy: control_input_anchor
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
@@ -896,7 +896,7 @@ contracts:
     authority: execution_plane
     path: /home/home/p/g/n/execution_plane/core/execution_plane/lib/execution_plane/runtime_contracts.ex
     version: 1
-    digest: de8e3645d581554f5233ada3541e6e89dbec8a93024778bb2358949e3859d46f
+    digest: d1262e7827742c2187179051147fe7956d17b51d90fd17ec31429f8fcfff42ce
     producers: [execution_plane]
     consumers: [cli_subprocess_core, pristine, gemini_ex, app_kit]
     compatibility: clean_break
@@ -905,7 +905,7 @@ contracts:
     authority: cli_subprocess_core
     path: /home/home/p/g/n/cli_subprocess_core/lib/cli_subprocess_core/runtime_gateway.ex
     version: 1
-    digest: 9cec5f57bc2d4d584a51245fbed6231886c60f47a9c5b77cec39c694da031f6e
+    digest: c892e2efa7af9a11b3950089e8a97bd2d325cba12c5494c4c3693eea0030f2f7
     producers: [cli_subprocess_core]
     consumers: [codex_sdk, agent_session_manager, jido_integration]
     compatibility: clean_break
@@ -914,7 +914,7 @@ contracts:
     authority: agent_session_manager
     path: /home/home/p/g/n/agent_session_manager/lib/asm/managed_session.ex
     version: 1
-    digest: fcf4feea3ecdd8786dbfb896416928d6306384f702c3ab571bda3478c63c891f
+    digest: 93c202c20bb224ce6e9bbda40b759b14dc8b3006955e40d2aeb75920d9d668a6
     producers: [agent_session_manager]
     consumers: [jido_integration, codex_sdk, app_kit]
     compatibility: clean_break
