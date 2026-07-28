@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
-  reconciled_on: "2026-07-27"
-  checklist_revision: 216e398749f75d92a8db259c48c74a52a8c9226a
+  reconciled_on: "2026-07-28"
+  checklist_revision: 6ce7acc3b7a55a11113640b48357a6d899054bd1
   checklist_revision_policy: control_input_anchor
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
@@ -10,19 +10,19 @@ baseline:
     production_host: true
     stack_lab_role: proof_and_regression_harness_only
   source_revisions:
-    nshkr: d87444509e92e34d0a1b5a3f894c0e4793bbc8aa
-    synapse: 5bcb223339fa8a89a40a1347b39f929c89835e37
-    app_kit: 0b0a17b61315091b0107fa5e77c1d3220e54e6b8
+    nshkr: ca971f43bad7d5455b10d4b67368d5b5d1d6113d
+    synapse: 64ebe39b9a9ee458c8953a663a3d16f5ba8e40f5
+    app_kit: 27bb680ef8c3175ec0ec82716308d37658096bb9
     ground_plane: d0af5e68745ea16438dd93711341cb47ddc7860c
-    mezzanine: 7ad78e2dee9022ce051469a3a7ada5d3dc937811
-    citadel: 65bfa27646eee6bb090e896bc09187502ec6dd5a
+    mezzanine: 94e4b6ea7a384787986d4bb8ef215dcdd36acf43
+    citadel: 161ed158b9c58046005c8bbd81062477274efda5
     outer_brain: ddb2d9af206fc00305208d1636161d2859c2cc95
-    jido_integration: 58c8a7cb33d98330a606f2ef56df5c3a1b57b2bf
+    jido_integration: 007fa9239ea2990c37a6ee8c4b568d991b00aac1
     inference: 74754d7bde788a1647e35be6bdddf1fa27892ec7
     gemini_ex: 352a9eb7ad564a15d1e2cd599176e215fd0763e5
-    agent_session_manager: ec9a1c6a1e4ed0915f834ebfd608197ea947459c
-    codex_sdk: 6e602d6a03284826e4c9f81fde65b16c0bb541f0
-    cli_subprocess_core: 3d342153eeee2a9f363aa3e469bace5f96b7e013
+    agent_session_manager: c122b917d6f597ec52dd979c48e8601dd73d1b70
+    codex_sdk: b98ea32319130095c30ace483e24592d52e8121f
+    cli_subprocess_core: 3bc9c85070c0a7143fd47d15505964df2b55afff
     execution_plane: a1820b5dbb8cd8aeb1da35483af7a7ad6507d209
     chassis: 8e2964b428dacbc3bc890e317990a8f0ed65229c
     aitrace: 956c4ba9d41f32974ac89e6bdeec9408c68ce92d
@@ -1004,7 +1004,7 @@ contracts:
     authority: app_kit
     path: /home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/core/governed_effect_dtos.ex
     version: 1
-    digest: 259f30848c3d7eaf86c1b9ba8a855fcbe06f279d32b672b8d75c4e730c4b355a
+    digest: 89b23b2efd830d557be35dd80e50a9da78339940f583c03a486a6650bf05b329
     producers: [app_kit]
     consumers: [synapse, extravaganza]
     compatibility: clean_break

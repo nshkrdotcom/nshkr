@@ -10,8 +10,7 @@ capabilities:
     mode: managed_account_local_effect
     required_contracts: [citadel.scoped-grant.v1, jido.credential-lease.v1, jido.credential-materialization.v1, cli-core.runtime-gateway.v1, asm.managed-session.v1, mezzanine.effect-record.v1]
     required_components: [nshkr_runtime, mezzanine, citadel, jido_integration, codex_sdk, cli_subprocess_core, agent_session_manager]
-    active: false
-    absence_reason: not_composed
+    active: true
     activation_node: P04-governed-codex
   - id: execution.process.runtime-admitted-effect
     mode: runtime_admitted_effect

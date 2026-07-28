@@ -19,6 +19,6 @@ external_effects:
   effect_class: "billable_codex_session_and_reviewed_file_write"
   cost_or_lifecycle_scope: "one create-or-replace of one named text file plus readback"
 catalog_effect: dormant
-status: blocked_dependency
+status: complete
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]
