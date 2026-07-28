@@ -9,6 +9,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
   """
 
   alias AppKit.Core.RequestContext
+  alias AppKit.Core.SurfaceError
   alias AppKit.EffectSurface
   alias Citadel.Governance.ToolEffectAuthority
   alias Citadel.PolicyPacks.ToolEffectPolicy
@@ -68,7 +69,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
          :ok <- validate_execute_attrs(attrs),
          {:ok, context} <- request_context(attrs),
          refs = refs(attrs),
-         {:ok, proposed} <- propose_effect(attrs, context, refs) do
+         {:ok, proposed} <- fetch_or_propose_effect(attrs, context, refs) do
       execute_proposed(attrs, context, refs, proposed)
     end
   rescue
@@ -392,6 +393,23 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
       },
       effect_options()
     )
+  end
+
+  defp fetch_or_propose_effect(attrs, context, refs) do
+    case EffectSurface.get_effect_by_idempotency(
+           context,
+           attrs.idempotency_key,
+           effect_options()
+         ) do
+      {:ok, effect} ->
+        {:ok, effect}
+
+      {:error, %SurfaceError{code: "effect_not_found"}} ->
+        propose_effect(attrs, context, refs)
+
+      {:error, _reason} = error ->
+        error
+    end
   end
 
   defp begin_dispatch(context, proposed) do
