@@ -4,7 +4,7 @@ phase: 5
 driving_consumer: synapse-recovery-and-memory
 repository: /home/home/p/g/n/app_kit
 base_revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
-owned_paths: ["/home/home/p/g/n/app_kit/core/adaptive_control_surface","/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/headless_surface.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/work_control_service.ex","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge/lib/mezzanine/app_kit_bridge/semantic_failure_recovery_service.ex"]
+owned_paths: ["/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/core/runtime_readback","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge"]
 read_only_dependencies: ["/home/home/p/g/n/mezzanine","/home/home/p/g/n/outer_brain","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1","mezzanine.effect-record.v1","outer-brain.memory-context-provenance.v1"]
 dependency_nodes: ["P04-governed-codex"]
@@ -19,6 +19,6 @@ external_effects:
   effect_class: null
   cost_or_lifecycle_scope: null
 catalog_effect: none
-status: ready
+status: complete
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -4,7 +4,7 @@ default_revision_policy: exact_source_revision
 repositories:
   - id: program_control
     path: /home/home/p/g/j/jido_brainstorm
-    revision: 6ce7acc3b7a55a11113640b48357a6d899054bd1
+    revision: aa4b916a63b1cf0c7fa615103b052fb95327c268
     revision_policy: control_input_anchor
     branch: main
     dirty: false
@@ -13,7 +13,7 @@ repositories:
     consumes: []
   - id: nshkr
     path: /home/home/p/g/n/nshkr
-    revision: ca971f43bad7d5455b10d4b67368d5b5d1d6113d
+    revision: 41a1e3a806aa25b01899651a0264170906274c77
     revision_policy: last_non_control_source_revision
     branch: main
     dirty: false
@@ -30,7 +30,7 @@ repositories:
     consumes: []
   - id: mezzanine
     path: /home/home/p/g/n/mezzanine
-    revision: 94e4b6ea7a384787986d4bb8ef215dcdd36acf43
+    revision: 6c3e6813fbe8ddc4873a949a418c640f387c28c8
     branch: main
     dirty: false
     role: durable_run_turn_and_effect_owner
@@ -38,7 +38,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.command-envelope.v1, ground-plane.artifact-descriptor.v1, citadel.scoped-grant.v1]
   - id: citadel
     path: /home/home/p/g/n/citadel
-    revision: 161ed158b9c58046005c8bbd81062477274efda5
+    revision: 9571c4d6365878bcecfdf2436bfc8e058d8987c5
     branch: main
     dirty: false
     role: authority_governance_and_grant_owner
@@ -46,7 +46,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1]
   - id: outer_brain
     path: /home/home/p/g/n/outer_brain
-    revision: ddb2d9af206fc00305208d1636161d2859c2cc95
+    revision: 67b6c03ffcf84b695dfc1f13aee7feee6b1d5c2c
     branch: main
     dirty: false
     role: semantic_context_memory_and_reply_owner
@@ -54,7 +54,7 @@ repositories:
     consumes: [ground-plane.opaque-ref.v1, ground-plane.artifact-descriptor.v1, mezzanine.run-acceptance.v1, citadel.scoped-grant.v1]
   - id: jido_integration
     path: /home/home/p/g/n/jido_integration
-    revision: 007fa9239ea2990c37a6ee8c4b568d991b00aac1
+    revision: 4be39b01fd34faf9dd173d1fd14812a3f7e3f827
     branch: main
     dirty: false
     role: provider_account_lease_materialization_and_attempt_owner
@@ -134,7 +134,7 @@ repositories:
     consumes: []
   - id: app_kit
     path: /home/home/p/g/n/app_kit
-    revision: 27bb680ef8c3175ec0ec82716308d37658096bb9
+    revision: a34fe1614f1c6f02bc445572f6dba0c64f32e77a
     branch: main
     dirty: false
     role: sole_product_boundary
@@ -142,7 +142,7 @@ repositories:
     consumes: [mezzanine.run-acceptance.v1, mezzanine.effect-record.v1, outer-brain.reply-publication.v1, chassis.release-resource.v1]
   - id: synapse
     path: /home/home/p/g/n/synapse
-    revision: 64ebe39b9a9ee458c8953a663a3d16f5ba8e40f5
+    revision: 3f84436b08a1bab221872bd2c4ed3899b9b895d0
     branch: nshkr-agent-rewrite-20260518
     dirty: false
     role: appkit_only_product

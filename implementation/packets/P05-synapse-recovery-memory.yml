@@ -4,7 +4,7 @@ phase: 5
 driving_consumer: synapse-recovery-and-memory
 repository: /home/home/p/g/n/synapse
 base_revision: 5bcb223339fa8a89a40a1347b39f929c89835e37
-owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/memory.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/context_packs.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live"]
+owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core","/home/home/p/g/n/synapse/apps/synapse_web","/home/home/p/g/n/synapse/config/test.exs"]
 read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
 dependency_nodes: ["P04-governed-codex"]
@@ -19,6 +19,6 @@ external_effects:
   effect_class: null
   cost_or_lifecycle_scope: null
 catalog_effect: none
-status: ready
+status: complete
 non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
 stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

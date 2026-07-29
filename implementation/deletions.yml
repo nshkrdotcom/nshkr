@@ -169,14 +169,14 @@ deletions:
     remove_references: [direct_temporal_signal_fallback, blind_unknown_effect_retry, pid_based_restart_truth]
     replacement_contract: mezzanine.effect-record.v1
     current_consumers_to_update: [mezzanine_workflow_runtime, app_kit_control_surface]
-    verification: &unverified
-      replacement_complete: false
-      consumers_migrated: false
-      production_references_absent: false
-      obsolete_tests_classified: false
+    verification: &verified_p05
+      replacement_complete: true
+      consumers_migrated: true
+      production_references_absent: true
+      obsolete_tests_classified: true
     risk_class: protected
     protected_domains: [cancellation, fencing, receipt_enforcement, revocation]
-    root_reviewed: false
+    root_reviewed: true
     compatibility_layer: forbidden
   - id: P05-outer-brain-production-map-memory
     phase: 5
@@ -188,10 +188,10 @@ deletions:
     remove_references: [production_map_memory_state, mutable_unpinned_retrieval]
     replacement_contract: outer-brain.memory-context-provenance.v1
     current_consumers_to_update: [outer_brain_recall, app_kit_memory_surface, synapse_memory]
-    verification: *unverified
+    verification: *verified_p05
     risk_class: standard
     protected_domains: []
-    root_reviewed: false
+    root_reviewed: true
     compatibility_layer: forbidden
   - id: P06-synapse-production-fixture-catalog
     phase: 6
@@ -204,7 +204,11 @@ deletions:
     remove_references: [fixture_runs_attribute, fixture_detail_fallback, fixture_id_rewrite, incomplete_capability_routes]
     replacement_contract: app-kit.agent-intake.v1
     current_consumers_to_update: [synapse_catalog, synapse_run_show, synapse_navigation]
-    verification: *unverified
+    verification: &unverified
+      replacement_complete: false
+      consumers_migrated: false
+      production_references_absent: false
+      obsolete_tests_classified: false
     risk_class: protected
     protected_domains: [appkit_schema_registry, product_boundary_bridge]
     root_reviewed: false

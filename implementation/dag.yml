@@ -129,7 +129,7 @@ nodes:
         type: semantic
     owned_paths: [/home/home/p/g/n/mezzanine, /home/home/p/g/n/outer_brain, /home/home/p/g/n/jido_integration, /home/home/p/g/n/citadel, /home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
     catalog_effect: none
-    status: ready
+    status: complete
   - id: P06-synapse-mvp
     phase: 6
     repository: /home/home/p/g/n/synapse
@@ -140,7 +140,7 @@ nodes:
         type: composition
     owned_paths: [/home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
     catalog_effect: activate_only_executable_product_capabilities
-    status: blocked_dependencies
+    status: ready
   - id: P07-family-preparation
     phase: 7
     repository: /home/home/p/g/n/execution_plane
