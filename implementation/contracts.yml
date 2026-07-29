@@ -10,11 +10,11 @@ baseline:
     production_host: true
     stack_lab_role: proof_and_regression_harness_only
   source_revisions:
-    nshkr: 41a1e3a806aa25b01899651a0264170906274c77
-    synapse: d549668920bee7d61ad84f7416784c212bfc7ccd
-    app_kit: 556a78182edd8b53b0492ef7845f29efdd604ecb
+    nshkr: 095af16adf703586523bc1a4a2a9aee1535ba487
+    synapse: e51e3cc34d9e909cb770967df85e9836eacd159c
+    app_kit: b07f343430db0b0c1b2759860d4250145714cc99
     ground_plane: d0af5e68745ea16438dd93711341cb47ddc7860c
-    mezzanine: 9e69abc9aaa1a8965deb883b6e8277a16ebfe736
+    mezzanine: a74b5581ba47d25283e4ef000f3192c250b4d37b
     citadel: 9571c4d6365878bcecfdf2436bfc8e058d8987c5
     outer_brain: 67b6c03ffcf84b695dfc1f13aee7feee6b1d5c2c
     jido_integration: 4be39b01fd34faf9dd173d1fd14812a3f7e3f827
@@ -788,7 +788,7 @@ contracts:
     authority: mezzanine
     path: /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/runs/journey_contracts.ex
     version: 1
-    digest: f56b19b66cdaceb83ba2ad43ada654418b8482edbe79a042aecea51386fffef2
+    digest: cd9682ebe6528289bd089c980a8f75eada261100b910c03e4b27eb13e12f1513
     producers: [mezzanine]
     consumers: [app_kit, synapse, outer_brain]
     compatibility: clean_break

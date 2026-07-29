@@ -144,7 +144,7 @@ nodes:
         type: compile_api
     owned_paths: [/home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
     catalog_effect: activate_only_executable_product_capabilities
-    status: ready
+    status: active
   - id: P06-mezzanine-turn-timeline
     phase: 6
     repository: /home/home/p/g/n/mezzanine
@@ -166,7 +166,7 @@ nodes:
         type: semantic
     owned_paths: [/home/home/p/g/n/app_kit/core/app_kit_core, /home/home/p/g/n/app_kit/bridges/mezzanine_bridge]
     catalog_effect: activate_only_executable_product_capabilities
-    status: ready
+    status: complete
   - id: P07-family-preparation
     phase: 7
     repository: /home/home/p/g/n/execution_plane
