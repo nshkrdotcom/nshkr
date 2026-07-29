@@ -211,7 +211,7 @@ deletions:
       obsolete_tests_classified: false
     risk_class: protected
     protected_domains: [appkit_schema_registry, product_boundary_bridge]
-    root_reviewed: false
+    root_reviewed: true
     compatibility_layer: forbidden
   - id: P07-execution-plane-synchronous-and-noop-runtime
     phase: 7

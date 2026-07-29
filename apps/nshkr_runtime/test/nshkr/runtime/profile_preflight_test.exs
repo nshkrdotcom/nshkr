@@ -195,6 +195,7 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
       "NSHKR_SYNAPSE_PROGRAM_ID" => "22222222-2222-4222-8222-222222222222",
       "NSHKR_SYNAPSE_WORK_CLASS_ID" => "33333333-3333-4333-8333-333333333333",
       "NSHKR_SYNAPSE_MEMORY_PROOF_TOKEN_REF" => "proof://mezzanine/recall/current",
+      "NSHKR_SYNAPSE_TURN_AUTHORITY_REF" => "authority://citadel/synapse/turn",
       "NSHKR_SYNAPSE_CONTROL_AUTHORITY_REF" => "authority://citadel/synapse/operator",
       "NSHKR_SYNAPSE_CONTROL_PERMISSION_DECISION_REF" =>
         "decision://citadel/synapse/operator-control",
@@ -343,6 +344,8 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              proof_token_store: Mezzanine.Audit.MemoryProofTokenStore,
              memory_store: OuterBrain.Persistence.Store,
              memory_repo: OuterBrain.Persistence.Repo,
+             product_projection_service: Nshkr.Runtime.ProductProjectionService,
+             turn_authority_ref: "authority://citadel/synapse/turn",
              control_authority_ref: "authority://citadel/synapse/operator",
              control_permission_decision_ref: "decision://citadel/synapse/operator-control"
            ]
@@ -361,6 +364,11 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              document.runtime_config[:synapse_core][:app_kit_backend_stack]
              |> apply(:backend_stack, [])
              |> AppKit.BackendStack.fetch(:operator_backend)
+
+    assert {:ok, AppKit.Bridges.MezzanineBridge.ProductSurfaceAdapter} =
+             document.runtime_config[:synapse_core][:app_kit_backend_stack]
+             |> apply(:backend_stack, [])
+             |> AppKit.BackendStack.fetch(:product_surface_backend)
 
     capability_service =
       Enum.find(

@@ -9,6 +9,7 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
   @effect_surface_backend AppKit.Bridges.MezzanineBridge.EffectAdapter
   @headless_backend AppKit.Bridges.MezzanineBridge
   @operator_backend AppKit.Bridges.MezzanineBridge.OperatorAdapter
+  @product_surface_backend AppKit.Bridges.MezzanineBridge.ProductSurfaceAdapter
   @review_backend AppKit.Bridges.MezzanineBridge.ReviewAdapter
 
   @spec start_link(keyword()) :: GenServer.on_start()
@@ -22,6 +23,7 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
       agent_intake_backend: @agent_intake_backend,
       effect_surface_backend: @effect_surface_backend,
       operator_backend: @operator_backend,
+      product_surface_backend: @product_surface_backend,
       review_backend: @review_backend,
       headless_backend: @headless_backend
     )
@@ -37,6 +39,8 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
     control_permission_decision_ref = Keyword.get(opts, :control_permission_decision_ref)
     memory_read_query = Keyword.get(opts, :memory_read_query)
     memory_provenance_query = Keyword.get(opts, :memory_provenance_query)
+    product_projection_service = Keyword.get(opts, :product_projection_service)
+    turn_authority_ref = Keyword.get(opts, :turn_authority_ref)
 
     with %BackendStack{} = stack <- backend_stack(),
          true <- owner_id?(program_id),
@@ -44,18 +48,24 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
          true <- present_ref?(memory_proof_token_ref),
          true <- present_ref?(control_authority_ref),
          true <- present_ref?(control_permission_decision_ref),
+         true <- present_ref?(turn_authority_ref),
          {:ok, ^expected_backend} <- BackendStack.fetch(stack, :agent_intake_backend),
          {:ok, @effect_surface_backend} <- BackendStack.fetch(stack, :effect_surface_backend),
          {:ok, @operator_backend} <- BackendStack.fetch(stack, :operator_backend),
+         {:ok, @product_surface_backend} <-
+           BackendStack.fetch(stack, :product_surface_backend),
          {:ok, @review_backend} <- BackendStack.fetch(stack, :review_backend),
          {:ok, @headless_backend} <- BackendStack.fetch(stack, :headless_backend),
          true <- Code.ensure_loaded?(expected_backend),
          true <- Code.ensure_loaded?(@effect_surface_backend),
          true <- Code.ensure_loaded?(@operator_backend),
+         true <- Code.ensure_loaded?(@product_surface_backend),
          true <- Code.ensure_loaded?(@review_backend),
          true <- Code.ensure_loaded?(@headless_backend),
          true <- memory_query?(memory_read_query, :list_fragments_by_proof_token, 3),
          true <- memory_query?(memory_provenance_query, :fragment_provenance, 2),
+         true <- memory_query?(product_projection_service, :run_projection, 3),
+         true <- memory_query?(product_projection_service, :capability_projections, 3),
          true <- function_exported?(expected_backend, :start_agent_run, 3),
          true <- function_exported?(expected_backend, :await_agent_outcome, 4),
          true <- function_exported?(expected_backend, :catch_up_agent_events, 3),
@@ -64,6 +74,8 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
          true <- function_exported?(@operator_backend, :list_memory_fragments, 3),
          true <- function_exported?(@operator_backend, :memory_fragment_provenance, 3),
          true <- function_exported?(@operator_backend, :apply_action, 4),
+         true <- function_exported?(@product_surface_backend, :run_projection, 3),
+         true <- function_exported?(@product_surface_backend, :capability_projections, 3),
          true <- function_exported?(@review_backend, :record_decision_by_id, 4),
          true <- function_exported?(@headless_backend, :runtime_run_detail, 4) do
       {:ok,
@@ -72,6 +84,7 @@ defmodule Nshkr.Runtime.AppKitBackendStack do
          effect_surface_backend: @effect_surface_backend,
          headless_backend: @headless_backend,
          operator_backend: @operator_backend,
+         product_surface_backend: @product_surface_backend,
          review_backend: @review_backend,
          durable_owner: Mezzanine.OpsDomain.Repo,
          memory_proof_token_ref: memory_proof_token_ref,

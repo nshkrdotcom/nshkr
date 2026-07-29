@@ -379,6 +379,8 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
       proof_token_store: Mezzanine.Audit.MemoryProofTokenStore,
       memory_store: OuterBrain.Persistence.Store,
       memory_repo: OuterBrain.Persistence.Repo,
+      product_projection_service: Nshkr.Runtime.ProductProjectionService,
+      turn_authority_ref: required(env, "NSHKR_SYNAPSE_TURN_AUTHORITY_REF"),
       control_authority_ref: required(env, "NSHKR_SYNAPSE_CONTROL_AUTHORITY_REF"),
       control_permission_decision_ref:
         required(env, "NSHKR_SYNAPSE_CONTROL_PERMISSION_DECISION_REF")
