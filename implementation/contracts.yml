@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
   reconciled_on: "2026-07-28"
-  checklist_revision: aa4b916a63b1cf0c7fa615103b052fb95327c268
+  checklist_revision: dcff8d89cf441c99cd1e62bb032260590f877c09
   checklist_revision_policy: control_input_anchor
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
