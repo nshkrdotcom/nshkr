@@ -4,7 +4,7 @@ phase: 7
 driving_consumer: runtime-admitted-effects
 repository: /home/home/p/g/n/jido_integration
 base_revision: 705fccc2e049235bcf9cf2f9de6afc7668c2605b
-owned_paths: ["/home/home/p/g/n/jido_integration/core/runtime_router","/home/home/p/g/n/jido_integration/core/asm_runtime_bridge","/home/home/p/g/n/jido_integration/core/direct_runtime"]
+owned_paths: ["/home/home/p/g/n/jido_integration/core/runtime_router","/home/home/p/g/n/jido_integration/core/asm_runtime_bridge","/home/home/p/g/n/jido_integration/core/control_plane","/home/home/p/g/n/jido_integration/core/direct_runtime"]
 read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["execution-plane.runtime-client.v1","execution-plane.runtime-families.v1","jido.credential-materialization.v1"]
 dependency_nodes: ["P04-governed-codex"]

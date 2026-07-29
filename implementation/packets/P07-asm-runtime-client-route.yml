@@ -4,14 +4,14 @@ phase: 7
 driving_consumer: runtime-admitted-process
 repository: /home/home/p/g/n/agent_session_manager
 base_revision: bfefc137ac26adcfcb1f54a73a2f1ce0a562078b
-owned_paths: ["/home/home/p/g/n/agent_session_manager/lib/asm/remote","/home/home/p/g/n/agent_session_manager/lib/asm/control.ex","/home/home/p/g/n/agent_session_manager/lib/asm/managed_session.ex"]
+owned_paths: ["/home/home/p/g/n/agent_session_manager/lib/asm/remote","/home/home/p/g/n/agent_session_manager/lib/asm/control.ex","/home/home/p/g/n/agent_session_manager/lib/asm/managed_session.ex","/home/home/p/g/n/agent_session_manager/lib/asm/execution/config.ex","/home/home/p/g/n/agent_session_manager/lib/asm/provider_backend/core.ex","/home/home/p/g/n/agent_session_manager/lib/asm/provider_registry.ex","/home/home/p/g/n/agent_session_manager/lib/asm/run","/home/home/p/g/n/agent_session_manager/lib/asm/session/server.ex","/home/home/p/g/n/agent_session_manager/test/asm"]
 read_only_dependencies: ["/home/home/p/g/n/execution_plane","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["asm.managed-session.v1","execution-plane.runtime-client.v1"]
 dependency_nodes: ["P04-governed-codex"]
 behavior: ["route placed managed sessions through Runtime Client","replace manual RPC and node selection","preserve continuation, cancel, cleanup, account, and generation identity"]
 negative_invariants: ["no manual RPC placement","no raw PID identity","no account/generation drift"]
 minimal_qc: ["compile ASM","run targeted remote route, continuation, cancellation, cleanup, and downgrade tests"]
-mandatory_qc: ["cd /home/home/p/g/n/agent_session_manager && mix test test/asm/runtime_auth_test.exs test/asm/runtime_auth_codex_materialization_test.exs test/asm/distributed/remote_node_execution_test.exs"]
+mandatory_qc: ["cd /home/home/p/g/n/agent_session_manager && mix test test/asm/runtime_auth_test.exs test/asm/runtime_auth_codex_materialization_test.exs test/asm/managed_runtime_auth_test.exs test/asm/remote/runtime_client_test.exs"]
 protected_deletions: ["P04-asm-manual-rpc-placement"]
 external_effects:
   authority_required: false
