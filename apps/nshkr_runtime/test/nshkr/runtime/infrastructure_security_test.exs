@@ -131,6 +131,10 @@ defmodule Nshkr.Runtime.InfrastructureSecurityTest do
     assert bootstrap =~ "vault kv put kv/codex/primary auth_json=@/input/codex-auth.json"
     assert services =~ "Codex auth file is not readable"
     assert profile =~ "NSHKR_CODEX_SESSION_ROOT_PARENT"
+    assert profile =~ "\"NSHKR_SYNAPSE_SECRET_KEY_BASE\""
+    assert profile =~ "\"NSHKR_SYNAPSE_LIVE_VIEW_SIGNING_SALT\""
+    assert profile =~ "\"NSHKR_SYNAPSE_HOST\" => System.get_env"
+    assert profile =~ "\"NSHKR_SYNAPSE_PORT\" => System.get_env"
 
     refute compose =~ "CODEX_HOME"
     refute profile =~ "auth.json"

@@ -28,6 +28,7 @@ end
     agent_session_manager: root_package.("agent_session_manager", "~> 0.12.0"),
     app_kit_core: internal.("app_kit", "core/app_kit_core"),
     app_kit_mezzanine_bridge: internal.("app_kit", "bridges/mezzanine_bridge"),
+    app_kit_review_surface: internal.("app_kit", "core/review_surface"),
     blitz: %{
       hex: "~> 0.3.0",
       default_order: [:hex],
@@ -58,11 +59,14 @@ end
     jido_integration_v2_control_plane: internal.("jido_integration", "core/control_plane"),
     jido_integration_v2_runtime_router: internal.("jido_integration", "core/runtime_router"),
     jido_integration_v2_store_postgres: internal.("jido_integration", "core/store_postgres"),
+    mezzanine_archival_engine: internal.("mezzanine", "core/archival_engine"),
     mezzanine_audit_engine: internal.("mezzanine", "core/audit_engine"),
     mezzanine_core: internal.("mezzanine", "core/mezzanine_core"),
     mezzanine_execution_engine: internal.("mezzanine", "core/execution_engine"),
     mezzanine_ops_domain: internal.("mezzanine", "core/ops_domain"),
     mezzanine_workflow_runtime: internal.("mezzanine", "core/workflow_runtime"),
-    outer_brain_runtime: internal.("outer_brain", "core/outer_brain_runtime")
+    outer_brain_runtime: internal.("outer_brain", "core/outer_brain_runtime"),
+    synapse_core: internal.("synapse", "apps/synapse_core"),
+    synapse_web: internal.("synapse", "apps/synapse_web")
   }
 }

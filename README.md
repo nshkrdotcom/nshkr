@@ -58,9 +58,12 @@ host-built AppKit backend stack and does not start lower owner services.
 For the real single-host developer profile, start Vault and MinIO with
 `apps/nshkr_runtime/priv/dev/services.sh up`, provide the four owner database
 URLs plus the canonical `NSHKR_SYNAPSE_PROGRAM_ID`,
-`NSHKR_SYNAPSE_WORK_CLASS_ID`, `NSHKR_SYNAPSE_MEMORY_PROOF_TOKEN_REF`,
+`NSHKR_SYNAPSE_WORK_CLASS_ID`, `NSHKR_SYNAPSE_TENANT_ID`,
+`NSHKR_SYNAPSE_INSTALLATION_ID`, `NSHKR_SYNAPSE_MEMORY_PROOF_TOKEN_REF`,
 `NSHKR_SYNAPSE_CONTROL_AUTHORITY_REF`, and
-`NSHKR_SYNAPSE_CONTROL_PERMISSION_DECISION_REF` identifiers named by
+`NSHKR_SYNAPSE_CONTROL_PERMISSION_DECISION_REF` identifiers, plus
+`NSHKR_SYNAPSE_SECRET_KEY_BASE` and `NSHKR_SYNAPSE_LIVE_VIEW_SIGNING_SALT`,
+named by
 `Nshkr.Runtime.DeveloperLocalProfile`, and set
 `NSHKR_PROFILE_FILE` to `apps/nshkr_runtime/priv/dev/profile.exs`. Boot performs
 migration-head, Postgres, Vault, MinIO, Temporal, owner-store, outbox, and

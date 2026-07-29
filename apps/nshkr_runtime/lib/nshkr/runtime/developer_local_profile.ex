@@ -128,6 +128,13 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         {Nshkr.Runtime.Probes, :postgres, [Mezzanine.Audit.Repo]}
       ),
       service(
+        "mezzanine-archival-postgres",
+        :postgres_repo,
+        Mezzanine.Archival.Repo,
+        [],
+        {Nshkr.Runtime.Probes, :postgres, [Mezzanine.Archival.Repo]}
+      ),
+      service(
         "citadel-postgres",
         :postgres_repo,
         Citadel.Governance.Repo,
@@ -265,6 +272,13 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         Nshkr.Runtime.AppKitBackendStack,
         [name: Nshkr.Runtime.AppKitBackendStack] ++ app_kit_backend_options,
         {Nshkr.Runtime.AppKitBackendStack, :probe, []}
+      ),
+      service(
+        "synapse-product-endpoint",
+        :product_endpoint,
+        Nshkr.Runtime.ProductEndpoint,
+        [name: Nshkr.Runtime.ProductEndpoint, endpoint: SynapseWeb.Endpoint],
+        {Nshkr.Runtime.ProductEndpoint, :probe, []}
       )
     ]
   end
@@ -299,6 +313,7 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         :mezzanine_execution_engine
       ),
       migration("mezzanine", Mezzanine.Audit.Repo, :mezzanine_audit_engine),
+      migration("mezzanine", Mezzanine.Archival.Repo, :mezzanine_archival_engine),
       migration(
         "mezzanine",
         Mezzanine.OpsDomain.Repo,
@@ -341,6 +356,12 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
             ecto_repos: [Mezzanine.Audit.Repo],
             start_runtime_children?: false
           ],
+      mezzanine_archival_engine:
+        repo_runtime(Mezzanine.Archival.Repo, urls.mezzanine) ++
+          [
+            ecto_repos: [Mezzanine.Archival.Repo],
+            start_runtime_children?: false
+          ],
       mezzanine_workflow_runtime: [temporal: temporal_options],
       citadel_governance:
         repo_runtime(Citadel.Governance.Repo, urls.citadel) ++
@@ -363,9 +384,39 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         ]
       ],
       synapse_core: [
+        {Synapse.Config,
+         [
+           tenant_id: required(env, "NSHKR_SYNAPSE_TENANT_ID"),
+           default_installation_id: required(env, "NSHKR_SYNAPSE_INSTALLATION_ID")
+         ]},
         app_kit_backend_stack: Nshkr.Runtime.AppKitBackendStack,
         app_kit_backend_options: app_kit_backend_options
+      ],
+      synapse_web: [
+        {SynapseWeb.Endpoint, synapse_endpoint_config(env)},
+        generators: [context_app: :synapse_core]
       ]
+    ]
+  end
+
+  defp synapse_endpoint_config(env) do
+    host = optional(env, "NSHKR_SYNAPSE_HOST", "127.0.0.1")
+    port = positive_integer(env, "NSHKR_SYNAPSE_PORT", "4000")
+
+    [
+      url: [scheme: "http", host: host, port: port],
+      adapter: Bandit.PhoenixAdapter,
+      render_errors: [
+        formats: [html: SynapseWeb.ErrorHTML, json: SynapseWeb.ErrorJSON],
+        layout: false
+      ],
+      pubsub_server: Synapse.PubSub,
+      live_view: [
+        signing_salt: required(env, "NSHKR_SYNAPSE_LIVE_VIEW_SIGNING_SALT")
+      ],
+      http: [ip: {127, 0, 0, 1}, port: port],
+      server: true,
+      secret_key_base: required(env, "NSHKR_SYNAPSE_SECRET_KEY_BASE")
     ]
   end
 
@@ -451,6 +502,15 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
   defp optional(env, key, default) do
     case Map.get(env, key, default) do
       value when is_binary(value) and value != "" -> value
+      _invalid -> raise ArgumentError, "invalid developer profile value: #{key}"
+    end
+  end
+
+  defp positive_integer(env, key, default) do
+    value = optional(env, key, default)
+
+    case Integer.parse(value) do
+      {number, ""} when number in 1..65_535 -> number
       _invalid -> raise ArgumentError, "invalid developer profile value: #{key}"
     end
   end

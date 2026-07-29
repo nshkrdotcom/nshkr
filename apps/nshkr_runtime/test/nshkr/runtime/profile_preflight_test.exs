@@ -192,6 +192,8 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
       "NSHKR_CITADEL_DATABASE_URL" => "ecto://localhost/citadel",
       "NSHKR_OUTER_BRAIN_DATABASE_URL" => "ecto://localhost/outer_brain",
       "NSHKR_JIDO_DATABASE_URL" => "ecto://localhost/jido",
+      "NSHKR_SYNAPSE_TENANT_ID" => "tenant-1",
+      "NSHKR_SYNAPSE_INSTALLATION_ID" => "nshkr/developer-local",
       "NSHKR_SYNAPSE_PROGRAM_ID" => "22222222-2222-4222-8222-222222222222",
       "NSHKR_SYNAPSE_WORK_CLASS_ID" => "33333333-3333-4333-8333-333333333333",
       "NSHKR_SYNAPSE_MEMORY_PROOF_TOKEN_REF" => "proof://mezzanine/recall/current",
@@ -199,6 +201,10 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
       "NSHKR_SYNAPSE_CONTROL_AUTHORITY_REF" => "authority://citadel/synapse/operator",
       "NSHKR_SYNAPSE_CONTROL_PERMISSION_DECISION_REF" =>
         "decision://citadel/synapse/operator-control",
+      "NSHKR_SYNAPSE_HOST" => "127.0.0.1",
+      "NSHKR_SYNAPSE_PORT" => "4400",
+      "NSHKR_SYNAPSE_LIVE_VIEW_SIGNING_SALT" => "test-live-view-salt",
+      "NSHKR_SYNAPSE_SECRET_KEY_BASE" => String.duplicate("s", 64),
       "NSHKR_RUNTIME_SECRET_DIR" => "/run/nshkr/secrets",
       "NSHKR_TEMPORAL_ADDRESS" => "temporal.internal:7233",
       "NSHKR_VAULT_ENDPOINT" => "https://vault.internal",
@@ -235,6 +241,12 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              :url
            ]) == "ecto://localhost/mezzanine"
 
+    assert get_in(document.runtime_config, [
+             :mezzanine_archival_engine,
+             Mezzanine.Archival.Repo,
+             :url
+           ]) == "ecto://localhost/mezzanine"
+
     assert document.runtime_config[:mezzanine_core][:run_store] ==
              Mezzanine.WorkflowRuntime.Store.Postgres
 
@@ -257,6 +269,12 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              Enum.find(
                document.production_profile.migration_plan,
                &(&1.owner == "mezzanine" and &1.repo == Mezzanine.Audit.Repo)
+             )
+
+    assert %{repo: Mezzanine.Archival.Repo, otp_app: :mezzanine_archival_engine} =
+             Enum.find(
+               document.production_profile.migration_plan,
+               &(&1.owner == "mezzanine" and &1.repo == Mezzanine.Archival.Repo)
              )
 
     assert %{
@@ -335,6 +353,11 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
     assert document.runtime_config[:synapse_core][:app_kit_backend_stack] ==
              Nshkr.Runtime.AppKitBackendStack
 
+    assert document.runtime_config[:synapse_core][Synapse.Config] == [
+             tenant_id: "tenant-1",
+             default_installation_id: "nshkr/developer-local"
+           ]
+
     assert document.runtime_config[:synapse_core][:app_kit_backend_options] == [
              program_id: "22222222-2222-4222-8222-222222222222",
              work_class_id: "33333333-3333-4333-8333-333333333333",
@@ -370,6 +393,26 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              |> apply(:backend_stack, [])
              |> AppKit.BackendStack.fetch(:product_surface_backend)
 
+    assert %{
+             role: :product_endpoint,
+             module: Nshkr.Runtime.ProductEndpoint,
+             options: product_endpoint_options
+           } =
+             Enum.find(
+               document.production_profile.services,
+               &(&1.id == "synapse-product-endpoint")
+             )
+
+    assert product_endpoint_options[:endpoint] == SynapseWeb.Endpoint
+
+    endpoint_config =
+      document.runtime_config[:synapse_web][SynapseWeb.Endpoint]
+
+    assert endpoint_config[:server]
+    assert endpoint_config[:http] == [ip: {127, 0, 0, 1}, port: 4400]
+    assert endpoint_config[:url] == [scheme: "http", host: "127.0.0.1", port: 4400]
+    assert :ok = Nshkr.Runtime.ProductEndpoint.validate_endpoint_config(endpoint_config)
+
     capability_service =
       Enum.find(
         document.production_profile.services,
@@ -395,6 +438,10 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
 
     assert_raise ArgumentError, ~r/NSHKR_JIDO_DATABASE_URL/, fn ->
       env |> Map.delete("NSHKR_JIDO_DATABASE_URL") |> DeveloperLocalProfile.document()
+    end
+
+    assert_raise ArgumentError, ~r/NSHKR_SYNAPSE_SECRET_KEY_BASE/, fn ->
+      env |> Map.delete("NSHKR_SYNAPSE_SECRET_KEY_BASE") |> DeveloperLocalProfile.document()
     end
   end
 
