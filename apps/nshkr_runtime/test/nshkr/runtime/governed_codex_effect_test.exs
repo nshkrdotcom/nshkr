@@ -9,6 +9,18 @@ defmodule Nshkr.Runtime.GovernedCodexEffectTest do
     assert GovernedCodexEffect.capability_id() == "codex.session.turn"
   end
 
+  test "uses only the single-use database-time grant checkpoint at dispatch" do
+    source =
+      __DIR__
+      |> Path.join("../../../lib/nshkr/runtime/governed_codex_effect.ex")
+      |> Path.expand()
+      |> File.read!()
+
+    assert source =~ "ToolEffectAuthority.decide_grant"
+    assert source =~ "grant_control_receipt_ref"
+    refute source =~ "ToolEffectAuthority.verify_grant"
+  end
+
   test "rejects caller-supplied credentials before durable admission" do
     assert {:error, {:unknown_governed_codex_field, :api_key}} =
              attrs()

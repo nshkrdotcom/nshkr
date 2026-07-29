@@ -60,6 +60,32 @@ defmodule Nshkr.Runtime.Probes do
     |> Jido.Integration.V2.StorePostgres.DurableRuntime.preflight()
   end
 
+  @spec recovery_signal_dispatcher(keyword()) :: :ok | {:error, term()}
+  def recovery_signal_dispatcher(service_opts) when is_list(service_opts) do
+    dispatcher = Mezzanine.WorkflowRuntime.RecoverySignalDispatcher
+    store = Keyword.get(service_opts, :store)
+    runtime = Keyword.get(service_opts, :runtime)
+    store_opts = Keyword.get(service_opts, :store_opts, [])
+
+    with true <- Code.ensure_loaded?(dispatcher),
+         true <- function_exported?(dispatcher, :dispatch_once, 1),
+         true <- Code.ensure_loaded?(store),
+         true <- function_exported?(store, :claim_signal_outboxes, 3),
+         true <- function_exported?(store, :complete_signal_outbox, 4),
+         true <- Code.ensure_loaded?(runtime),
+         true <- function_exported?(runtime, :signal_workflow, 1) do
+      owner_store(
+        service_opts,
+        Mezzanine.OpsDomain.Repo,
+        Mezzanine.WorkflowRuntime.Store,
+        :health,
+        [[repo: Mezzanine.OpsDomain.Repo] ++ Keyword.take(store_opts, [:timeout])]
+      )
+    else
+      _other -> {:error, :recovery_signal_dispatcher_unavailable}
+    end
+  end
+
   defp safe_reason(%{__struct__: module}), do: module
   defp safe_reason(reason) when is_atom(reason), do: reason
   defp safe_reason({left, _right}) when is_atom(left), do: left

@@ -10,6 +10,7 @@ defmodule Nshkr.Runtime.Profile do
     :object_store,
     :owner_store,
     :session_runtime,
+    :recovery_control,
     :temporal,
     :outbox_dispatcher,
     :capability_truth,
@@ -23,7 +24,12 @@ defmodule Nshkr.Runtime.Profile do
     :temporal,
     :capability_truth
   ]
-  @optional_singular_roles [:session_runtime, :app_kit_backend_stack, :product_endpoint]
+  @optional_singular_roles [
+    :session_runtime,
+    :recovery_control,
+    :app_kit_backend_stack,
+    :product_endpoint
+  ]
   @enforce_keys [:topology, :services, :migration_plan]
   defstruct [:topology, :services, :migration_plan]
 

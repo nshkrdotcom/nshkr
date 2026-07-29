@@ -9,6 +9,7 @@ defmodule Nshkr.Runtime.Service do
     :object_store,
     :owner_store,
     :session_runtime,
+    :recovery_control,
     :temporal,
     :outbox_dispatcher,
     :capability_truth,

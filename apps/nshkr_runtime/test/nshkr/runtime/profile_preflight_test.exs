@@ -194,6 +194,10 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
       "NSHKR_JIDO_DATABASE_URL" => "ecto://localhost/jido",
       "NSHKR_SYNAPSE_PROGRAM_ID" => "22222222-2222-4222-8222-222222222222",
       "NSHKR_SYNAPSE_WORK_CLASS_ID" => "33333333-3333-4333-8333-333333333333",
+      "NSHKR_SYNAPSE_MEMORY_PROOF_TOKEN_REF" => "proof://mezzanine/recall/current",
+      "NSHKR_SYNAPSE_CONTROL_AUTHORITY_REF" => "authority://citadel/synapse/operator",
+      "NSHKR_SYNAPSE_CONTROL_PERMISSION_DECISION_REF" =>
+        "decision://citadel/synapse/operator-control",
       "NSHKR_RUNTIME_SECRET_DIR" => "/run/nshkr/secrets",
       "NSHKR_TEMPORAL_ADDRESS" => "temporal.internal:7233",
       "NSHKR_VAULT_ENDPOINT" => "https://vault.internal",
@@ -203,6 +207,8 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
     }
 
     document = DeveloperLocalProfile.document(env)
+    assert %Profile{} = profile = Profile.new!(document.production_profile)
+    assert :ok = Preflight.reject_forbidden(profile)
 
     assert get_in(document.runtime_config, [
              :jido_integration_v2_store_postgres,
@@ -252,6 +258,16 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
                &(&1.owner == "mezzanine" and &1.repo == Mezzanine.Audit.Repo)
              )
 
+    assert %{
+             repo: Mezzanine.OpsDomain.Repo,
+             otp_app: :mezzanine_workflow_runtime
+           } =
+             Enum.find(
+               document.production_profile.migration_plan,
+               &(&1.owner == "mezzanine" and
+                   &1.otp_app == :mezzanine_workflow_runtime)
+             )
+
     assert %{options: temporal_options} =
              Enum.find(document.production_profile.services, &(&1.id == "temporal-workers"))
 
@@ -261,6 +277,32 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              Enum.find(document.production_profile.services, &(&1.id == "jido-owner-store"))
 
     assert jido_options[:persistence_profile] == :integration_postgres
+
+    assert %{
+             role: :recovery_control,
+             module: Nshkr.Runtime.AttemptRecoveryBinding,
+             options: recovery_options
+           } =
+             Enum.find(
+               document.production_profile.services,
+               &(&1.id == "codex-attempt-recovery")
+             )
+
+    assert recovery_options[:observer] == Nshkr.Runtime.CodexAttemptObserver
+    assert recovery_options[:max_retries] == 5
+
+    assert %{
+             role: :outbox_dispatcher,
+             module: Mezzanine.WorkflowRuntime.RecoverySignalDispatcher,
+             options: signal_options
+           } =
+             Enum.find(
+               document.production_profile.services,
+               &(&1.id == "mezzanine-recovery-signal-outbox")
+             )
+
+    assert signal_options[:store] == Mezzanine.WorkflowRuntime.RecoveryControl
+    assert signal_options[:runtime] == Mezzanine.WorkflowRuntime.TemporalexAdapter
 
     assert document.runtime_config[:jido_integration_v2_control_plane][:codex_materializer] == [
              command: System.find_executable("true"),
@@ -294,7 +336,15 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
 
     assert document.runtime_config[:synapse_core][:app_kit_backend_options] == [
              program_id: "22222222-2222-4222-8222-222222222222",
-             work_class_id: "33333333-3333-4333-8333-333333333333"
+             work_class_id: "33333333-3333-4333-8333-333333333333",
+             memory_proof_token_ref: "proof://mezzanine/recall/current",
+             memory_read_query: Nshkr.Runtime.MemoryReadQuery,
+             memory_provenance_query: Nshkr.Runtime.MemoryReadQuery,
+             proof_token_store: Mezzanine.Audit.MemoryProofTokenStore,
+             memory_store: OuterBrain.Persistence.Store,
+             memory_repo: OuterBrain.Persistence.Repo,
+             control_authority_ref: "authority://citadel/synapse/operator",
+             control_permission_decision_ref: "decision://citadel/synapse/operator-control"
            ]
 
     assert {:ok, AppKit.Bridges.MezzanineBridge.AgentIntakeAdapter} =
@@ -306,6 +356,11 @@ defmodule Nshkr.Runtime.ProfilePreflightTest do
              document.runtime_config[:synapse_core][:app_kit_backend_stack]
              |> apply(:backend_stack, [])
              |> AppKit.BackendStack.fetch(:headless_backend)
+
+    assert {:ok, AppKit.Bridges.MezzanineBridge.OperatorAdapter} =
+             document.runtime_config[:synapse_core][:app_kit_backend_stack]
+             |> apply(:backend_stack, [])
+             |> AppKit.BackendStack.fetch(:operator_backend)
 
     capability_service =
       Enum.find(

@@ -93,7 +93,6 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
          refs = Map.put(refs, :credential_lease_ref, lease.lease_id),
          {:ok, grant, input_digest, policy} <-
            issue_grant(attrs, review, refs, account, lease, now),
-         :ok <- verify_grant(attrs, review, refs, account, lease, grant, input_digest, policy),
          {:ok, prompt} <- prepare_prompt(attrs, refs),
          {:ok, prompt} <-
            OuterBrainStore.record_prompt_context(
@@ -102,6 +101,17 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
              repo: OuterBrain.Persistence.Repo
            ),
          {:ok, dispatching} <- begin_dispatch(context, proposed),
+         {:ok, grant_control_receipt} <-
+           decide_grant(
+             attrs,
+             review,
+             refs,
+             account,
+             lease,
+             grant,
+             input_digest,
+             policy
+           ),
          materialization_request =
            materialization_request(lease, account_ref, refs, account, now),
          result <-
@@ -113,6 +123,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
              materialization_request,
              lease_context,
              grant,
+             grant_control_receipt,
              dispatching,
              context,
              prompt
@@ -145,6 +156,8 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
          true <- effect.status == "completed" or {:error, {:effect_not_completed, effect.status}},
          {:ok, attempt} <- ControlPlane.fetch_attempt(effect.attempt_ref),
          {:ok, grant} <- ToolEffectAuthority.fetch_grant(effect.grant_ref),
+         {:ok, grant_control_receipt} <-
+           ToolEffectAuthority.fetch_grant_control_receipt("#{effect.grant_ref}/dispatch"),
          publication when not is_nil(publication) <-
            OuterBrainStore.latest_publication(
              tenant_ref,
@@ -157,6 +170,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
          effect: effect,
          attempt: attempt,
          grant: grant,
+         grant_control_receipt: grant_control_receipt,
          publication: publication
        }}
     else
@@ -317,7 +331,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
     end
   end
 
-  defp verify_grant(attrs, review, refs, account, lease, grant, input_digest, policy) do
+  defp decide_grant(attrs, review, refs, account, lease, grant, input_digest, policy) do
     binding =
       grant_attrs(attrs, review, refs, account, lease, grant.issued_at)
       |> Map.drop([:session_ref, :grant_ref, :issued_at, :expires_at])
@@ -327,7 +341,12 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
         policy_version: policy.policy_version
       })
 
-    ToolEffectAuthority.verify_grant(grant.grant_ref, binding, now())
+    ToolEffectAuthority.decide_grant(grant.grant_ref, binding, %{
+      receipt_ref: refs.grant_control_receipt_ref,
+      attempt_ref: refs.attempt_ref,
+      boundary_ref: "boundary://jido/codex-dispatch",
+      deadline_at: earliest(grant.expires_at, lease.expires_at)
+    })
   end
 
   defp grant_attrs(attrs, _review, refs, account, lease, now) do
@@ -512,6 +531,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
          materialization_request,
          lease_context,
          grant,
+         grant_control_receipt,
          dispatching,
          context,
          prompt
@@ -527,6 +547,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
       provider_metadata: %{app_server: true, skip_git_repo_check: true},
       authority_metadata: %{
         grant_ref: grant.grant_ref,
+        grant_control_receipt_ref: grant_control_receipt.receipt_ref,
         decision_ref: grant.decision_ref,
         review_ref: refs.review_ref,
         effect_ref: refs.effect_ref
@@ -1086,6 +1107,7 @@ defmodule Nshkr.Runtime.GovernedCodexEffect do
       connector_binding_ref: "connector-binding://codex/nshkr/#{token}",
       jido_run_id: jido_run_id,
       attempt_ref: Jido.Integration.V2.Contracts.attempt_id(jido_run_id, 1),
+      grant_control_receipt_ref: "grant://citadel/tool-effect/#{token}/dispatch",
       accepted_receipt_ref: "receipt://jido/codex/#{token}/accepted",
       completed_receipt_ref: "receipt://nshkr/codex/#{token}/completed",
       failed_receipt_ref: "receipt://nshkr/codex/#{token}/failed",

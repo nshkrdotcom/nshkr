@@ -192,6 +192,19 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         {Nshkr.Runtime.CodexSessionStack, :probe, []}
       ),
       service(
+        "codex-attempt-recovery",
+        :recovery_control,
+        Nshkr.Runtime.AttemptRecoveryBinding,
+        [
+          name: Nshkr.Runtime.AttemptRecoveryBinding,
+          observer: Nshkr.Runtime.CodexAttemptObserver,
+          interval_ms: 5_000,
+          retry_delay_ms: 5_000,
+          max_retries: 5
+        ],
+        {Nshkr.Runtime.AttemptRecoveryBinding, :probe, []}
+      ),
+      service(
         "temporal-workers",
         :temporal,
         Nshkr.Runtime.Temporal,
@@ -215,6 +228,18 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
            :health,
            [mezzanine_health]
          ]}
+      ),
+      service(
+        "mezzanine-recovery-signal-outbox",
+        :outbox_dispatcher,
+        Mezzanine.WorkflowRuntime.RecoverySignalDispatcher,
+        [
+          name: Mezzanine.WorkflowRuntime.RecoverySignalDispatcher,
+          store: Mezzanine.WorkflowRuntime.RecoveryControl,
+          store_opts: mezzanine_health,
+          runtime: Mezzanine.WorkflowRuntime.TemporalexAdapter
+        ],
+        {Nshkr.Runtime.Probes, :recovery_signal_dispatcher, []}
       ),
       service(
         "capability-truth",
@@ -274,6 +299,11 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
         :mezzanine_execution_engine
       ),
       migration("mezzanine", Mezzanine.Audit.Repo, :mezzanine_audit_engine),
+      migration(
+        "mezzanine",
+        Mezzanine.OpsDomain.Repo,
+        :mezzanine_workflow_runtime
+      ),
       migration("citadel", Citadel.Governance.Repo, :citadel_governance),
       migration("outer_brain", OuterBrain.Persistence.Repo, :outer_brain_persistence),
       migration(
@@ -342,7 +372,16 @@ defmodule Nshkr.Runtime.DeveloperLocalProfile do
   defp app_kit_backend_options(env) do
     [
       program_id: required(env, "NSHKR_SYNAPSE_PROGRAM_ID"),
-      work_class_id: required(env, "NSHKR_SYNAPSE_WORK_CLASS_ID")
+      work_class_id: required(env, "NSHKR_SYNAPSE_WORK_CLASS_ID"),
+      memory_proof_token_ref: required(env, "NSHKR_SYNAPSE_MEMORY_PROOF_TOKEN_REF"),
+      memory_read_query: Nshkr.Runtime.MemoryReadQuery,
+      memory_provenance_query: Nshkr.Runtime.MemoryReadQuery,
+      proof_token_store: Mezzanine.Audit.MemoryProofTokenStore,
+      memory_store: OuterBrain.Persistence.Store,
+      memory_repo: OuterBrain.Persistence.Repo,
+      control_authority_ref: required(env, "NSHKR_SYNAPSE_CONTROL_AUTHORITY_REF"),
+      control_permission_decision_ref:
+        required(env, "NSHKR_SYNAPSE_CONTROL_PERMISSION_DECISION_REF")
     ]
   end
 

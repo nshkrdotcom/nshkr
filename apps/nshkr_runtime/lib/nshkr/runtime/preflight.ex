@@ -6,6 +6,14 @@ defmodule Nshkr.Runtime.Preflight do
 
   @forbidden_fragments ~w(fake fixture memory mickey_mouse noop no_op static_success incomplete req.test)
   @secret_keys ~w(api_key authorization bearer client_secret credential credentials password secret session_token token)
+  @admitted_memory_boundary_keys ~w(
+    memory_proof_token_ref
+    memory_provenance_query
+    memory_read_query
+    memory_repo
+    memory_store
+    proof_token_store
+  )
 
   @spec verify!(Profile.t()) :: :ok
   def verify!(%Profile{} = profile) do
@@ -89,7 +97,7 @@ defmodule Nshkr.Runtime.Preflight do
 
       if secret_key?(key) and value not in [nil, "", []],
         do: [:secret_value | next_path],
-        else: forbidden_path(key, next_path) || forbidden_path(value, next_path)
+        else: forbidden_entry_path(key, value, next_path)
     end)
   end
 
@@ -125,6 +133,30 @@ defmodule Nshkr.Runtime.Preflight do
   end
 
   defp secret_key?(_key), do: false
+
+  defp forbidden_entry_path(key, value, path) when is_atom(key) or is_binary(key) do
+    if to_string(key) in @admitted_memory_boundary_keys do
+      forbidden_admitted_memory_value(value, path)
+    else
+      forbidden_path(key, path) || forbidden_path(value, path)
+    end
+  end
+
+  defp forbidden_entry_path(key, value, path),
+    do: forbidden_path(key, path) || forbidden_path(value, path)
+
+  defp forbidden_admitted_memory_value(value, path)
+       when is_atom(value) or is_binary(value) do
+    normalized = value |> to_string() |> String.downcase()
+    forbidden_fragments = @forbidden_fragments -- ["memory"]
+
+    if Enum.any?(forbidden_fragments, &String.contains?(normalized, &1)) or
+         sensitive_uri?(value),
+       do: [:forbidden_value | path],
+       else: nil
+  end
+
+  defp forbidden_admitted_memory_value(value, path), do: forbidden_path(value, path)
 
   defp sensitive_uri?(value) when is_binary(value) do
     uri = URI.parse(value)
