@@ -7,7 +7,7 @@ base_revision: 5bcb223339fa8a89a40a1347b39f929c89835e37
 owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/catalog.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/evidence.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/arbitration.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/catalog_index_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/catalog_show_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/evidence_index_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/evidence_show_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/operations_live.ex"]
 read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/capabilities.yml"]
 contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
-dependency_nodes: ["P05-recovery-cognition"]
+dependency_nodes: ["P05-recovery-cognition","P06-appkit-product-query"]
 behavior: ["complete artifact, evidence, operation, arbitration, and truthful capability surfaces","hide unavailable routes and descriptors","enumerate only executable composed modes"]
 negative_invariants: ["no stale capability.plan/reflect/summarize/evaluate/write claim","no fixture evidence as production truth","no unavailable navigation"]
 minimal_qc: ["compile changed Synapse apps","run targeted catalog, evidence, arbitration, operations, and LiveView tests","enumerate production capabilities through AppKit"]

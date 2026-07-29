@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P06-appkit-product-query
+phase: 6
+driving_consumer: synapse-mvp-operations
+repository: /home/home/p/g/n/app_kit
+base_revision: 6494aeeec0e0c309180f7aa88e0a50b2bff6fbda
+owned_paths: ["/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/backend_stack.ex","/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/product_surface.ex","/home/home/p/g/n/app_kit/core/app_kit_core/lib/app_kit/core/backends/product_surface_backend.ex","/home/home/p/g/n/app_kit/core/app_kit_core/test/app_kit/product_surface_test.exs","/home/home/p/g/n/app_kit/bridges/mezzanine_bridge"]
+read_only_dependencies: ["/home/home/p/g/n/mezzanine","/home/home/p/g/n/outer_brain","/home/home/p/g/n/citadel","/home/home/p/g/n/jido_integration","/home/home/p/g/n/nshkr/implementation/capabilities.yml"]
+contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1","mezzanine.run-acceptance.v1","mezzanine.effect-record.v1"]
+dependency_nodes: ["P06-mezzanine-turn-timeline"]
+behavior: ["expose executable AppKit composite run and capability query functions over typed ProductSurface DTOs","require an explicit owner-prepared bridge service and revalidate exact run, tenant, operation, receipt, availability, and capability truth","return only durable owner-backed projections and fail closed when the composition service is absent"]
+negative_invariants: ["no DTO-only or contract-only completion","no generic RuntimeRow extension inference as capability truth","no advertised capability without an available executable operation"]
+minimal_qc: ["compile app_kit_core and mezzanine_bridge warnings-as-errors","run focused product facade and bridge adapter tests","exercise exact run/tenant mismatch and unavailable catalog negatives"]
+mandatory_qc: ["cd /home/home/p/g/n/app_kit && mix app_kit.schema_registry.verify","cd /home/home/p/g/n/app_kit && mix app_kit.no_bypass.scan --root /home/home/p/g/n/app_kit --profile hazmat --include 'core/**/*.ex' --include 'bridges/**/*.ex' --include 'web/**/*.ex' --include 'examples/**/*.ex'"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: activate_only_executable_product_capabilities
+status: ready
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

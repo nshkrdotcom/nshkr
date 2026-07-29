@@ -7,7 +7,7 @@ base_revision: 5bcb223339fa8a89a40a1347b39f929c89835e37
 owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/product_bootstrap.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/product_profile.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/dashboard_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/router.ex"]
 read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/capabilities.yml"]
 contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1"]
-dependency_nodes: ["P05-recovery-cognition"]
+dependency_nodes: ["P05-recovery-cognition","P06-appkit-product-query"]
 behavior: ["compose only AppKit backends in production","present restart, reconnect, control, and degraded states","remove incomplete routes and product-owned lower process startup"]
 negative_invariants: ["no lower Repo or process supervision","no fixture default","no route to unavailable functionality"]
 minimal_qc: ["compile changed Synapse apps","run targeted bootstrap, profile, dashboard, router, reconnect, and degraded tests"]

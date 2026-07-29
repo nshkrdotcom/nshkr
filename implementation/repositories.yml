@@ -4,7 +4,7 @@ default_revision_policy: exact_source_revision
 repositories:
   - id: program_control
     path: /home/home/p/g/j/jido_brainstorm
-    revision: 1c3dee0755cb298cf253774d00667285db77527e
+    revision: 95dee6aae35ad953715a27b04d7855c953304c9b
     revision_policy: control_input_anchor
     branch: main
     dirty: false
@@ -134,7 +134,7 @@ repositories:
     consumes: []
   - id: app_kit
     path: /home/home/p/g/n/app_kit
-    revision: 6494aeeec0e0c309180f7aa88e0a50b2bff6fbda
+    revision: 556a78182edd8b53b0492ef7845f29efdd604ecb
     branch: main
     dirty: false
     role: sole_product_boundary
@@ -142,7 +142,7 @@ repositories:
     consumes: [mezzanine.run-acceptance.v1, mezzanine.effect-record.v1, outer-brain.reply-publication.v1, chassis.release-resource.v1]
   - id: synapse
     path: /home/home/p/g/n/synapse
-    revision: 3f84436b08a1bab221872bd2c4ed3899b9b895d0
+    revision: d549668920bee7d61ad84f7416784c212bfc7ccd
     branch: nshkr-agent-rewrite-20260518
     dirty: false
     role: appkit_only_product

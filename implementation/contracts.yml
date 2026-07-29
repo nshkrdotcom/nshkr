@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
   reconciled_on: "2026-07-28"
-  checklist_revision: 1c3dee0755cb298cf253774d00667285db77527e
+  checklist_revision: 95dee6aae35ad953715a27b04d7855c953304c9b
   checklist_revision_policy: control_input_anchor
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
@@ -11,8 +11,8 @@ baseline:
     stack_lab_role: proof_and_regression_harness_only
   source_revisions:
     nshkr: 41a1e3a806aa25b01899651a0264170906274c77
-    synapse: 3f84436b08a1bab221872bd2c4ed3899b9b895d0
-    app_kit: 6494aeeec0e0c309180f7aa88e0a50b2bff6fbda
+    synapse: d549668920bee7d61ad84f7416784c212bfc7ccd
+    app_kit: 556a78182edd8b53b0492ef7845f29efdd604ecb
     ground_plane: d0af5e68745ea16438dd93711341cb47ddc7860c
     mezzanine: 9e69abc9aaa1a8965deb883b6e8277a16ebfe736
     citadel: 9571c4d6365878bcecfdf2436bfc8e058d8987c5
