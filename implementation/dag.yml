@@ -144,7 +144,7 @@ nodes:
         type: compile_api
     owned_paths: [/home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
     catalog_effect: activate_only_executable_product_capabilities
-    status: active
+    status: complete
   - id: P06-mezzanine-turn-timeline
     phase: 6
     repository: /home/home/p/g/n/mezzanine
