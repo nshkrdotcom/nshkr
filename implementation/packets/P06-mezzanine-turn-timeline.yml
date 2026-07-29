@@ -1,0 +1,24 @@
+schema: nshkr.packet.v1
+packet_id: P06-mezzanine-turn-timeline
+phase: 6
+driving_consumer: synapse-mvp-run-turn
+repository: /home/home/p/g/n/mezzanine
+base_revision: 6c3e6813fbe8ddc4873a949a418c640f387c28c8
+owned_paths: ["/home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/runs","/home/home/p/g/n/mezzanine/core/mezzanine_core/test/mezzanine/runs","/home/home/p/g/n/mezzanine/core/workflow_runtime"]
+read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/synapse","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
+contract_versions: ["mezzanine.run-acceptance.v1"]
+dependency_nodes: ["P05-recovery-cognition"]
+behavior: ["accept durable follow-up turn commands with tenant, cursor, and idempotency enforcement","append accepted turns, committed provider events, completed turns, and control transitions to one canonical run timeline","persist signal outbox and idempotent acceptance readback atomically"]
+negative_invariants: ["no bridge-local or VM-local accepted turn truth","no cross-tenant, stale-cursor, or terminal-run acceptance","no raw prompt, credential, or secret payload in the turn command"]
+minimal_qc: ["compile changed Mezzanine packages warnings-as-errors","run targeted turn-contract, Postgres store, recovery-control, and signal-outbox tests"]
+mandatory_qc: ["cd /home/home/p/g/n/mezzanine && mix test core/mezzanine_core/test/mezzanine/runs/turn_contracts_test.exs core/workflow_runtime/test/mezzanine/workflow_runtime/store_postgres_test.exs core/workflow_runtime/test/mezzanine/workflow_runtime/recovery_control_test.exs core/workflow_runtime/test/mezzanine/workflow_runtime/operator_signal_control_test.exs"]
+protected_deletions: []
+external_effects:
+  authority_required: false
+  target: null
+  effect_class: null
+  cost_or_lifecycle_scope: null
+catalog_effect: none
+status: complete
+non_goals: ["backwards compatibility","fixture or no-op production completion","unrelated later-program breadth"]
+stop_conditions: ["frozen contract contradicted by a current consumer","required write falls outside owned_paths","external authority is required but not confirmed"]

@@ -1,7 +1,7 @@
 schema: nshkr.contracts.v1
 baseline:
   reconciled_on: "2026-07-28"
-  checklist_revision: dcff8d89cf441c99cd1e62bb032260590f877c09
+  checklist_revision: 1c3dee0755cb298cf253774d00667285db77527e
   checklist_revision_policy: control_input_anchor
   runtime_composition:
     workspace: /home/home/p/g/n/nshkr
@@ -12,9 +12,9 @@ baseline:
   source_revisions:
     nshkr: 41a1e3a806aa25b01899651a0264170906274c77
     synapse: 3f84436b08a1bab221872bd2c4ed3899b9b895d0
-    app_kit: a34fe1614f1c6f02bc445572f6dba0c64f32e77a
+    app_kit: 6494aeeec0e0c309180f7aa88e0a50b2bff6fbda
     ground_plane: d0af5e68745ea16438dd93711341cb47ddc7860c
-    mezzanine: 6c3e6813fbe8ddc4873a949a418c640f387c28c8
+    mezzanine: 9e69abc9aaa1a8965deb883b6e8277a16ebfe736
     citadel: 9571c4d6365878bcecfdf2436bfc8e058d8987c5
     outer_brain: 67b6c03ffcf84b695dfc1f13aee7feee6b1d5c2c
     jido_integration: 4be39b01fd34faf9dd173d1fd14812a3f7e3f827
@@ -788,7 +788,7 @@ contracts:
     authority: mezzanine
     path: /home/home/p/g/n/mezzanine/core/mezzanine_core/lib/mezzanine/runs/journey_contracts.ex
     version: 1
-    digest: 19755c20ee2639ad7f3811ec7116de854842cbedc426e58779021138c36d3b20
+    digest: f56b19b66cdaceb83ba2ad43ada654418b8482edbe79a042aecea51386fffef2
     producers: [mezzanine]
     consumers: [app_kit, synapse, outer_brain]
     compatibility: clean_break

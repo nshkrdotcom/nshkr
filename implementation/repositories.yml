@@ -4,7 +4,7 @@ default_revision_policy: exact_source_revision
 repositories:
   - id: program_control
     path: /home/home/p/g/j/jido_brainstorm
-    revision: dcff8d89cf441c99cd1e62bb032260590f877c09
+    revision: 1c3dee0755cb298cf253774d00667285db77527e
     revision_policy: control_input_anchor
     branch: main
     dirty: false
@@ -30,7 +30,7 @@ repositories:
     consumes: []
   - id: mezzanine
     path: /home/home/p/g/n/mezzanine
-    revision: 6c3e6813fbe8ddc4873a949a418c640f387c28c8
+    revision: 9e69abc9aaa1a8965deb883b6e8277a16ebfe736
     branch: main
     dirty: false
     role: durable_run_turn_and_effect_owner
@@ -134,7 +134,7 @@ repositories:
     consumes: []
   - id: app_kit
     path: /home/home/p/g/n/app_kit
-    revision: a34fe1614f1c6f02bc445572f6dba0c64f32e77a
+    revision: 6494aeeec0e0c309180f7aa88e0a50b2bff6fbda
     branch: main
     dirty: false
     role: sole_product_boundary

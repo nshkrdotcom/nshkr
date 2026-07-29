@@ -7,7 +7,7 @@ base_revision: 5bcb223339fa8a89a40a1347b39f929c89835e37
 owned_paths: ["/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/agent_runs.ex","/home/home/p/g/n/synapse/apps/synapse_core/lib/synapse/turns.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_index_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_new_live.ex","/home/home/p/g/n/synapse/apps/synapse_web/lib/synapse_web/live/run_show_live.ex"]
 read_only_dependencies: ["/home/home/p/g/n/app_kit","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1"]
-dependency_nodes: ["P05-recovery-cognition"]
+dependency_nodes: ["P05-recovery-cognition","P06-mezzanine-turn-timeline"]
 behavior: ["complete durable run, turn, incremental stream, cursor resume, and degraded presentation","replace provisional deltas with committed turn readback","remove fixture ID and detail fallbacks"]
 negative_invariants: ["no static fixture run list","no PubSub as durable truth","no lower-stack imports"]
 minimal_qc: ["compile changed Synapse apps","run targeted AgentRuns, Turns, and stable-DOM run LiveView tests","exercise the distinct real run/turn/stream journey"]

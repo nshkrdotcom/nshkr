@@ -134,13 +134,26 @@ nodes:
     phase: 6
     repository: /home/home/p/g/n/synapse
     produces: [synapse_real_mvp_journeys]
-    requires: [P05-recovery-cognition]
+    requires: [P05-recovery-cognition, P06-mezzanine-turn-timeline]
     edges:
       - node: P05-recovery-cognition
         type: composition
+      - node: P06-mezzanine-turn-timeline
+        type: compile_api
     owned_paths: [/home/home/p/g/n/app_kit, /home/home/p/g/n/synapse, /home/home/p/g/n/nshkr]
     catalog_effect: activate_only_executable_product_capabilities
     status: ready
+  - id: P06-mezzanine-turn-timeline
+    phase: 6
+    repository: /home/home/p/g/n/mezzanine
+    produces: [durable_followup_turn_submission, unified_run_timeline_cursor]
+    requires: [P05-recovery-cognition]
+    edges:
+      - node: P05-recovery-cognition
+        type: semantic
+    owned_paths: [/home/home/p/g/n/mezzanine/core/mezzanine_core, /home/home/p/g/n/mezzanine/core/workflow_runtime]
+    catalog_effect: none
+    status: complete
   - id: P07-family-preparation
     phase: 7
     repository: /home/home/p/g/n/execution_plane

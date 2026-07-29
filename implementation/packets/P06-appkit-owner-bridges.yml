@@ -7,7 +7,7 @@ base_revision: b023d3cf6f389c5fefdde2690e5b7148bba7591f
 owned_paths: ["/home/home/p/g/n/app_kit/bridges/mezzanine_bridge"]
 read_only_dependencies: ["/home/home/p/g/n/mezzanine","/home/home/p/g/n/outer_brain","/home/home/p/g/n/citadel","/home/home/p/g/n/nshkr/implementation/contracts.yml"]
 contract_versions: ["app-kit.agent-intake.v1","app-kit.governed-effect.v1","mezzanine.run-acceptance.v1","mezzanine.effect-record.v1"]
-dependency_nodes: ["P05-recovery-cognition"]
+dependency_nodes: ["P05-recovery-cognition","P06-mezzanine-turn-timeline"]
 behavior: ["complete owner-backed AppKit command and query adapters for every MVP surface","map durable cursors, receipts, artifacts, degraded states, and capabilities","delete bridge-local truth"]
 negative_invariants: ["no memory or ETS owner truth in bridge","no direct product selection of owner modules","no fallback to fixture transport"]
 minimal_qc: ["compile mezzanine_bridge","run targeted command, query, stream, review, memory, operation, control, degraded, and capability adapter tests"]
