@@ -42,7 +42,18 @@ end
     citadel_governance: internal.("citadel", "core/citadel_governance"),
     cli_subprocess_core: root_package.("cli_subprocess_core", "~> 0.4.0"),
     codex_sdk: root_package.("codex_sdk", "~> 0.18.0"),
-    execution_plane: internal.("execution_plane", "core/execution_plane"),
+    execution_plane: %{
+      path: Path.join(siblings_root, "execution_plane/core/execution_plane"),
+      github: %{
+        repo: "nshkrdotcom/execution_plane",
+        branch: "main",
+        subdir: "core/execution_plane"
+      },
+      hex: "~> 0.2.0",
+      opts: [override: true],
+      default_order: [:path, :github, :hex],
+      publish_order: [:hex]
+    },
     gemini_ex: %{
       path: Path.join(siblings_root, "gemini_ex"),
       github: %{repo: "nshkrdotcom/gemini_ex", branch: "main"},
