@@ -60,6 +60,7 @@ defmodule Nshkr.Runtime.MixProject do
       DependencySources.dep(:mezzanine_ops_domain, @repo_root, runtime: false),
       DependencySources.dep(:mezzanine_workflow_runtime, @repo_root, runtime: false),
       DependencySources.dep(:outer_brain_runtime, @repo_root, runtime: false),
+      DependencySources.dep(:pristine, @repo_root),
       DependencySources.dep(:synapse_core, @repo_root, runtime: false),
       DependencySources.dep(:synapse_web, @repo_root, runtime: false),
       {:ecto_sql, "~> 3.13"},

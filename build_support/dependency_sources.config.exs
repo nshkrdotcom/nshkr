@@ -77,6 +77,18 @@ end
     mezzanine_ops_domain: internal.("mezzanine", "core/ops_domain"),
     mezzanine_workflow_runtime: internal.("mezzanine", "core/workflow_runtime"),
     outer_brain_runtime: internal.("outer_brain", "core/outer_brain_runtime"),
+    pristine: %{
+      path: Path.join(siblings_root, "pristine/apps/pristine_runtime"),
+      github: %{
+        repo: "nshkrdotcom/pristine",
+        branch: "main",
+        subdir: "apps/pristine_runtime"
+      },
+      hex: "~> 0.2.1",
+      opts: [override: true],
+      default_order: [:path, :github, :hex],
+      publish_order: [:hex]
+    },
     synapse_core: internal.("synapse", "apps/synapse_core"),
     synapse_web: internal.("synapse", "apps/synapse_web")
   }
