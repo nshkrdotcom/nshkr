@@ -117,6 +117,52 @@ defmodule Nshkr.Runtime.InfrastructureSecurityTest do
              )
   end
 
+  test "Vault preflight reports rejection status without exposing the token" do
+    jwt_path =
+      Path.join(System.tmp_dir!(), "nshkr-vault-jwt-#{System.unique_integer([:positive])}")
+
+    File.write!(jwt_path, "jwt")
+    on_exit(fn -> File.rm(jwt_path) end)
+
+    Req.Test.stub(:vault_preflight_rejected, fn conn ->
+      case {conn.method, conn.request_path} do
+        {"POST", "/v1/auth/kubernetes/login"} ->
+          Req.Test.json(conn, %{
+            auth: %{
+              client_token: "sentinel-rejected-vault-token",
+              lease_duration: 60,
+              renewable: true
+            }
+          })
+
+        {"GET", "/v1/auth/token/lookup-self"} ->
+          assert Plug.Conn.get_req_header(conn, "x-vault-token") == [
+                   "sentinel-rejected-vault-token"
+                 ]
+
+          Plug.Conn.resp(conn, 403, "")
+      end
+    end)
+
+    request_options = [plug: {Req.Test, :vault_preflight_rejected}]
+
+    result =
+      VaultKvV2.probe(
+        endpoint: "https://vault.test",
+        mount: "kv",
+        auth_module: VaultKubernetesAuth,
+        auth_options: [
+          role: "nshkr-runtime",
+          jwt_path: jwt_path,
+          request_options: request_options
+        ],
+        request_options: request_options
+      )
+
+    assert result == {:error, {:vault_token_lookup_rejected, 403}}
+    refute inspect(result) =~ "sentinel-rejected-vault-token"
+  end
+
   test "Codex auth enters only the one-shot Vault bootstrap boundary" do
     package_root = Path.expand("../../..", __DIR__)
     compose = File.read!(Path.join(package_root, "priv/dev/compose.yaml"))

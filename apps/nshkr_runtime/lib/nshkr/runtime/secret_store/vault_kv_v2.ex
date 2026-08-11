@@ -207,11 +207,10 @@ defmodule Nshkr.Runtime.SecretStore.VaultKvV2 do
   @spec probe(keyword()) :: :ok | {:error, term()}
   def probe(opts) do
     with {:ok, auth} <- authenticate(opts),
-         {:ok, %Req.Response{status: status}} <- token_lookup(opts, auth.token),
-         true <- status in 200..299 do
+         {:ok, %Req.Response{status: status}} when status in 200..299 <-
+           token_lookup(opts, auth.token) do
       :ok
     else
-      false -> {:error, :vault_token_lookup_rejected}
       {:ok, %Req.Response{status: status}} -> {:error, {:vault_token_lookup_rejected, status}}
       {:error, _reason} = error -> error
     end
