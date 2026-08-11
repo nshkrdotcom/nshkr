@@ -58,6 +58,8 @@ defmodule Nshkr.Workspace.MixProject do
 
   defp aliases do
     monorepo_aliases = [
+      "compile.matrix": ["nshkr.compile_matrix"],
+      "compile.matrix.deps.get": ["nshkr.compile_matrix.deps_get"],
       "monorepo.deps.get": ["blitz.workspace.impact deps_get --"],
       "monorepo.format": ["blitz.workspace.impact format --"],
       "monorepo.compile": ["blitz.workspace.impact compile --"],
@@ -84,7 +86,7 @@ defmodule Nshkr.Workspace.MixProject do
   defp blitz_workspace do
     [
       root: __DIR__,
-      projects: WorkspaceContract.active_project_globs(),
+      projects: WorkspaceContract.compile_matrix_project_globs(),
       isolation: [
         deps_path: true,
         build_path: true,
@@ -94,13 +96,32 @@ defmodule Nshkr.Workspace.MixProject do
       parallelism: [
         max_concurrency: nil,
         multiplier: :auto,
-        base: [deps_get: 2, format: 2, compile: 2, test: 2, credo: 2, docs: 2],
+        base: [
+          deps_get: 2,
+          format: 2,
+          compile: 2,
+          compile_matrix: 2,
+          matrix_deps_get: 2,
+          test: 2,
+          credo: 2,
+          docs: 2
+        ],
         overrides: []
       ],
       tasks: [
         deps_get: [args: ["deps.get"], preflight?: false],
         format: [args: ["format"]],
         compile: [args: ["compile", "--warnings-as-errors"]],
+        compile_matrix: [
+          args: ["compile", "--warnings-as-errors"],
+          preflight?: false,
+          env: {Nshkr.Build.CompileMatrix, :workspace_env}
+        ],
+        matrix_deps_get: [
+          args: ["deps.get"],
+          preflight?: false,
+          env: {Nshkr.Build.CompileMatrix, :workspace_env}
+        ],
         test: [args: ["test"], mix_env: "test", color: true],
         credo: [args: ["credo"]],
         docs: [args: ["docs"]]

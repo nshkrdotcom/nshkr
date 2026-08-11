@@ -30,7 +30,7 @@ end
     app_kit_mezzanine_bridge: internal.("app_kit", "bridges/mezzanine_bridge"),
     app_kit_review_surface: internal.("app_kit", "core/review_surface"),
     blitz: %{
-      hex: "~> 0.3.0",
+      hex: "~> 0.4.1",
       default_order: [:hex],
       publish_order: [:hex]
     },
