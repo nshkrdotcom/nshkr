@@ -8,8 +8,11 @@
 
 ## Dependency sources
 
-- Cross-repository source selection belongs in `build_support/dependency_sources.config.exs`.
-- Local dependency overrides use `.dependency_sources.local.exs`, which must remain untracked.
+- Cross-repository source substitution uses MWO's documented tuple-first
+  `workspace_dep(committed_tuple)` seam in `apps/nshkr_runtime/mix.exs`. Committed tuples
+  are standalone Hex defaults; MWO activation substitutes only source coordinates.
+- Machine-local source preferences belong in MWO's XDG operator state. Do not install a
+  repository-local dependency-source helper or override file.
 - Do not select dependency sources through environment variables.
 - Keep the committed Blitz and Weld dependencies on current released Hex versions.
 

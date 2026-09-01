@@ -1,6 +1,4 @@
-unless Code.ensure_loaded?(DependencySources) do
-  Code.require_file("../../build_support/dependency_sources.exs", __DIR__)
-end
+if bootstrap = System.get_env("MIX_WORKSPACE_OPS_BOOTSTRAP"), do: Code.require_file(bootstrap)
 
 defmodule Nshkr.Runtime.MixProject do
   use Mix.Project
@@ -37,38 +35,54 @@ defmodule Nshkr.Runtime.MixProject do
 
   defp deps do
     [
-      DependencySources.dep(:agent_session_manager, @repo_root),
-      DependencySources.dep(:app_kit_core, @repo_root, runtime: false),
-      DependencySources.dep(:app_kit_mezzanine_bridge, @repo_root, runtime: false),
-      DependencySources.dep(:app_kit_review_surface, @repo_root, runtime: false),
-      DependencySources.dep(:citadel_governance, @repo_root, runtime: false),
-      DependencySources.dep(:cli_subprocess_core, @repo_root),
-      DependencySources.dep(:codex_sdk, @repo_root),
-      DependencySources.dep(:execution_plane, @repo_root, runtime: false),
-      DependencySources.dep(:gemini_ex, @repo_root),
-      DependencySources.dep(:jido_integration_secrets_provider, @repo_root, runtime: false),
-      DependencySources.dep(:jido_integration_v2_auth, @repo_root, runtime: false),
-      DependencySources.dep(:jido_integration_v2_asm_runtime_bridge, @repo_root, runtime: false),
-      DependencySources.dep(:jido_integration_v2_codex_cli, @repo_root, runtime: false),
-      DependencySources.dep(:jido_integration_v2_control_plane, @repo_root, runtime: false),
-      DependencySources.dep(:jido_integration_v2_runtime_router, @repo_root, runtime: false),
-      DependencySources.dep(:jido_integration_v2_store_postgres, @repo_root, runtime: false),
-      DependencySources.dep(:mezzanine_archival_engine, @repo_root, runtime: false),
-      DependencySources.dep(:mezzanine_audit_engine, @repo_root, runtime: false),
-      DependencySources.dep(:mezzanine_core, @repo_root, runtime: false),
-      DependencySources.dep(:mezzanine_execution_engine, @repo_root, runtime: false),
-      DependencySources.dep(:mezzanine_ops_domain, @repo_root, runtime: false),
-      DependencySources.dep(:mezzanine_workflow_runtime, @repo_root, runtime: false),
-      DependencySources.dep(:outer_brain_runtime, @repo_root, runtime: false),
-      DependencySources.dep(:pristine, @repo_root),
-      DependencySources.dep(:synapse_core, @repo_root, runtime: false),
-      DependencySources.dep(:synapse_web, @repo_root, runtime: false),
+      workspace_dep({:agent_session_manager, "~> 0.12.0", override: true}),
+      workspace_dep({:app_kit_core, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:app_kit_mezzanine_bridge, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:app_kit_review_surface, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:citadel_governance, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:cli_subprocess_core, "~> 0.4.0", override: true}),
+      workspace_dep({:codex_sdk, "~> 0.18.0", override: true}),
+      workspace_dep({:execution_plane, "~> 0.2.0", override: true, runtime: false}),
+      workspace_dep({:gemini_ex, "~> 0.15.0", override: true}),
+      workspace_dep(
+        {:jido_integration_secrets_provider, "~> 0.1.0", override: true, runtime: false}
+      ),
+      workspace_dep({:jido_integration_v2_auth, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep(
+        {:jido_integration_v2_asm_runtime_bridge, "~> 0.1.0", override: true, runtime: false}
+      ),
+      workspace_dep({:jido_integration_v2_codex_cli, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep(
+        {:jido_integration_v2_control_plane, "~> 0.1.0", override: true, runtime: false}
+      ),
+      workspace_dep(
+        {:jido_integration_v2_runtime_router, "~> 0.1.0", override: true, runtime: false}
+      ),
+      workspace_dep(
+        {:jido_integration_v2_store_postgres, "~> 0.1.0", override: true, runtime: false}
+      ),
+      workspace_dep({:mezzanine_archival_engine, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:mezzanine_audit_engine, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:mezzanine_core, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:mezzanine_execution_engine, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:mezzanine_ops_domain, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:mezzanine_workflow_runtime, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:outer_brain_runtime, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:pristine, "~> 0.2.1", override: true}),
+      workspace_dep({:synapse_core, "~> 0.1.0", override: true, runtime: false}),
+      workspace_dep({:synapse_web, "~> 0.1.0", override: true, runtime: false}),
       {:ecto_sql, "~> 3.13"},
       {:jason, "~> 1.4"},
       {:postgrex, "~> 0.22"},
       {:req, "~> 0.5"},
       {:plug, "~> 1.20"}
     ]
+  end
+
+  defp workspace_dep(committed) do
+    if function_exported?(MixWorkspaceOpsBootstrap, :dep, 2),
+      do: apply(MixWorkspaceOpsBootstrap, :dep, [committed, @repo_root]),
+      else: committed
   end
 
   defp releases do
