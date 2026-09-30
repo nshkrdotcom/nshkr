@@ -34,15 +34,15 @@ defmodule Nshkr.Runtime.MixProject do
 
   defp deps do
     [
-      workspace_dep({:agent_session_manager, "~> 0.12.0", override: true}),
+      workspace_dep({:agent_session_manager, "~> 0.17.3", override: true}),
       workspace_dep({:app_kit_core, "~> 0.1.0", override: true, runtime: false}),
       workspace_dep({:app_kit_mezzanine_bridge, "~> 0.1.0", override: true, runtime: false}),
       workspace_dep({:app_kit_review_surface, "~> 0.1.0", override: true, runtime: false}),
       workspace_dep({:citadel_governance, "~> 0.1.0", override: true, runtime: false}),
-      workspace_dep({:cli_subprocess_core, "~> 0.4.0", override: true}),
-      workspace_dep({:codex_sdk, "~> 0.18.0", override: true}),
-      workspace_dep({:execution_plane, "~> 0.2.0", override: true, runtime: false}),
-      workspace_dep({:gemini_ex, "~> 0.15.0", override: true}),
+      workspace_dep({:cli_subprocess_core, "~> 0.9.3", override: true}),
+      workspace_dep({:codex_sdk, "~> 0.21.3", override: true}),
+      workspace_dep({:execution_plane, "~> 0.3.0", override: true, runtime: false}),
+      workspace_dep({:gemini_ex, "~> 0.18.0", override: true}),
       workspace_dep(
         {:jido_integration_secrets_provider, "~> 0.1.0", override: true, runtime: false}
       ),
@@ -67,14 +67,14 @@ defmodule Nshkr.Runtime.MixProject do
       workspace_dep({:mezzanine_ops_domain, "~> 0.1.0", override: true, runtime: false}),
       workspace_dep({:mezzanine_workflow_runtime, "~> 0.1.0", override: true, runtime: false}),
       workspace_dep({:outer_brain_runtime, "~> 0.1.0", override: true, runtime: false}),
-      workspace_dep({:pristine, "~> 0.2.1", override: true}),
+      workspace_dep({:pristine, "~> 0.4.0", override: true}),
       {:synapse_core, "~> 0.1.0", override: true, runtime: false},
       {:synapse_web, "~> 0.1.0", override: true, runtime: false},
-      {:ecto_sql, "~> 3.13"},
-      {:jason, "~> 1.4"},
-      {:postgrex, "~> 0.22"},
-      {:req, "~> 0.5"},
-      {:plug, "~> 1.20"}
+      {:ecto_sql, "~> 3.14.0"},
+      {:jason, "~> 1.4.5"},
+      {:postgrex, "~> 0.22.4"},
+      {:req, "~> 0.7.4"},
+      {:plug, "~> 1.20.3"}
     ]
   end
 
